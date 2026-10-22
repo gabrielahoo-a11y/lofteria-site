@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* Paleta do manual Rebranding 2025 */
+@theme inline {
+  --color-salmao: #e46f6b;
+  --color-salmao-escuro: #c9554f;
+  --color-grafite: #323c44;
+  --color-grafite-profundo: #1c2227;
+  --color-petroleo: #0f6073;
+  --color-petroleo-profundo: #0a4554;
+  --color-branco: #fcfcfc;
+  --color-nevoa: #eef0f2;
+  --color-linha: #dfe2e6;
+  --color-texto: #323c44;
+  --color-texto-suave: #7b858d;
+  --font-sans: var(--font-exo);
+}
+
+html {
+  background: var(--color-nevoa);
+}
+
+body {
+  background: var(--color-nevoa);
+  color: var(--color-texto);
+  font-family: var(--font-exo), system-ui, sans-serif;
+  font-weight: 400;
+  overflow-x: clip;
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--color-salmao);
+  color: white;
+}
+
+@layer components {
+  /* Rótulo pequeno em caixa alta com o quadradinho salmão */
+  .rotulo {
+    @apply inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.22em] uppercase;
+  }
+  .rotulo::before {
+    content: "";
+    @apply size-1.5 bg-salmao;
+  }
+
+  .titulo-xl {
+    @apply font-semibold leading-[0.95] tracking-[-0.035em];
+    font-size: clamp(2.75rem, 8vw, 7.5rem);
+  }
+  .titulo-lg {
+    @apply font-semibold leading-[1] tracking-[-0.03em];
+    font-size: clamp(2.25rem, 5vw, 4.5rem);
+  }
+  .titulo-md {
+    @apply font-semibold leading-[1.05] tracking-[-0.025em];
+    font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  }
+
+  /* Botão com cantoneiras: lembra uma planta baixa */
+  .botao {
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold tracking-[0.16em] uppercase transition-colors duration-300;
+  }
+  .botao::before,
+  .botao::after {
+    content: "";
+    @apply pointer-events-none absolute size-2.5 border-current transition-all duration-300;
+  }
+  .botao::before {
+    @apply -top-1 -left-1 border-t border-l;
+  }
+  .botao::after {
+    @apply -right-1 -bottom-1 border-r border-b;
+  }
+  .botao:hover::before {
+    @apply top-0 left-0;
+  }
+  .botao:hover::after {
+    @apply right-0 bottom-0;
+  }
+  .botao-salmao {
+    @apply bg-salmao text-white hover:bg-salmao-escuro;
+  }
+  .botao-claro {
+    @apply bg-white text-grafite hover:bg-nevoa;
+  }
+  .botao-escuro {
+    @apply bg-grafite-profundo text-white hover:bg-grafite;
+  }
+}
+
+/* Controle deslizante do simulador */
+.deslizante {
+  appearance: none;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--color-salmao) var(--progresso),
+    var(--color-linha) var(--progresso)
+  );
+  cursor: pointer;
+}
+.deslizante::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: var(--color-salmao);
+  border: 4px solid white;
+  box-shadow: 0 2px 10px rgb(228 111 107 / 0.45);
+  transition: transform 0.2s;
+}
+.deslizante::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.deslizante::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: var(--color-salmao);
+  border: 4px solid white;
+  box-shadow: 0 2px 10px rgb(228 111 107 / 0.45);
+}
+.deslizante:focus-visible {
+  outline: 2px solid var(--color-salmao);
+  outline-offset: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
