@@ -6,7 +6,6 @@ import Comparativo from "@/components/Comparativo";
 import Calculadora from "@/components/Calculadora";
 import Numeros from "@/components/Numeros";
 import Depoimentos from "@/components/Depoimentos";
-import Contato from "@/components/Contato";
 
 export const metadata: Metadata = {
   title: "Para investidor · Lofteria",
@@ -69,7 +68,6 @@ export default function Investidor() {
         <Numeros />
         <Depoimentos />
       </main>
-      <Contato origem="investidor" />
     </>
   );
 }

@@ -16,7 +16,8 @@ export async function POST(request: Request) {
     nome: texto(corpo?.nome),
     email: texto(corpo?.email),
     whatsapp: texto(corpo?.whatsapp, 40),
-    mensagem: texto(corpo?.mensagem, 2000) || null,
+    // O assunto escolhido no formulário de contato vai junto da mensagem
+    mensagem: [texto(corpo?.interesse, 80), texto(corpo?.mensagem, 2000)].filter(Boolean).join(" — ") || null,
     origem: texto(corpo?.origem, 40) || "site",
     simulacao: corpo?.simulacao ?? null,
   };

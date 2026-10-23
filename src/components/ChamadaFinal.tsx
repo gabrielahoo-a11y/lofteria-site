@@ -13,9 +13,13 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 export default function ChamadaFinal({
   titulo = "Seu imóvel pronto para performar começa aqui",
   foto = "sala-azul",
+  rotulo = "Vamos começar",
+  acao = { href: "/contato", texto: "Agendar conversa" },
 }: {
   titulo?: string;
   foto?: string;
+  rotulo?: string;
+  acao?: { href: string; texto: string };
 }) {
   const raiz = useRef<HTMLElement>(null);
 
@@ -40,12 +44,12 @@ export default function ChamadaFinal({
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-grafite-profundo/70 via-grafite-profundo/55 to-grafite-profundo" />
       <div className="relative">
-        <p className="rotulo justify-center text-white/70">Vamos começar</p>
+        <p className="rotulo justify-center text-white/70">{rotulo}</p>
         <h2 className="mx-auto mt-6 max-w-[16ch] text-[clamp(2.4rem,5.5vw,5rem)] leading-[1] font-semibold tracking-[-0.03em] text-balance">
           {titulo}
         </h2>
-        <Link href="/contato" className="botao botao-claro mt-10">
-          Agendar conversa
+        <Link href={acao.href} className="botao botao-claro mt-10">
+          {acao.texto}
         </Link>
       </div>
     </section>

@@ -4,7 +4,6 @@ import PaginaTopo from "@/components/PaginaTopo";
 import Revelar from "@/components/Revelar";
 import Solucao from "@/components/Solucao";
 import Numeros from "@/components/Numeros";
-import Contato from "@/components/Contato";
 
 export const metadata: Metadata = {
   title: "Construtoras e incorporadoras · Lofteria",
@@ -67,7 +66,6 @@ export default function Construtoras() {
           </p>
         </Revelar>
       </main>
-      <Contato origem="construtoras" />
     </>
   );
 }

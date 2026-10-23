@@ -4,7 +4,6 @@ import PaginaTopo from "@/components/PaginaTopo";
 import Revelar from "@/components/Revelar";
 import Solucao from "@/components/Solucao";
 import Depoimentos from "@/components/Depoimentos";
-import Contato from "@/components/Contato";
 
 export const metadata: Metadata = {
   title: "Para morador · Lofteria",
@@ -68,7 +67,6 @@ export default function Morador() {
         <Solucao />
         <Depoimentos />
       </main>
-      <Contato origem="morador" />
     </>
   );
 }

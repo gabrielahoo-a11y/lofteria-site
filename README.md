@@ -17,13 +17,13 @@ npm run lint
 
 | Rota | Conteúdo |
 |---|---|
-| `/` | Home: abertura com o isométrico, quem somos, solução, números, chamada para investidores, projetos, estilos, depoimentos, parceiros |
+| `/` | Home: abertura com o isométrico, quem somos, solução + estilos, portfólio, números, depoimentos, parceiros |
 | `/investidor` | Pilares, comparativo com/sem Lofteria, **simulador**, números, depoimentos |
 | `/morador` | O que cuidamos, etapas, estilos, depoimentos |
 | `/construtoras` | Tecnologia/design/processos, etapas, números, estilos |
 | `/projetos` | Lista do "Onde atuamos" com filtro por tipologia + projetos em destaque |
 | `/sobre` | Estrutura da página About da Avenlo: título + galeria curva, quem somos, cartões de prova, jornada fixa, o que fazemos, valores em carrossel, depoimentos, chamada final |
-| `/contato` | Formulário |
+| `/contato` | Estrutura da página de contato da Avenlo: título, cartão com os dados + formulário (com assunto), chamada final |
 
 O menu e o rodapé leem as páginas de `src/lib/navegacao.ts`.
 

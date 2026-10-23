@@ -3,7 +3,6 @@ import Menu from "@/components/Menu";
 import PaginaTopo from "@/components/PaginaTopo";
 import ListaProjetos from "@/components/ListaProjetos";
 import Projetos from "@/components/Projetos";
-import Contato from "@/components/Contato";
 
 export const metadata: Metadata = {
   title: "Projetos · Lofteria",
@@ -29,7 +28,6 @@ export default function PaginaProjetos() {
         <ListaProjetos />
         <Projetos />
       </main>
-      <Contato origem="projetos" />
     </>
   );
 }
