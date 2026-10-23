@@ -20,7 +20,9 @@ export async function POST(request: Request) {
     origem: texto(corpo?.origem, 40) || "site",
     simulacao: corpo?.simulacao ?? null,
   };
-  if (!lead.nome || !lead.email.includes("@") || !lead.whatsapp) {
+  // A newsletter só pede o e-mail; os demais formulários pedem nome, e-mail e WhatsApp
+  const soEmail = lead.origem === "newsletter";
+  if (!lead.email.includes("@") || (!soEmail && (!lead.nome || !lead.whatsapp))) {
     return Response.json({ erro: "Preencha nome, e-mail e WhatsApp" }, { status: 400 });
   }
 

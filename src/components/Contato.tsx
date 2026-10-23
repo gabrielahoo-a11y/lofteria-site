@@ -1,11 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { Logo } from "./Logo";
-import { PAGINAS, REDES } from "@/lib/navegacao";
 
-// Formulário de contato + rodapé, no fim de todas as páginas.
+// Formulário de contato, no fim das páginas (o rodapé fica no layout).
 // `origem` diz de qual página veio o lead.
 export default function Contato({ origem = "contato" }: { origem?: string }) {
   const [estado, setEstado] = useState<"editando" | "enviando" | "enviado" | "erro">("editando");
@@ -23,8 +20,8 @@ export default function Contato({ origem = "contato" }: { origem?: string }) {
   }
 
   return (
-    <footer id="contato" className="rounded-t-[32px] bg-petroleo-profundo text-white md:rounded-t-[48px]">
-      <div className="mx-auto grid max-w-[1440px] gap-16 px-5 pt-24 pb-16 md:px-10 md:pt-32 lg:grid-cols-2">
+    <section id="contato" className="rounded-t-[32px] bg-petroleo-profundo text-white md:rounded-t-[48px]">
+      <div className="mx-auto grid max-w-[1440px] gap-16 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-2">
         <div>
           <p className="rotulo mb-6 text-white/70">Fale com um consultor</p>
           <h2 className="titulo-lg max-w-[12ch]">
@@ -81,27 +78,6 @@ export default function Contato({ origem = "contato" }: { origem?: string }) {
         )}
       </div>
 
-      <nav aria-label="Páginas" className="mx-auto flex max-w-[1440px] flex-wrap gap-x-8 gap-y-3 border-t border-white/10 px-5 py-8 md:px-10">
-        {[{ href: "/", rotulo: "Início" }, ...PAGINAS, { href: "/contato", rotulo: "Contato" }].map((p) => (
-          <Link key={p.href} href={p.href} className="text-[11px] font-semibold tracking-[0.18em] text-white/70 uppercase hover:text-salmao">
-            {p.rotulo}
-          </Link>
-        ))}
-      </nav>
-
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <Logo className="w-full text-white/[0.07]" />
-      </div>
-      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-6 px-5 py-8 pb-28 text-sm text-white/55 md:px-10">
-        <p>© {new Date().getFullYear()} Lofteria · Seu imóvel pronto para performar.</p>
-        <nav className="flex gap-6" aria-label="Redes sociais">
-          {REDES.map((r) => (
-            <a key={r.nome} href={r.href} target="_blank" rel="noreferrer" className="hover:text-salmao">
-              {r.nome}
-            </a>
-          ))}
-        </nav>
-      </div>
-    </footer>
+    </section>
   );
 }

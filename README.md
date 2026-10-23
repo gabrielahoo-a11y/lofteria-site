@@ -22,7 +22,7 @@ npm run lint
 | `/morador` | O que cuidamos, etapas, estilos, depoimentos |
 | `/construtoras` | Tecnologia/design/processos, etapas, números, estilos |
 | `/projetos` | Lista do "Onde atuamos" com filtro por tipologia + projetos em destaque |
-| `/sobre` | Propósito, visão, missão, quem somos, valores, números |
+| `/sobre` | Estrutura da página About da Avenlo: título + galeria curva, quem somos, cartões de prova, jornada fixa, o que fazemos, valores em carrossel, depoimentos, chamada final |
 | `/contato` | Formulário |
 
 O menu e o rodapé leem as páginas de `src/lib/navegacao.ts`.

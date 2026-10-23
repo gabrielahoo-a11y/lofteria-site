@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import SmoothScroll from "@/components/SmoothScroll";
+import Rodape from "@/components/Rodape";
 import "./globals.css";
 
 // Exo 2 é a fonte da nova identidade (manual Rebranding 2025)
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <SmoothScroll />
         {children}
+        <Rodape />
       </body>
     </html>
   );
