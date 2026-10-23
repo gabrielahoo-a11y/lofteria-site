@@ -81,8 +81,8 @@ export default function ProjetosMini() {
               height={48}
               onPointerEnter={() => setFixo(i)}
               onPointerLeave={() => setFixo(null)}
-              className={`size-12 rounded-full border-2 border-white object-cover transition-transform duration-300 ${
-                visivel && mostrado === i ? "z-10 -translate-y-1.5 scale-110" : ""
+              className={`relative size-12 rounded-full border-2 border-white object-cover transition-transform duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] ${
+                visivel && mostrado === i ? "z-10 scale-[1.35] shadow-lg shadow-grafite/20" : ""
               }`}
             />
           ))}
@@ -115,9 +115,6 @@ export default function ProjetosMini() {
                   }`}
                 />
               ))}
-              <span className="absolute top-3 left-3 rounded-full bg-black/45 px-2.5 py-1 text-[10px] font-semibold tracking-[0.16em] text-white uppercase tabular-nums">
-                {String(mostrado + 1).padStart(2, "0")} / {String(PROJETOS.length).padStart(2, "0")}
-              </span>
             </div>
             <div className="px-4 py-3">
               <p className="text-sm font-semibold text-grafite">{PROJETOS[mostrado].nome}</p>
