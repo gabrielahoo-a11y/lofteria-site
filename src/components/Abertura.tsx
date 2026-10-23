@@ -79,9 +79,7 @@ export default function Abertura() {
           tl.to("[data-texto]", { opacity: 0, y: -90, duration: 0.14, ease: "power2.in" }, 0)
             .to("[data-video-bloco]", { opacity: 0, y: 40, duration: 0.12 }, 0)
             .to(iso, { x: xFinal, y: yInicio, scale: escala, duration: 0.38, ease: "power2.inOut" }, 0.06)
-            .to(iso, { y: yFim, duration: 0.55 }, 0.42)
-            .fromTo("[data-letreiro]", { xPercent: 4, opacity: 0 }, { xPercent: -38, opacity: 1, duration: 1 }, 0)
-            .to("[data-letreiro]", { opacity: 1, duration: 0.15 }, 0.12);
+            .to(iso, { y: yFim, duration: 0.55 }, 0.42);
 
           AMBIENTES.forEach((_, i) => {
             const el = `[data-ambiente="${i}"]`;
@@ -89,7 +87,28 @@ export default function Abertura() {
           });
           tl.to("[data-ambiente]", { opacity: 0, duration: 0.04 }, 0.95);
 
-          return () => titulo.revert();
+          // Faixa de logos em loop contínuo, que acelera enquanto a pessoa rola
+          const faixa = gsap.to("[data-faixa]", { xPercent: -50, ease: "none", duration: 70, repeat: -1 });
+          let alvo = 1;
+          const velocidade = ScrollTrigger.create({
+            trigger: palco,
+            start: "top top",
+            end: "+=360%",
+            onUpdate: (st) => {
+              alvo = Math.max(alvo, 1 + Math.min(Math.abs(st.getVelocity()) / 220, 9));
+            },
+          });
+          const suavizar = () => {
+            faixa.timeScale(faixa.timeScale() + (alvo - faixa.timeScale()) * 0.08);
+            alvo += (1 - alvo) * 0.04;
+          };
+          gsap.ticker.add(suavizar);
+
+          return () => {
+            gsap.ticker.remove(suavizar);
+            velocidade.kill();
+            titulo.revert();
+          };
         },
       );
     },
@@ -99,13 +118,13 @@ export default function Abertura() {
   return (
     <section id="topo" ref={raiz} className="relative bg-white">
       <div data-palco className="relative overflow-hidden lg:h-svh lg:min-h-[680px]">
-        {/* Letreiro gigante que passa por trás do apartamento */}
-        <div
-          data-letreiro
-          aria-hidden
-          className="pointer-events-none absolute top-[8%] left-0 w-[170vw] text-grafite/[0.08] opacity-0 lg:w-[130vw]"
-        >
-          <Logo className="h-auto w-full" />
+        {/* Faixa de logos que corre por trás do apartamento */}
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[13%] overflow-hidden text-grafite/[0.06] lg:top-[10%]">
+          <div data-faixa className="flex w-max">
+            {Array.from({ length: 8 }, (_, i) => (
+              <Logo key={i} className="mr-[6vh] h-[11vh] w-auto shrink-0 lg:h-[15vh]" />
+            ))}
+          </div>
         </div>
 
         <div className="relative mx-auto grid h-full max-w-[1440px] items-center gap-10 px-5 pt-28 pb-14 md:px-10 lg:grid-cols-[1fr_1.1fr] lg:pt-20 lg:pb-10">
