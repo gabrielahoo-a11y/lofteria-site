@@ -5,14 +5,14 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
-import { Leaf, Move3d, PenTool } from "lucide-react";
+import { Cpu, Palette, Workflow } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 const PILARES = [
-  { titulo: "Design", Icone: PenTool },
-  { titulo: "Tecnologia", Icone: Move3d },
-  { titulo: "Processos", Icone: Leaf },
+  { titulo: "Design", Icone: Palette, movimento: "icone-girar" },
+  { titulo: "Tecnologia", Icone: Cpu, movimento: "icone-pulsar" },
+  { titulo: "Processos", Icone: Workflow, movimento: "icone-fluir" },
 ];
 
 // O texto "acende" palavra por palavra conforme a rolagem
@@ -21,6 +21,11 @@ export default function Manifesto() {
 
   useGSAP(
     () => {
+      // Comprimento 1 em cada traço dos ícones, para o efeito de redesenhar no hover
+      raiz.current!
+        .querySelectorAll("[data-pilar] svg :is(path, circle, rect, line, polyline)")
+        .forEach((el) => el.setAttribute("pathLength", "1"));
+
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const texto = SplitText.create("[data-manifesto]", { type: "words" });
@@ -60,9 +65,15 @@ export default function Manifesto() {
       </p>
 
       <ul data-pilares className="mx-auto mt-20 flex max-w-xl justify-center gap-12 sm:gap-20">
-        {PILARES.map(({ titulo, Icone }) => (
-          <li key={titulo} data-pilar className="flex flex-col items-center gap-4">
-            <Icone className="size-9 text-grafite" strokeWidth={1.4} aria-hidden />
+        {PILARES.map(({ titulo, Icone, movimento }) => (
+          <li key={titulo} data-pilar className="icone-vivo group flex cursor-default flex-col items-center gap-4">
+            <span className="grid size-16 place-items-center rounded-full transition-colors duration-500 group-hover:bg-salmao/10">
+              <Icone
+                className={`size-9 text-grafite transition-colors duration-500 group-hover:text-salmao ${movimento}`}
+                strokeWidth={1.4}
+                aria-hidden
+              />
+            </span>
             <span className="font-semibold text-grafite">{titulo}</span>
           </li>
         ))}
