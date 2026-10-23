@@ -79,7 +79,11 @@ export default function Abertura() {
           tl.to("[data-texto]", { opacity: 0, y: -90, duration: 0.14, ease: "power2.in" }, 0)
             .to("[data-video-bloco]", { opacity: 0, y: 40, duration: 0.12 }, 0)
             .to(iso, { x: xFinal, y: yInicio, scale: escala, duration: 0.38, ease: "power2.inOut" }, 0.06)
-            .to(iso, { y: yFim, duration: 0.55 }, 0.42);
+            .to(iso, { y: yFim, duration: 0.55 }, 0.42)
+            // A faixa estava escondida atrás do texto: sobe pela máscara quando ele sai
+            // e depois anda para o lado conforme a rolagem
+            .fromTo("[data-faixa]", { y: 0, yPercent: 110 }, { yPercent: 0, duration: 0.14, ease: "power3.out" }, 0.05)
+            .fromTo("[data-faixa]", { xPercent: 0 }, { xPercent: -30, duration: 1 }, 0);
 
           AMBIENTES.forEach((_, i) => {
             const el = `[data-ambiente="${i}"]`;
@@ -87,28 +91,7 @@ export default function Abertura() {
           });
           tl.to("[data-ambiente]", { opacity: 0, duration: 0.04 }, 0.95);
 
-          // Faixa de logos em loop contínuo, que acelera enquanto a pessoa rola
-          const faixa = gsap.to("[data-faixa]", { xPercent: -50, ease: "none", duration: 70, repeat: -1 });
-          let alvo = 1;
-          const velocidade = ScrollTrigger.create({
-            trigger: palco,
-            start: "top top",
-            end: "+=360%",
-            onUpdate: (st) => {
-              alvo = Math.max(alvo, 1 + Math.min(Math.abs(st.getVelocity()) / 220, 9));
-            },
-          });
-          const suavizar = () => {
-            faixa.timeScale(faixa.timeScale() + (alvo - faixa.timeScale()) * 0.08);
-            alvo += (1 - alvo) * 0.04;
-          };
-          gsap.ticker.add(suavizar);
-
-          return () => {
-            gsap.ticker.remove(suavizar);
-            velocidade.kill();
-            titulo.revert();
-          };
+          return () => titulo.revert();
         },
       );
     },
@@ -118,9 +101,9 @@ export default function Abertura() {
   return (
     <section id="topo" ref={raiz} className="relative bg-white">
       <div data-palco className="relative overflow-hidden lg:h-svh lg:min-h-[680px]">
-        {/* Faixa de logos que corre por trás do apartamento */}
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[13%] overflow-hidden text-grafite/[0.06] lg:top-[10%]">
-          <div data-faixa className="flex w-max">
+        {/* Faixa de logos por trás do apartamento: escondida na abertura, revelada na rolagem */}
+        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[13%] overflow-hidden text-grafite/[0.07] lg:top-[10%]">
+          <div data-faixa className="flex w-max" style={{ transform: "translateY(110%)" }}>
             {Array.from({ length: 8 }, (_, i) => (
               <Logo key={i} className="mr-[6vh] h-[11vh] w-auto shrink-0 lg:h-[15vh]" />
             ))}
