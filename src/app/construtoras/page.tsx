@@ -3,7 +3,6 @@ import Menu from "@/components/Menu";
 import PaginaTopo from "@/components/PaginaTopo";
 import Revelar from "@/components/Revelar";
 import Solucao from "@/components/Solucao";
-import Estilos from "@/components/Estilos";
 import Numeros from "@/components/Numeros";
 import Contato from "@/components/Contato";
 
@@ -58,7 +57,6 @@ export default function Construtoras() {
 
         <Solucao />
         <Numeros />
-        <Estilos />
 
         <Revelar className="mx-auto max-w-[1440px] px-5 pb-28 md:px-10">
           <p data-revelar className="titulo-md max-w-[24ch] text-grafite">

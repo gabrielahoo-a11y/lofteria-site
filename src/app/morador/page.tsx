@@ -3,7 +3,6 @@ import Menu from "@/components/Menu";
 import PaginaTopo from "@/components/PaginaTopo";
 import Revelar from "@/components/Revelar";
 import Solucao from "@/components/Solucao";
-import Estilos from "@/components/Estilos";
 import Depoimentos from "@/components/Depoimentos";
 import Contato from "@/components/Contato";
 
@@ -67,7 +66,6 @@ export default function Morador() {
         </Revelar>
 
         <Solucao />
-        <Estilos />
         <Depoimentos />
       </main>
       <Contato origem="morador" />

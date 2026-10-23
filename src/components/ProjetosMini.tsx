@@ -4,15 +4,10 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { gsap } from "gsap";
+import { DESTAQUES, foto } from "@/lib/projetos";
 
-// Projetos entregues (fotos do site atual). As três primeiras são as bolinhas visíveis.
-const PROJETOS = [
-  { nome: "Sunset Lagoa", local: "Florianópolis", foto: "sunset-lagoa" },
-  { nome: "Plenty Sea 401", local: "Florianópolis", foto: "plenty-sea" },
-  { nome: "Swami Beach 316", local: "Santa Catarina", foto: "swami-beach" },
-  { nome: "Lago di Garda", local: "Florianópolis", foto: "lago-di-garda" },
-  { nome: "Villa de Algarve 301", local: "Santa Catarina", foto: "vila-algarve" },
-];
+// Projetos entregues; as três primeiras fotos são as bolinhas visíveis
+const PROJETOS = DESTAQUES.map((p) => ({ nome: p.nome, local: `${p.tipologia} · ${p.local}`, foto: foto(p) }));
 
 // "+350 apartamentos entregues": ao passar o mouse, uma miniatura segue o cursor
 // passando fotos dos projetos. Por enquanto o clique não leva a lugar nenhum.
@@ -75,7 +70,7 @@ export default function ProjetosMini() {
           {PROJETOS.slice(0, 3).map((p, i) => (
             <Image
               key={p.foto}
-              src={`/img/${p.foto}.jpg`}
+              src={p.foto}
               alt=""
               width={48}
               height={48}
@@ -106,7 +101,7 @@ export default function ProjetosMini() {
               {PROJETOS.map((p, i) => (
                 <Image
                   key={p.foto}
-                  src={`/img/${p.foto}.jpg`}
+                  src={p.foto}
                   alt=""
                   fill
                   sizes="256px"
@@ -118,7 +113,7 @@ export default function ProjetosMini() {
             </div>
             <div className="px-4 py-3">
               <p className="text-sm font-semibold text-grafite">{PROJETOS[mostrado].nome}</p>
-              <p className="text-xs text-texto-suave">{PROJETOS[mostrado].local} · entregue pela Lofteria</p>
+              <p className="text-xs text-texto-suave">{PROJETOS[mostrado].local}</p>
             </div>
           </div>,
           document.body,

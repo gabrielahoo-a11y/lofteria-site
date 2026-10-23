@@ -4,33 +4,16 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Simbolo } from "./Logo";
+import { PROJETOS, foto, type Projeto } from "@/lib/projetos";
 
 gsap.registerPlugin(useGSAP);
 
-type Tipo = "studio" | "1d" | "2d" | "3d";
-
-// Lista do "Onde atuamos" do site atual. Tipologia só onde o site informa; foto só onde temos.
-const PROJETOS: { nome: string; cidade: string; tipologia?: string; tipo?: Tipo; foto?: string }[] = [
-  { nome: "Sunset 213", cidade: "Florianópolis", foto: "sunset-lagoa" },
-  { nome: "Plenty Sea", cidade: "Florianópolis", tipologia: "2 dormitórios", tipo: "2d", foto: "plenty-sea" },
-  { nome: "Lago di Garda 07", cidade: "Florianópolis", tipologia: "Loft", tipo: "studio", foto: "lago-di-garda" },
-  { nome: "Swami Beach 316", cidade: "Florianópolis", foto: "swami-beach" },
-  { nome: "Villa de Algarve 301", cidade: "Florianópolis", foto: "vila-algarve" },
-  { nome: "Emanoel Peluso 1101", cidade: "Florianópolis", tipologia: "4 dormitórios", tipo: "3d" },
-  { nome: "Esquina Copenhagen 206", cidade: "Florianópolis", tipologia: "Studio", tipo: "studio" },
-  { nome: "Icon Home Design", cidade: "Florianópolis", tipologia: "1 dormitório", tipo: "1d" },
-  { nome: "Lago di Garda 201", cidade: "Florianópolis", tipologia: "2 dormitórios", tipo: "2d" },
-  { nome: "Life Residence 606", cidade: "Florianópolis" },
-  { nome: "Penha Spot", cidade: "Penha", tipologia: "Spot" },
-  { nome: "Smart Living 604", cidade: "Florianópolis" },
-  { nome: "Spot 215 · 202", cidade: "Florianópolis" },
-  { nome: "Spot 215 · 301", cidade: "Florianópolis" },
-];
+type Tipo = Projeto["tipo"];
 
 const FILTROS: { id: Tipo | "todos"; rotulo: string }[] = [
   { id: "todos", rotulo: "Todos" },
   { id: "studio", rotulo: "Studio e loft" },
+  { id: "spot", rotulo: "Spot" },
   { id: "1d", rotulo: "1 dormitório" },
   { id: "2d", rotulo: "2 dormitórios" },
   { id: "3d", rotulo: "3 ou mais" },
@@ -79,28 +62,18 @@ export default function ListaProjetos() {
 
       <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {visiveis.map((p) => (
-          <li key={p.nome} data-cartao-projeto className="group relative aspect-[4/5] overflow-hidden rounded-[24px] bg-grafite-profundo">
-            {p.foto ? (
-              <Image
-                src={`/img/${p.foto}.jpg`}
-                alt={`Apartamento ${p.nome} montado pela Lofteria`}
-                fill
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-110"
-              />
-            ) : (
-              <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-grafite to-grafite-profundo">
-                <Simbolo className="w-1/3 text-white/[0.07] transition-transform duration-[1.2s] group-hover:scale-110 group-hover:rotate-6" />
-                <span className="absolute top-5 right-5 rounded-full border border-white/15 px-3 py-1 text-[10px] tracking-[0.16em] text-white/60 uppercase">
-                  Fotos em breve
-                </span>
-              </div>
-            )}
+          <li key={p.slug} data-cartao-projeto className="group relative aspect-[4/5] overflow-hidden rounded-[24px] bg-grafite-profundo">
+            <Image
+              src={foto(p)}
+              alt={`Apartamento ${p.nome} montado pela Lofteria`}
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-110"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0" />
             <div className="absolute inset-x-0 bottom-0 p-6 text-white">
               <p className="text-[11px] tracking-[0.16em] text-white/70 uppercase">
-                {p.cidade}
-                {p.tipologia && ` · ${p.tipologia}`}
+                {p.tipologia} · {p.local}
               </p>
               <h3 className="mt-2 text-2xl font-semibold tracking-tight transition-transform duration-500 group-hover:-translate-y-1">
                 {p.nome}
