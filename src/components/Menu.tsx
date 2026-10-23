@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Calculator, FolderOpen, LayoutGrid, MapPin, Users } from "lucide-react";
 import { Logo } from "./Logo";
 
 const LINKS = [
-  { href: "#solucao", rotulo: "Solução" },
-  { href: "#calculadora", rotulo: "Simulador" },
-  { href: "#projetos", rotulo: "Projetos" },
-  { href: "#estilos", rotulo: "Estilos" },
-  { href: "#depoimentos", rotulo: "Clientes" },
+  { href: "#solucao", rotulo: "Solução", Icone: MapPin },
+  { href: "#calculadora", rotulo: "Para investidor", Icone: Calculator },
+  { href: "#projetos", rotulo: "Projetos", Icone: FolderOpen },
+  { href: "#estilos", rotulo: "Estilos", Icone: LayoutGrid },
+  { href: "#depoimentos", rotulo: "Clientes", Icone: Users },
 ];
 
 // Topo transparente sobre a abertura; depois de rolar vira uma pílula
@@ -34,7 +35,7 @@ export default function Menu() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
+        className={`fixed inset-x-0 top-0 z-40 bg-white/85 backdrop-blur-md transition-all duration-500 ${
           compacto ? "pointer-events-none -translate-y-full opacity-0" : "opacity-100"
         }`}
       >
@@ -49,7 +50,7 @@ export default function Menu() {
                 href={l.href}
                 className="group flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.18em] text-grafite uppercase"
               >
-                <span className="text-salmao transition-transform duration-300 group-hover:rotate-90">+</span>
+                <l.Icone className="size-3.5 text-salmao transition-transform duration-300 group-hover:-translate-y-0.5" strokeWidth={1.6} aria-hidden />
                 {l.rotulo}
               </a>
             ))}

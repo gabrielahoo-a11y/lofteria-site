@@ -17,11 +17,11 @@
 }
 
 html {
-  background: var(--color-nevoa);
+  background: #ffffff;
 }
 
 body {
-  background: var(--color-nevoa);
+  background: #ffffff;
   color: var(--color-texto);
   font-family: var(--font-exo), system-ui, sans-serif;
   font-weight: 400;
