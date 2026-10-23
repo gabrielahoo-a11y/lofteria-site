@@ -6,7 +6,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
-import { Logo } from "./Logo";
 import VideoPlay from "./VideoPlay";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
@@ -32,36 +31,50 @@ export default function Abertura() {
         { movimento: "(prefers-reduced-motion: no-preference)", celular: "(max-width: 1023px)" },
         (ctx) => {
           const { movimento, celular } = ctx.conditions as { movimento: boolean; celular: boolean };
-          if (!movimento) return;
-
           const palco = raiz.current!.querySelector<HTMLElement>("[data-palco]")!;
+          const lugar = raiz.current!.querySelector<HTMLElement>("[data-iso-lugar]")!;
           const iso = raiz.current!.querySelector<HTMLElement>("[data-iso]")!;
+          const interno = iso.querySelector<HTMLElement>("[data-iso-interno]")!;
+
+          // O isométrico é desenhado já no tamanho final (largura da tela) e reduzido até o lugar
+          // dele na abertura. Assim, ao crescer, continua nítido e não precisa ser redesenhado.
+          const largura = () => window.innerWidth * (celular ? 1.5 : 1);
+          const caixa = () => {
+            const p = palco.getBoundingClientRect();
+            const l = lugar.getBoundingClientRect();
+            return { left: l.left - p.left, top: l.top - p.top, w: l.width };
+          };
+          const xInicial = () => caixa().left;
+          const yInicial = () => caixa().top;
+          const escalaInicial = () => caixa().w / largura();
+          const xZoom = () => (window.innerWidth - largura()) / 2;
+          const yZoom = () => window.innerHeight * (celular ? 0.1 : 0.06);
+          const yFim = () => Math.min(yZoom(), window.innerHeight * 0.96 - largura() * PROPORCAO);
+
+          const posicionar = () => {
+            iso.style.width = `${largura()}px`;
+            gsap.set(iso, { x: xInicial(), y: yInicial(), scale: escalaInicial(), transformOrigin: "0 0" });
+          };
+          posicionar();
+
+          if (!movimento) {
+            gsap.set(iso, { opacity: 1 });
+            return;
+          }
+
           const titulo = SplitText.create("[data-titulo]", { type: "lines,words", mask: "lines" });
 
           // Entrada
           gsap
             .timeline({ defaults: { ease: "expo.out" } })
             .from(titulo.words, { yPercent: 110, duration: 1.3, stagger: 0.05 })
-            .from(iso, { opacity: 0, y: 60, scale: 0.94, duration: 1.6 }, 0.2)
+            .fromTo(interno, { opacity: 0, y: 70, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 1.8 }, 0.15)
+            .set(iso, { opacity: 1 }, 0.15)
             .from("[data-surge]", { opacity: 0, y: 24, duration: 1, stagger: 0.08 }, 0.5);
 
-          // Posição do isométrico em relação ao palco, sem transformações
-          const medida = () => {
-            const p = palco.getBoundingClientRect();
-            const pai = iso.parentElement!.getBoundingClientRect();
-            return { left: pai.left - p.left + iso.offsetLeft, top: pai.top - p.top + iso.offsetTop, w: iso.offsetWidth };
-          };
-          const largura = () => window.innerWidth * (celular ? 1.5 : 1);
-          const escala = () => largura() / medida().w;
-          const xFinal = () => (window.innerWidth - largura()) / 2 - medida().left;
-          const yInicio = () => window.innerHeight * (celular ? 0.1 : 0.06) - medida().top;
-          const yFim = () => {
-            const altura = largura() * PROPORCAO;
-            return Math.min(yInicio(), window.innerHeight - altura - window.innerHeight * 0.04 - medida().top);
-          };
-
-          gsap.set(iso, { transformOrigin: "0 0" });
+          // Rótulos dos ambientes mantêm o mesmo tamanho na tela em qualquer zoom
           const inversa = () => iso.style.setProperty("--inv", String(1 / (gsap.getProperty(iso, "scaleX") as number)));
+          inversa();
 
           const tl = gsap.timeline({
             defaults: { ease: "none" },
@@ -70,34 +83,66 @@ export default function Abertura() {
               start: "top top",
               end: "+=260%",
               pin: true,
-              scrub: 1,
+              scrub: 1.4,
+              anticipatePin: 1,
               invalidateOnRefresh: true,
+              onRefresh: posicionar,
             },
             onUpdate: inversa,
           });
 
-          tl.to("[data-texto]", { opacity: 0, y: -90, duration: 0.14, ease: "power2.in" }, 0)
-            .to("[data-video-bloco]", { opacity: 0, y: 40, duration: 0.12 }, 0)
-            .to(iso, { x: xFinal, y: yInicio, scale: escala, duration: 0.38, ease: "power2.inOut" }, 0.06)
-            .to(iso, { y: yFim, duration: 0.55 }, 0.42)
-            // Como na Avenlo, a faixa faz parte da cena: começa abaixo da dobra, entra por baixo
-            // no ritmo da rolagem e depois sobe junto com o apartamento
+          // O título sai palavra por palavra; o resto do texto logo depois
+          tl.fromTo(
+            titulo.words,
+            { yPercent: 0 },
+            { yPercent: -110, duration: 0.1, stagger: 0.006, ease: "power2.in", immediateRender: false },
+            0,
+          )
             .fromTo(
-              "[data-faixa-trilho]",
-              { y: () => window.innerHeight + 40 },
-              { y: () => window.innerHeight * 0.3, duration: 0.44 },
-              0,
+              "[data-texto] [data-surge]",
+              { opacity: 1, y: 0 },
+              { opacity: 0, y: -40, duration: 0.08, stagger: 0.02, immediateRender: false },
+              0.02,
             )
-            .to("[data-faixa-trilho]", { y: () => window.innerHeight * 0.3 + yFim() - yInicio(), duration: 0.55 }, 0.42);
+            .fromTo("[data-video-bloco]", { opacity: 1, y: 0 }, { opacity: 0, y: 40, duration: 0.1, immediateRender: false }, 0)
+            .fromTo(
+              iso,
+              { x: xInicial, y: yInicial, scale: escalaInicial },
+              { x: xZoom, y: yZoom, scale: 1, duration: 0.38, ease: "power3.inOut", immediateRender: false },
+              0.05,
+            )
+            .to(iso, { y: yFim, duration: 0.55 }, 0.43);
 
-          // E corre para o lado sozinha, o tempo todo
-          gsap.to("[data-faixa]", { xPercent: -50, ease: "none", duration: 55, repeat: -1 });
-
-          AMBIENTES.forEach((_, i) => {
+          AMBIENTES.forEach((a, i) => {
             const el = `[data-ambiente="${i}"]`;
-            tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.04 }, AMBIENTES[i].em - 0.04);
+            tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.04 }, a.em - 0.04).fromTo(
+              `${el} [data-pilula]`,
+              { x: -14, scale: 0.9 },
+              { x: 0, scale: 1, duration: 0.05, ease: "power2.out" },
+              a.em - 0.04,
+            );
           });
           tl.to("[data-ambiente]", { opacity: 0, duration: 0.04 }, 0.95);
+
+          // Na abertura, o apartamento acompanha o mouse com um leve movimento de profundidade
+          if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            const irX = gsap.quickTo(interno, "x", { duration: 1.2, ease: "power3.out" });
+            const irY = gsap.quickTo(interno, "y", { duration: 1.2, ease: "power3.out" });
+            const girar = gsap.quickTo(interno, "rotation", { duration: 1.2, ease: "power3.out" });
+            const mover = (e: PointerEvent) => {
+              const forca = Math.max(0, 1 - tl.scrollTrigger!.progress * 8);
+              const nx = e.clientX / window.innerWidth - 0.5;
+              const ny = e.clientY / window.innerHeight - 0.5;
+              irX(nx * 90 * forca);
+              irY(ny * 60 * forca);
+              girar(nx * 1.2 * forca);
+            };
+            window.addEventListener("pointermove", mover);
+            return () => {
+              window.removeEventListener("pointermove", mover);
+              titulo.revert();
+            };
+          }
 
           return () => titulo.revert();
         },
@@ -109,20 +154,6 @@ export default function Abertura() {
   return (
     <section id="topo" ref={raiz} className="relative bg-white">
       <div data-palco className="relative overflow-hidden lg:h-svh lg:min-h-[680px]">
-        {/* Faixa de logos atrás do apartamento (letras com degradê, como o "Since 1990" da Avenlo) */}
-        <div
-          data-faixa-trilho
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 overflow-hidden text-grafite/[0.11] [mask-image:linear-gradient(to_bottom,black_15%,transparent_95%)]"
-          style={{ transform: "translateY(110vh)" }}
-        >
-          <div data-faixa className="flex w-max">
-            {Array.from({ length: 8 }, (_, i) => (
-              <Logo key={i} className="mr-[10vh] h-[14vh] w-auto shrink-0 lg:h-[24vh]" />
-            ))}
-          </div>
-        </div>
-
         <div className="relative mx-auto grid h-full max-w-[1440px] items-center gap-10 px-5 pt-28 pb-14 md:px-10 lg:grid-cols-[1fr_1.1fr] lg:pt-20 lg:pb-10">
           <div data-texto className="relative z-20">
             <h1 data-titulo className="text-[clamp(2.7rem,5.6vw,5.6rem)] leading-[0.98] tracking-[-0.035em] text-grafite">
@@ -156,40 +187,46 @@ export default function Abertura() {
           </div>
 
           <div className="relative z-10 lg:h-full">
+            {/* Reserva o lugar do isométrico na abertura; a imagem em si fica solta no palco */}
             <div
-              data-iso
+              data-iso-lugar
+              aria-hidden
               className="relative mx-auto w-full max-w-[560px] lg:absolute lg:top-[6%] lg:right-0 lg:w-[96%] lg:max-w-none"
               style={{ aspectRatio: `${3600} / ${3288}` }}
-            >
-              <Image
-                src="/img/apartamento-isometrico.webp"
-                alt="Isométrico do loft Lago di Garda montado pela Lofteria: mezanino com quarto, cozinha, living, jantar e home office"
-                fill
-                sizes="100vw"
-                preload
-                className="object-contain"
-              />
-              {AMBIENTES.map((a, i) => (
-                <div
-                  key={a.nome}
-                  data-ambiente={i}
-                  className="pointer-events-none absolute flex origin-left items-center gap-2.5 opacity-0"
-                  style={{ left: `${a.x}%`, top: `${a.y}%`, transform: "translate(-7px, -50%) scale(var(--inv, 1))" }}
-                >
-                  <span className="relative size-3.5 shrink-0 rounded-full bg-salmao shadow-[0_0_0_4px_rgba(255,255,255,.9)]">
-                    <span className="absolute -inset-2 animate-ping rounded-full border border-salmao" />
-                  </span>
-                  <span className="rounded-full bg-grafite-profundo/85 px-3.5 py-2 text-[13px] whitespace-nowrap text-white backdrop-blur">
-                    <strong className="font-semibold">{a.nome}</strong>
-                    <span className="hidden text-white/60 sm:inline"> · {a.detalhe}</span>
-                  </span>
-                </div>
-              ))}
-            </div>
+            />
 
             <div data-video-bloco className="relative z-20 mt-10 flex justify-end lg:absolute lg:right-0 lg:bottom-10 lg:mt-0">
               <VideoPlay texto="Integramos design estratégico, tecnologia e inteligência de mercado para transformar unidades em produtos de alta performance." />
             </div>
+          </div>
+        </div>
+
+        <div data-iso className="pointer-events-none absolute top-0 left-0 z-10 w-screen opacity-0">
+          <div data-iso-interno className="relative w-full" style={{ aspectRatio: `${3600} / ${3288}` }}>
+            <Image
+              src="/img/apartamento-isometrico.webp"
+              alt="Isométrico do loft Lago di Garda montado pela Lofteria: mezanino com quarto, cozinha, living, jantar e home office"
+              fill
+              sizes="(max-width: 1023px) 150vw, 100vw"
+              preload
+              className="object-contain"
+            />
+            {AMBIENTES.map((a, i) => (
+              <div
+                key={a.nome}
+                data-ambiente={i}
+                className="absolute flex origin-left items-center gap-2.5 opacity-0"
+                style={{ left: `${a.x}%`, top: `${a.y}%`, transform: "translate(-7px, -50%) scale(var(--inv, 1))" }}
+              >
+                <span className="relative size-3.5 shrink-0 rounded-full bg-salmao shadow-[0_0_0_4px_rgba(255,255,255,.9)]">
+                  <span className="absolute -inset-2 animate-ping rounded-full border border-salmao" />
+                </span>
+                <span data-pilula className="origin-left rounded-full bg-grafite-profundo/90 px-3.5 py-2 text-[13px] whitespace-nowrap text-white">
+                  <strong className="font-semibold">{a.nome}</strong>
+                  <span className="hidden text-white/60 sm:inline"> · {a.detalhe}</span>
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
