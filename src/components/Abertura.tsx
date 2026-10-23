@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 import VideoPlay from "./VideoPlay";
+import ProjetosMini from "./ProjetosMini";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
@@ -173,16 +174,8 @@ export default function Abertura() {
                 Como funciona
               </a>
             </div>
-            <div data-surge className="mt-14 flex items-center gap-4 lg:mt-24">
-              <div className="flex shrink-0 -space-x-3">
-                {["sunset-lagoa", "plenty-sea", "swami-beach"].map((f) => (
-                  <Image key={f} src={`/img/${f}.jpg`} alt="" width={48} height={48} className="size-12 rounded-full border-2 border-white object-cover" />
-                ))}
-              </div>
-              <p className="leading-tight text-texto-suave">
-                <strong className="block text-2xl font-semibold text-grafite">+350</strong>
-                apartamentos <strong className="font-semibold text-grafite/80">entregues</strong>
-              </p>
+            <div data-surge className="mt-14 lg:mt-24">
+              <ProjetosMini />
             </div>
           </div>
 
