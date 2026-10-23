@@ -80,10 +80,18 @@ export default function Abertura() {
             .to("[data-video-bloco]", { opacity: 0, y: 40, duration: 0.12 }, 0)
             .to(iso, { x: xFinal, y: yInicio, scale: escala, duration: 0.38, ease: "power2.inOut" }, 0.06)
             .to(iso, { y: yFim, duration: 0.55 }, 0.42)
-            // A faixa estava escondida atrás do texto: sobe pela máscara quando ele sai
-            // e depois anda para o lado conforme a rolagem
-            .fromTo("[data-faixa]", { y: 0, yPercent: 110 }, { yPercent: 0, duration: 0.14, ease: "power3.out" }, 0.05)
-            .fromTo("[data-faixa]", { xPercent: 0 }, { xPercent: -30, duration: 1 }, 0);
+            // Como na Avenlo, a faixa faz parte da cena: começa abaixo da dobra, entra por baixo
+            // no ritmo da rolagem e depois sobe junto com o apartamento
+            .fromTo(
+              "[data-faixa-trilho]",
+              { y: () => window.innerHeight + 40 },
+              { y: () => window.innerHeight * 0.3, duration: 0.44 },
+              0,
+            )
+            .to("[data-faixa-trilho]", { y: () => window.innerHeight * 0.3 + yFim() - yInicio(), duration: 0.55 }, 0.42);
+
+          // E corre para o lado sozinha, o tempo todo
+          gsap.to("[data-faixa]", { xPercent: -50, ease: "none", duration: 55, repeat: -1 });
 
           AMBIENTES.forEach((_, i) => {
             const el = `[data-ambiente="${i}"]`;
@@ -101,11 +109,16 @@ export default function Abertura() {
   return (
     <section id="topo" ref={raiz} className="relative bg-white">
       <div data-palco className="relative overflow-hidden lg:h-svh lg:min-h-[680px]">
-        {/* Faixa de logos por trás do apartamento: escondida na abertura, revelada na rolagem */}
-        <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[13%] overflow-hidden text-grafite/[0.07] lg:top-[10%]">
-          <div data-faixa className="flex w-max" style={{ transform: "translateY(110%)" }}>
+        {/* Faixa de logos atrás do apartamento (letras com degradê, como o "Since 1990" da Avenlo) */}
+        <div
+          data-faixa-trilho
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 overflow-hidden text-grafite/[0.11] [mask-image:linear-gradient(to_bottom,black_15%,transparent_95%)]"
+          style={{ transform: "translateY(110vh)" }}
+        >
+          <div data-faixa className="flex w-max">
             {Array.from({ length: 8 }, (_, i) => (
-              <Logo key={i} className="mr-[6vh] h-[11vh] w-auto shrink-0 lg:h-[15vh]" />
+              <Logo key={i} className="mr-[10vh] h-[14vh] w-auto shrink-0 lg:h-[24vh]" />
             ))}
           </div>
         </div>
