@@ -164,7 +164,7 @@ export default function Calculadora() {
   );
 
   return (
-    <section id="calculadora" ref={raiz} className="relative overflow-hidden py-28 md:py-40">
+    <section id="simulador" ref={raiz} className="relative overflow-hidden py-28 md:py-40">
       <p
         data-palavra-fundo
         aria-hidden

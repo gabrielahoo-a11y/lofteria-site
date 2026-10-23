@@ -3,7 +3,8 @@ import Abertura from "@/components/Abertura";
 import Manifesto from "@/components/Manifesto";
 import Solucao from "@/components/Solucao";
 import Numeros from "@/components/Numeros";
-import Calculadora from "@/components/Calculadora";
+import ChamadaInvestidor from "@/components/ChamadaInvestidor";
+import Parceiros from "@/components/Parceiros";
 import Projetos from "@/components/Projetos";
 import Estilos from "@/components/Estilos";
 import Depoimentos from "@/components/Depoimentos";
@@ -18,12 +19,13 @@ export default function Home() {
         <Manifesto />
         <Solucao />
         <Numeros />
-        <Calculadora />
+        <ChamadaInvestidor />
         <Projetos />
         <Estilos />
         <Depoimentos />
+        <Parceiros />
       </main>
-      <Contato />
+      <Contato origem="home" />
     </>
   );
 }

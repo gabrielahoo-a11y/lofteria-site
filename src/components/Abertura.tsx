@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
@@ -167,9 +168,9 @@ export default function Abertura() {
               e sem dor de cabeça.
             </p>
             <div data-surge className="mt-10 flex flex-wrap items-center gap-6">
-              <a href="#calculadora" className="botao botao-salmao">
+              <Link href="/investidor" className="botao botao-salmao">
                 Para investidor
-              </a>
+              </Link>
               <a href="#solucao" className="botao text-grafite">
                 Como funciona
               </a>

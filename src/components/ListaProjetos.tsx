@@ -1,0 +1,117 @@
+"use client";
+
+import { useRef, useState } from "react";
+import Image from "next/image";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { Simbolo } from "./Logo";
+
+gsap.registerPlugin(useGSAP);
+
+type Tipo = "studio" | "1d" | "2d" | "3d";
+
+// Lista do "Onde atuamos" do site atual. Tipologia só onde o site informa; foto só onde temos.
+const PROJETOS: { nome: string; cidade: string; tipologia?: string; tipo?: Tipo; foto?: string }[] = [
+  { nome: "Sunset 213", cidade: "Florianópolis", foto: "sunset-lagoa" },
+  { nome: "Plenty Sea", cidade: "Florianópolis", tipologia: "2 dormitórios", tipo: "2d", foto: "plenty-sea" },
+  { nome: "Lago di Garda 07", cidade: "Florianópolis", tipologia: "Loft", tipo: "studio", foto: "lago-di-garda" },
+  { nome: "Swami Beach 316", cidade: "Florianópolis", foto: "swami-beach" },
+  { nome: "Villa de Algarve 301", cidade: "Florianópolis", foto: "vila-algarve" },
+  { nome: "Emanoel Peluso 1101", cidade: "Florianópolis", tipologia: "4 dormitórios", tipo: "3d" },
+  { nome: "Esquina Copenhagen 206", cidade: "Florianópolis", tipologia: "Studio", tipo: "studio" },
+  { nome: "Icon Home Design", cidade: "Florianópolis", tipologia: "1 dormitório", tipo: "1d" },
+  { nome: "Lago di Garda 201", cidade: "Florianópolis", tipologia: "2 dormitórios", tipo: "2d" },
+  { nome: "Life Residence 606", cidade: "Florianópolis" },
+  { nome: "Penha Spot", cidade: "Penha", tipologia: "Spot" },
+  { nome: "Smart Living 604", cidade: "Florianópolis" },
+  { nome: "Spot 215 · 202", cidade: "Florianópolis" },
+  { nome: "Spot 215 · 301", cidade: "Florianópolis" },
+];
+
+const FILTROS: { id: Tipo | "todos"; rotulo: string }[] = [
+  { id: "todos", rotulo: "Todos" },
+  { id: "studio", rotulo: "Studio e loft" },
+  { id: "1d", rotulo: "1 dormitório" },
+  { id: "2d", rotulo: "2 dormitórios" },
+  { id: "3d", rotulo: "3 ou mais" },
+];
+
+export default function ListaProjetos() {
+  const raiz = useRef<HTMLElement>(null);
+  const [filtro, setFiltro] = useState<Tipo | "todos">("todos");
+  const visiveis = PROJETOS.filter((p) => filtro === "todos" || p.tipo === filtro);
+
+  // Os cartões entram em sequência sempre que o filtro muda
+  useGSAP(
+    () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      gsap.fromTo(
+        "[data-cartao-projeto]",
+        { opacity: 0, y: 30, scale: 0.97 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.05, ease: "expo.out" },
+      );
+    },
+    { scope: raiz, dependencies: [filtro] },
+  );
+
+  return (
+    <section ref={raiz} className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32">
+      <div className="flex flex-wrap items-end justify-between gap-8">
+        <h2 className="titulo-md max-w-[18ch] text-grafite">
+          {PROJETOS.length} projetos em destaque <span className="font-light text-texto-suave">de mais de 350 entregues</span>
+        </h2>
+        <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrar por tipologia">
+          {FILTROS.map((f) => (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setFiltro(f.id)}
+              aria-pressed={filtro === f.id}
+              className={`rounded-full px-4 py-2.5 text-sm transition-all duration-300 ${
+                filtro === f.id ? "bg-grafite text-white" : "bg-white text-grafite ring-1 ring-linha hover:ring-grafite/40"
+              }`}
+            >
+              {f.rotulo}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {visiveis.map((p) => (
+          <li key={p.nome} data-cartao-projeto className="group relative aspect-[4/5] overflow-hidden rounded-[24px] bg-grafite-profundo">
+            {p.foto ? (
+              <Image
+                src={`/img/${p.foto}.jpg`}
+                alt={`Apartamento ${p.nome} montado pela Lofteria`}
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-110"
+              />
+            ) : (
+              <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-grafite to-grafite-profundo">
+                <Simbolo className="w-1/3 text-white/[0.07] transition-transform duration-[1.2s] group-hover:scale-110 group-hover:rotate-6" />
+                <span className="absolute top-5 right-5 rounded-full border border-white/15 px-3 py-1 text-[10px] tracking-[0.16em] text-white/60 uppercase">
+                  Fotos em breve
+                </span>
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0" />
+            <div className="absolute inset-x-0 bottom-0 p-6 text-white">
+              <p className="text-[11px] tracking-[0.16em] text-white/70 uppercase">
+                {p.cidade}
+                {p.tipologia && ` · ${p.tipologia}`}
+              </p>
+              <h3 className="mt-2 text-2xl font-semibold tracking-tight transition-transform duration-500 group-hover:-translate-y-1">
+                {p.nome}
+              </h3>
+            </div>
+          </li>
+        ))}
+      </ul>
+      {visiveis.length === 0 && (
+        <p className="mt-14 text-texto-suave">Nenhum projeto com essa tipologia na lista por enquanto.</p>
+      )}
+    </section>
+  );
+}

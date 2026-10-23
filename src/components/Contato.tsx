@@ -1,15 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Logo } from "./Logo";
+import { PAGINAS, REDES } from "@/lib/navegacao";
 
-const REDES = [
-  { nome: "Instagram", href: "https://www.instagram.com/lofteria.oficial/" },
-  { nome: "LinkedIn", href: "https://www.linkedin.com/company/lofteriabrasil" },
-  { nome: "Facebook", href: "https://www.facebook.com/profile.php?id=61566892994085" },
-];
-
-export default function Contato() {
+// Formulário de contato + rodapé, no fim de todas as páginas.
+// `origem` diz de qual página veio o lead.
+export default function Contato({ origem = "contato" }: { origem?: string }) {
   const [estado, setEstado] = useState<"editando" | "enviando" | "enviado" | "erro">("editando");
 
   async function enviar(ev: React.FormEvent<HTMLFormElement>) {
@@ -19,7 +17,7 @@ export default function Contato() {
     const resp = await fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...dados, origem: "contato" }),
+      body: JSON.stringify({ ...dados, origem }),
     }).catch(() => null);
     setEstado(resp?.ok ? "enviado" : "erro");
   }
@@ -82,6 +80,14 @@ export default function Contato() {
           </form>
         )}
       </div>
+
+      <nav aria-label="Páginas" className="mx-auto flex max-w-[1440px] flex-wrap gap-x-8 gap-y-3 border-t border-white/10 px-5 py-8 md:px-10">
+        {[{ href: "/", rotulo: "Início" }, ...PAGINAS, { href: "/contato", rotulo: "Contato" }].map((p) => (
+          <Link key={p.href} href={p.href} className="text-[11px] font-semibold tracking-[0.18em] text-white/70 uppercase hover:text-salmao">
+            {p.rotulo}
+          </Link>
+        ))}
+      </nav>
 
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
         <Logo className="w-full text-white/[0.07]" />

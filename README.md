@@ -13,6 +13,20 @@ npm run build
 npm run lint
 ```
 
+## Páginas
+
+| Rota | Conteúdo |
+|---|---|
+| `/` | Home: abertura com o isométrico, quem somos, solução, números, chamada para investidores, projetos, estilos, depoimentos, parceiros |
+| `/investidor` | Pilares, comparativo com/sem Lofteria, **simulador**, números, depoimentos |
+| `/morador` | O que cuidamos, etapas, estilos, depoimentos |
+| `/construtoras` | Tecnologia/design/processos, etapas, números, estilos |
+| `/projetos` | Lista do "Onde atuamos" com filtro por tipologia + projetos em destaque |
+| `/sobre` | Propósito, visão, missão, quem somos, valores, números |
+| `/contato` | Formulário |
+
+O menu e o rodapé leem as páginas de `src/lib/navegacao.ts`.
+
 ## Estrutura da home
 
 | Seção | Arquivo |
