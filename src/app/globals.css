@@ -195,3 +195,79 @@ html.lenis body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Isométrico vivo (abertura) */
+.iso-cone {
+  background: radial-gradient(ellipse at 50% 8%, rgba(255, 205, 135, 0.5), rgba(255, 222, 170, 0.16) 45%, transparent 72%);
+  mix-blend-mode: multiply;
+  filter: blur(6px);
+}
+.iso-lampada {
+  background: radial-gradient(circle, rgba(255, 246, 220, 1), rgba(255, 210, 140, 0.7) 40%, transparent 72%);
+  filter: blur(1px);
+}
+.iso-luz-mezanino,
+.iso-luz-escritorio,
+.iso-tela,
+.iso-vapor,
+.iso-sol {
+  opacity: 0;
+}
+.iso-sol {
+  background: linear-gradient(100deg, transparent 38%, rgba(255, 238, 205, 0.32) 46%, rgba(255, 244, 222, 0.42) 50%, rgba(255, 238, 205, 0.32) 54%, transparent 62%);
+  mix-blend-mode: screen;
+}
+.iso-tela {
+  background: radial-gradient(circle, rgba(170, 205, 255, 0.45), transparent 70%);
+  mix-blend-mode: screen;
+}
+.iso-vapor {
+  background: radial-gradient(ellipse, rgba(140, 140, 140, 0.5), transparent 68%);
+  filter: blur(3px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .iso-luz-mezanino {
+    animation: iso-acender 14s ease-in-out infinite;
+  }
+  .iso-luz-escritorio {
+    animation: iso-acender 14s ease-in-out -7s infinite;
+  }
+  .iso-tela {
+    animation: iso-tela 5s ease-in-out infinite;
+  }
+  .iso-vapor {
+    animation: iso-vapor 3.6s ease-out infinite;
+  }
+  .iso-sol {
+    animation: iso-sol 22s ease-in-out infinite alternate;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .iso-luz-mezanino {
+    opacity: 1;
+  }
+}
+
+@keyframes iso-acender {
+  0%, 12% { opacity: 0; }
+  /* acende rápido, como uma lâmpada inteligente, e apaga devagar */
+  15% { opacity: 1; }
+  16% { opacity: 0.85; }
+  17%, 62% { opacity: 1; }
+  74%, 100% { opacity: 0; }
+}
+@keyframes iso-tela {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+@keyframes iso-vapor {
+  0% { opacity: 0; transform: translate(-50%, 0) scale(0.6); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + 40%), -120%) scale(1.5, 1.8); }
+}
+@keyframes iso-sol {
+  0% { opacity: 0.6; transform: translateX(-18%); }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; transform: translateX(18%); }
+}

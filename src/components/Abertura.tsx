@@ -9,6 +9,7 @@ import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
 import VideoPlay from "./VideoPlay";
 import ProjetosMini from "./ProjetosMini";
+import IsoVida from "./IsoVida";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
@@ -198,13 +199,14 @@ export default function Abertura() {
         <div data-iso className="pointer-events-none absolute top-0 left-0 z-10 w-screen opacity-0">
           <div data-iso-interno className="relative w-full" style={{ aspectRatio: `${3600} / ${3288}` }}>
             <Image
-              src="/img/apartamento-isometrico.webp"
-              alt="Isométrico do loft Lago di Garda montado pela Lofteria: mezanino com quarto, cozinha, living, jantar e home office"
+              src="/img/apartamento-isometrico-vida.webp"
+              alt="Isométrico do loft Lago di Garda montado pela Lofteria: mezanino com quarto e uma moradora lendo, cozinha, living, jantar com um morador tomando café e home office"
               fill
               sizes="(max-width: 1023px) 150vw, 100vw"
               preload
               className="object-contain"
             />
+            <IsoVida />
             {AMBIENTES.map((a, i) => (
               <div
                 key={a.nome}
