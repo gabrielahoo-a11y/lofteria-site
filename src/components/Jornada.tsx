@@ -122,7 +122,7 @@ export default function Jornada() {
           </div>
         ))}
 
-        <div className="relative mx-auto aspect-[3/4] w-[min(60vw,300px)] overflow-hidden shadow-2xl shadow-grafite/20 max-md:order-1 md:order-2 md:w-[min(22vw,320px)]">
+        <div className="relative mx-auto aspect-[3/4] w-[min(60vw,300px)] overflow-hidden rounded-[22px] shadow-2xl shadow-grafite/20 max-md:order-1 md:order-2 md:w-[min(22vw,320px)]">
           {ETAPAS.map((e, i) => (
             <Image
               key={e.foto}

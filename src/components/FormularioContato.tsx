@@ -12,7 +12,7 @@ const INTERESSES = [
 ];
 
 const campo =
-  "mt-2 w-full bg-white px-4 py-3.5 text-grafite ring-1 ring-linha outline-none transition-shadow placeholder:text-texto-suave/60 focus:ring-2 focus:ring-salmao";
+  "mt-2 w-full rounded-xl bg-white px-4 py-3.5 text-grafite ring-1 ring-linha outline-none transition-shadow placeholder:text-texto-suave/60 focus:ring-2 focus:ring-salmao";
 
 export default function FormularioContato() {
   const [estado, setEstado] = useState<"editando" | "enviando" | "enviado" | "erro">("editando");
@@ -31,7 +31,7 @@ export default function FormularioContato() {
 
   if (estado === "enviado") {
     return (
-      <div className="flex min-h-[26.25rem] flex-col justify-center bg-nevoa p-10">
+      <div className="flex min-h-[26.25rem] flex-col justify-center rounded-[24px] bg-nevoa p-10">
         <span className="grid size-12 place-items-center rounded-full bg-salmao text-xl text-white">✓</span>
         <h2 className="mt-6 text-3xl font-semibold tracking-tight text-grafite">Mensagem enviada.</h2>
         <p className="mt-3 max-w-md font-light text-texto-suave">

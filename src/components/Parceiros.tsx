@@ -46,7 +46,7 @@ export default function Parceiros() {
             <li
               key={i}
               aria-hidden={i >= PARCEIROS.length}
-              className="px-10 text-[clamp(2rem,4vw,3.5rem)] font-semibold tracking-tight whitespace-nowrap text-grafite/25 transition-colors duration-300 hover:text-salmao md:px-16"
+              className="px-10 text-[clamp(2rem,4vw,3.5rem)] font-semibold tracking-[0.04em] whitespace-nowrap uppercase text-grafite/25 transition-colors duration-300 hover:text-salmao md:px-16"
             >
               {nome}
             </li>

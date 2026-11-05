@@ -239,7 +239,7 @@ export default function Calculadora() {
         <div className="lg:sticky lg:top-8 lg:self-start">
           <div
             data-cartao-resultado
-            className="relative overflow-hidden bg-gradient-to-br from-petroleo to-petroleo-profundo p-7 text-white shadow-2xl shadow-petroleo/30 md:p-10"
+            className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-petroleo to-petroleo-profundo p-7 text-white shadow-2xl shadow-petroleo/30 md:p-10"
           >
             <svg aria-hidden viewBox="0 0 400 200" className="absolute -right-10 -bottom-10 w-[120%] opacity-[0.08]">
               {Array.from({ length: 14 }, (_, i) => (
@@ -290,7 +290,7 @@ export default function Calculadora() {
               </div>
             </dl>
 
-            <div className="mt-8 bg-white/10 p-5">
+            <div className="mt-8 rounded-2xl bg-white/10 p-5">
               <p className="text-[0.6875rem] tracking-[0.16em] text-white/60 uppercase">Com a Lofteria × fazendo sozinho</p>
               <p className="mt-2 text-3xl font-semibold text-salmao tabular-nums">
                 +<Animado valor={r.ganhoPrimeiroAnoVsSozinho} formato={brl} />
@@ -305,7 +305,7 @@ export default function Calculadora() {
                   <Animado valor={total} formato={brl} />
                 </p>
               </div>
-              <div className="mt-3 flex h-2 gap-1 overflow-hidden">
+              <div className="mt-3 flex h-2 gap-1 overflow-hidden rounded-full">
                 <span className="bg-white/80 transition-[flex-grow] duration-700" style={{ flexGrow: investido }} />
                 <span className="bg-salmao transition-[flex-grow] duration-700" style={{ flexGrow: renda }} />
                 <span className="bg-[#7fc3d3] transition-[flex-grow] duration-700" style={{ flexGrow: valorizacao }} />

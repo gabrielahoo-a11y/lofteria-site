@@ -80,7 +80,7 @@ export default function Comparativo() {
           </div>
         </div>
 
-        <ul className="mt-12 grid gap-px overflow-hidden bg-linha [perspective:800px] sm:grid-cols-2">
+        <ul className="mt-12 grid gap-px overflow-hidden rounded-3xl bg-linha [perspective:800px] sm:grid-cols-2">
           {LINHAS.map((l) => (
             <li key={l.tarefa} className="flex items-center justify-between gap-4 bg-white px-6 py-5">
               <span className="font-semibold text-grafite">{l.tarefa}</span>

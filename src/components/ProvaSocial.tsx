@@ -52,7 +52,7 @@ export default function ProvaSocial() {
   return (
     <section ref={raiz} className="mx-auto grid max-w-[90rem] gap-4 px-5 pb-24 md:grid-cols-3 md:px-10 md:pb-32">
       {/* Depoimento rotativo */}
-      <div data-cartao className="relative flex min-h-[21.25rem] flex-col justify-between overflow-hidden bg-grafite-profundo p-7 text-white">
+      <div data-cartao className="relative flex min-h-[21.25rem] flex-col justify-between overflow-hidden rounded-[22px] bg-grafite-profundo p-7 text-white">
         <div className="flex items-center justify-between">
           <span className="flex items-center gap-2 text-sm font-semibold">
             <Simbolo className="size-5 text-salmao" /> Lofteria
@@ -80,7 +80,7 @@ export default function ProvaSocial() {
       </div>
 
       {/* Foto com resultado */}
-      <div data-cartao className="group relative min-h-[21.25rem] overflow-hidden">
+      <div data-cartao className="group relative min-h-[21.25rem] overflow-hidden rounded-[22px]">
         <Image
           src="/img/quarto-janela.jpg"
           alt="Quarto com janela ampla, montado pela Lofteria"
@@ -88,7 +88,7 @@ export default function ProvaSocial() {
           sizes="(min-width: 768px) 33vw, 100vw"
           className="object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-105"
         />
-        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 bg-grafite-profundo/80 p-4 text-white backdrop-blur-md">
+        <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-4 rounded-2xl bg-grafite-profundo/80 p-4 text-white backdrop-blur-md">
           <div>
             <div className="flex -space-x-2">
               {["sunset-lagoa", "plenty-sea", "swami-beach"].map((f) => (
@@ -106,9 +106,9 @@ export default function ProvaSocial() {
       {/* Medidor */}
       <div
         data-cartao
-        className="relative grid min-h-[21.25rem] place-items-center overflow-hidden bg-nevoa bg-[repeating-linear-gradient(0deg,transparent_0_9px,rgba(50,60,68,.06)_9px_10px)]"
+        className="relative grid min-h-[21.25rem] place-items-center overflow-hidden rounded-[22px] bg-nevoa bg-[repeating-linear-gradient(0deg,transparent_0_9px,rgba(50,60,68,.06)_9px_10px)]"
       >
-        <div className=" bg-white px-8 py-6 text-center shadow-sm">
+        <div className="rounded-2xl bg-white px-8 py-6 text-center shadow-sm">
           <p className="text-xs text-texto-suave">Rentabilidade nos imóveis entregues</p>
           <div className="relative mx-auto mt-3 w-44">
             <svg viewBox="0 0 120 66" className="w-full" aria-hidden>

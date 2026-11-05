@@ -77,7 +77,7 @@ export default function Depoimentos() {
             <figure
               key={i}
               aria-hidden={i >= DEPOIMENTOS.length}
-              className="flex w-[82vw] max-w-[26.25rem] flex-col justify-between bg-nevoa p-8"
+              className="flex w-[82vw] max-w-[26.25rem] flex-col justify-between rounded-[24px] bg-nevoa p-8"
             >
               <blockquote className="leading-relaxed text-grafite">
                 <span className="mb-4 block text-4xl leading-none text-salmao">“</span>

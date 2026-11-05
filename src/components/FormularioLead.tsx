@@ -47,7 +47,7 @@ export default function FormularioLead({
       onClick={(e) => e.target === e.currentTarget && aoFechar()}
     >
       <div
-        className={`w-full max-w-md bg-white p-8 transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] md:p-10 ${
+        className={`w-full max-w-md rounded-[28px] bg-white p-8 transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] md:p-10 ${
           aberto ? "translate-y-0" : "translate-y-10"
         }`}
       >

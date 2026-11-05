@@ -62,7 +62,7 @@ export default function ListaProjetos() {
 
       <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {visiveis.map((p) => (
-          <li key={p.slug} data-cartao-projeto className="group relative aspect-[4/5] overflow-hidden bg-grafite-profundo">
+          <li key={p.slug} data-cartao-projeto className="group relative aspect-[4/5] overflow-hidden rounded-[24px] bg-grafite-profundo">
             <Image
               src={foto(p)}
               alt={`Apartamento ${p.nome} montado pela Lofteria`}

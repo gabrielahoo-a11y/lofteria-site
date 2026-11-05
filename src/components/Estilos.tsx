@@ -41,7 +41,7 @@ export function PaineisEstilos({ inicial = 0 }: { inicial?: number }) {
             onFocus={() => setAtivo(i)}
             onClick={() => setAtivo(i)}
             aria-pressed={aberto}
-            className="group relative overflow-hidden text-left text-white transition-[flex-grow] duration-700 ease-[cubic-bezier(.7,0,.2,1)]"
+            className="group relative overflow-hidden rounded-[28px] text-left text-white transition-[flex-grow] duration-700 ease-[cubic-bezier(.7,0,.2,1)]"
             style={{ flexGrow: aberto ? 3.2 : 1, flexBasis: 0 }}
           >
             <Image

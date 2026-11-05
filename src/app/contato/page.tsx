@@ -24,7 +24,7 @@ export default function PaginaContato() {
         </TituloCentral>
 
         <Revelar className="mx-auto grid max-w-[75rem] gap-10 px-5 pb-28 md:px-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
-          <aside data-revelar className="h-fit bg-grafite-profundo p-8 text-white">
+          <aside data-revelar className="h-fit rounded-[24px] bg-grafite-profundo p-8 text-white">
             <p className="rotulo text-white/70">Lofteria</p>
             <p className="mt-5 text-lg leading-snug">Seu imóvel pronto para performar.</p>
             <dl className="mt-8 space-y-6 border-t border-white/10 pt-8 text-sm">

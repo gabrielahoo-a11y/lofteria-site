@@ -49,7 +49,7 @@ export default function Rodape() {
   return (
     <footer ref={raiz} className="overflow-hidden bg-grafite-profundo text-white">
       <div className="mx-auto grid max-w-[90rem] gap-12 px-5 pt-20 md:px-10 lg:grid-cols-[minmax(0,22rem)_1fr]">
-        <div className=" bg-white/[0.05] p-6 ring-1 ring-white/10">
+        <div className="rounded-[20px] bg-white/[0.05] p-6 ring-1 ring-white/10">
           <p className="text-[0.6875rem] font-semibold tracking-[0.18em] text-white/50 uppercase">Newsletter</p>
           <p className="mt-3 font-semibold">Novidades e oportunidades, uma vez por mês.</p>
           {estado === "enviado" ? (
@@ -66,7 +66,7 @@ export default function Rodape() {
                 type="email"
                 autoComplete="email"
                 placeholder="Seu e-mail"
-                className="min-w-0 flex-1 bg-black/25 px-4 py-3 text-sm ring-1 ring-white/10 outline-none placeholder:text-white/40 focus:ring-salmao"
+                className="min-w-0 flex-1 rounded-lg bg-black/25 px-4 py-3 text-sm ring-1 ring-white/10 outline-none placeholder:text-white/40 focus:ring-salmao"
               />
               <button
                 type="submit"
@@ -128,13 +128,13 @@ export default function Rodape() {
       </div>
 
       <div className="mx-auto mt-16 flex max-w-[90rem] flex-wrap items-center justify-between gap-3 px-5 text-xs md:px-10">
-        <span className="bg-white/[0.06] px-3.5 py-2 text-white/60">
+        <span className="rounded-full bg-white/[0.06] px-3.5 py-2 text-white/60">
           © {new Date().getFullYear()} Lofteria. Todos os direitos reservados.
         </span>
         <button
           type="button"
           onClick={topo}
-          className="flex items-center gap-2 bg-white/[0.06] px-3.5 py-2 font-semibold tracking-[0.14em] text-white/80 uppercase transition-colors hover:bg-salmao hover:text-white"
+          className="flex items-center gap-2 rounded-full bg-white/[0.06] px-3.5 py-2 font-semibold tracking-[0.14em] text-white/80 uppercase transition-colors hover:bg-salmao hover:text-white"
         >
           Voltar ao topo <ArrowUp className="size-3.5" aria-hidden />
         </button>

@@ -60,7 +60,7 @@ export default function GaleriaCurva() {
           <div
             key={i}
             aria-hidden={i >= FOTOS.length}
-            className="relative h-[34vh] min-h-[13.75rem] w-[26vh] min-w-[10.625rem] shrink-0 overflow-hidden md:h-[40vh] md:w-[30vh]"
+            className="relative h-[34vh] min-h-[13.75rem] w-[26vh] min-w-[10.625rem] shrink-0 overflow-hidden rounded-[18px] md:h-[40vh] md:w-[30vh]"
           >
             <Image src={`/img/${f}.jpg`} alt={i < FOTOS.length ? "Apartamento montado pela Lofteria" : ""} fill sizes="30vh" className="object-cover" />
           </div>

@@ -67,8 +67,9 @@ export default function VideoPlay({ texto }: { texto: string }) {
           x: origem.left + origem.width / 2 - (destino.left + destino.width / 2),
           y: origem.top + origem.height / 2 - (destino.top + destino.height / 2),
           scale: origem.width / destino.width,
+          borderRadius: 18,
         },
-        { x: 0, y: 0, scale: 1, duration: 0.8, ease: "expo.inOut" },
+        { x: 0, y: 0, scale: 1, borderRadius: 24, duration: 0.8, ease: "expo.inOut" },
       );
     }
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && fechar();
@@ -97,14 +98,14 @@ export default function VideoPlay({ texto }: { texto: string }) {
             <div
               ref={mini}
               aria-hidden
-              className={`pointer-events-none fixed top-0 left-0 z-[70] aspect-video w-72 overflow-hidden bg-grafite-profundo shadow-2xl shadow-black/30 transition-[opacity,scale] duration-300 ${
+              className={`pointer-events-none fixed top-0 left-0 z-[70] aspect-video w-72 overflow-hidden rounded-[18px] bg-grafite-profundo shadow-2xl shadow-black/30 transition-[opacity,scale] duration-300 ${
                 miniVisivel && !aberto ? "scale-100 opacity-100" : "scale-75 opacity-0"
               }`}
             >
               {miniVisivel && !aberto && (
                 <iframe src={MINI} title="Prévia do vídeo" allow="autoplay; encrypted-media" className="pointer-events-none absolute inset-0 size-full scale-[1.02]" tabIndex={-1} />
               )}
-              <span className="absolute bottom-3 left-3 bg-black/50 px-2.5 py-1 text-[0.625rem] font-semibold tracking-[0.18em] text-white uppercase backdrop-blur">
+              <span className="absolute bottom-3 left-3 rounded-full bg-black/50 px-2.5 py-1 text-[0.625rem] font-semibold tracking-[0.18em] text-white uppercase backdrop-blur">
                 Clique para assistir
               </span>
             </div>
@@ -117,7 +118,7 @@ export default function VideoPlay({ texto }: { texto: string }) {
                 className="fixed inset-0 z-[80] grid place-items-center bg-grafite-profundo/80 p-4 backdrop-blur-md"
                 onClick={(e) => e.target === e.currentTarget && fechar()}
               >
-                <div ref={modal} className="relative aspect-video w-full max-w-[68.75rem] overflow-hidden bg-black shadow-2xl">
+                <div ref={modal} className="relative aspect-video w-full max-w-[68.75rem] overflow-hidden rounded-3xl bg-black shadow-2xl">
                   <iframe
                     src={CHEIO}
                     title="Transforme seu imóvel em uma fonte de renda em 60 dias"

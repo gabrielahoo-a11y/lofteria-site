@@ -350,7 +350,7 @@ export default function Abertura() {
                 </span>
                 <span
                   data-pilula
-                  className="origin-left bg-grafite-profundo/90 px-3.5 py-2 text-[0.8125rem] whitespace-nowrap text-white"
+                  className="origin-left rounded-full bg-grafite-profundo/90 px-3.5 py-2 text-[0.8125rem] whitespace-nowrap text-white"
                 >
                   <strong className="font-semibold">{a.nome}</strong>
                   <span className="hidden text-white/60 sm:inline">

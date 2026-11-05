@@ -81,7 +81,7 @@ export default function Menu() {
           compacto ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-8 opacity-0"
         }`}
       >
-        <div className="flex items-center gap-6 bg-grafite-profundo/90 py-2.5 pr-2.5 pl-5 text-white shadow-2xl shadow-black/20 backdrop-blur-md">
+        <div className="flex items-center gap-6 rounded-full bg-grafite-profundo/90 py-2.5 pr-2.5 pl-5 text-white shadow-2xl shadow-black/20 backdrop-blur-md">
           <Link href="/" aria-label="Voltar ao início">
             <Logo className="h-4 w-auto" simboloSalmao />
           </Link>
@@ -89,7 +89,7 @@ export default function Menu() {
             type="button"
             onClick={() => setAberto(true)}
             aria-expanded={aberto}
-            className="flex items-center gap-2 bg-white/10 px-4 py-2 text-[0.6875rem] font-semibold tracking-[0.18em] uppercase transition-colors hover:bg-white/20"
+            className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-[0.6875rem] font-semibold tracking-[0.18em] uppercase transition-colors hover:bg-white/20"
           >
             Menu
             <span className="flex flex-col gap-[3px]">
