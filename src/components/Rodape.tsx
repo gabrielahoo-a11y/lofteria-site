@@ -6,7 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowUp } from "lucide-react";
-import { Logo } from "./Logo";
+import { Palavra } from "./Logo";
 import { PAGINAS, REDES } from "@/lib/navegacao";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -48,14 +48,14 @@ export default function Rodape() {
 
   return (
     <footer ref={raiz} className="overflow-hidden bg-grafite-profundo text-white">
-      <div className="mx-auto grid max-w-[1440px] gap-12 px-5 pt-20 md:px-10 lg:grid-cols-[minmax(0,22rem)_1fr]">
-        <div className="rounded-[20px] bg-white/[0.05] p-6 ring-1 ring-white/10">
-          <p className="text-[11px] font-semibold tracking-[0.18em] text-white/50 uppercase">Newsletter</p>
+      <div className="mx-auto grid max-w-[90rem] gap-12 px-5 pt-20 md:px-10 lg:grid-cols-[minmax(0,22rem)_1fr]">
+        <div className=" bg-white/[0.05] p-6 ring-1 ring-white/10">
+          <p className="text-[0.6875rem] font-semibold tracking-[0.18em] text-white/50 uppercase">Newsletter</p>
           <p className="mt-3 font-semibold">Novidades e oportunidades, uma vez por mês.</p>
           {estado === "enviado" ? (
             <p className="mt-5 text-sm text-salmao">Inscrição feita. Até a próxima edição!</p>
           ) : (
-            <form onSubmit={assinar} className="mt-5 space-y-3">
+            <form onSubmit={assinar} className="mt-5 flex flex-wrap gap-3">
               <label htmlFor="newsletter-email" className="sr-only">
                 Seu e-mail
               </label>
@@ -66,23 +66,23 @@ export default function Rodape() {
                 type="email"
                 autoComplete="email"
                 placeholder="Seu e-mail"
-                className="w-full rounded-lg bg-black/25 px-4 py-3 text-sm ring-1 ring-white/10 outline-none placeholder:text-white/40 focus:ring-salmao"
+                className="min-w-0 flex-1 bg-black/25 px-4 py-3 text-sm ring-1 ring-white/10 outline-none placeholder:text-white/40 focus:ring-salmao"
               />
               <button
                 type="submit"
                 disabled={estado === "enviando"}
-                className="w-full rounded-lg bg-white py-3 text-xs font-semibold tracking-[0.16em] text-grafite uppercase transition-colors hover:bg-salmao hover:text-white disabled:opacity-60"
+                className="shrink-0 bg-white px-6 py-3 text-xs font-semibold tracking-[0.16em] text-grafite uppercase transition-colors hover:bg-salmao hover:text-white disabled:opacity-60"
               >
                 {estado === "enviando" ? "Enviando…" : "Assinar"}
               </button>
-              {estado === "erro" && <p className="text-xs text-salmao">Não deu certo agora. Tente de novo em instantes.</p>}
+              {estado === "erro" && <p className="basis-full text-xs text-salmao">Não deu certo agora. Tente de novo em instantes.</p>}
             </form>
           )}
         </div>
 
         <div className="grid gap-10 sm:grid-cols-3">
           <nav aria-label="Páginas">
-            <p className="text-[11px] font-semibold tracking-[0.18em] text-white/50 uppercase">Páginas</p>
+            <p className="text-[0.6875rem] font-semibold tracking-[0.18em] text-white/50 uppercase">Páginas</p>
             <ul className="mt-5 space-y-2.5 text-sm">
               {[{ href: "/", rotulo: "Início" }, ...PAGINAS, { href: "/contato", rotulo: "Contato" }].map((p) => (
                 <li key={p.href}>
@@ -94,7 +94,7 @@ export default function Rodape() {
             </ul>
           </nav>
           <div>
-            <p className="text-[11px] font-semibold tracking-[0.18em] text-white/50 uppercase">Solução</p>
+            <p className="text-[0.6875rem] font-semibold tracking-[0.18em] text-white/50 uppercase">Solução</p>
             <ul className="mt-5 space-y-2.5 text-sm">
               {SOLUCOES.map((s) => (
                 <li key={s}>
@@ -111,7 +111,7 @@ export default function Rodape() {
             </ul>
           </div>
           <div>
-            <p className="text-[11px] font-semibold tracking-[0.18em] text-white/50 uppercase">Contato</p>
+            <p className="text-[0.6875rem] font-semibold tracking-[0.18em] text-white/50 uppercase">Contato</p>
             <ul className="mt-5 space-y-2.5 text-sm text-white/80">
               <li>Florianópolis · SC</li>
               <li className="select-all">marketing@lofteria.com</li>
@@ -127,24 +127,25 @@ export default function Rodape() {
         </div>
       </div>
 
-      <div className="relative mx-auto mt-16 max-w-[1440px] px-5 md:px-10">
-        <div data-marca className="text-white/[0.06]">
-          <Logo className="h-auto w-full" />
-        </div>
-        <div className="absolute inset-x-5 bottom-6 flex flex-wrap items-center justify-between gap-3 text-xs md:inset-x-10">
-          <span className="rounded-full bg-white/[0.06] px-3.5 py-2 text-white/60">
-            © {new Date().getFullYear()} Lofteria. Todos os direitos reservados.
-          </span>
-          <button
-            type="button"
-            onClick={topo}
-            className="flex items-center gap-2 rounded-full bg-white/[0.06] px-3.5 py-2 font-semibold tracking-[0.14em] text-white/80 uppercase transition-colors hover:bg-salmao hover:text-white"
-          >
-            Voltar ao topo <ArrowUp className="size-3.5" aria-hidden />
-          </button>
+      <div className="mx-auto mt-16 flex max-w-[90rem] flex-wrap items-center justify-between gap-3 px-5 text-xs md:px-10">
+        <span className="bg-white/[0.06] px-3.5 py-2 text-white/60">
+          © {new Date().getFullYear()} Lofteria. Todos os direitos reservados.
+        </span>
+        <button
+          type="button"
+          onClick={topo}
+          className="flex items-center gap-2 bg-white/[0.06] px-3.5 py-2 font-semibold tracking-[0.14em] text-white/80 uppercase transition-colors hover:bg-salmao hover:text-white"
+        >
+          Voltar ao topo <ArrowUp className="size-3.5" aria-hidden />
+        </button>
+      </div>
+
+      {/* Nome da marca de ponta a ponta, cortado pela base da página */}
+      <div className="mx-auto mt-12 aspect-[572/56] max-w-[90rem] overflow-hidden px-5 md:px-10" aria-hidden>
+        <div data-marca className="text-white/[0.07]">
+          <Palavra className="h-auto w-full" />
         </div>
       </div>
-      <div className="h-24" />
     </footer>
   );
 }

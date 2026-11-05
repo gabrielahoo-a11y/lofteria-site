@@ -58,7 +58,7 @@ function Opcoes<T extends string>({
 }) {
   return (
     <fieldset>
-      <legend className="mb-3 text-[11px] font-semibold tracking-[0.18em] text-texto-suave uppercase">{rotulo}</legend>
+      <legend className="mb-3 text-[0.6875rem] font-semibold tracking-[0.18em] text-texto-suave uppercase">{rotulo}</legend>
       <div className="flex flex-wrap gap-2">
         {opcoes.map((o) => (
           <button
@@ -66,7 +66,7 @@ function Opcoes<T extends string>({
             type="button"
             onClick={() => aoMudar(o.id)}
             aria-pressed={valor === o.id}
-            className={`rounded-full px-4 py-2.5 text-sm transition-all duration-300 ${
+            className={`px-4 py-2.5 text-sm transition-all duration-300 ${
               valor === o.id
                 ? "bg-grafite text-white"
                 : "bg-white text-grafite ring-1 ring-linha hover:ring-grafite/40"
@@ -101,7 +101,7 @@ function Deslizante({
   return (
     <label className="block">
       <span className="flex items-baseline justify-between gap-4">
-        <span className="text-[11px] font-semibold tracking-[0.18em] text-texto-suave uppercase">{rotulo}</span>
+        <span className="text-[0.6875rem] font-semibold tracking-[0.18em] text-texto-suave uppercase">{rotulo}</span>
         <span className="text-2xl font-semibold tracking-tight text-salmao tabular-nums md:text-3xl">{formato(valor)}</span>
       </span>
       <input
@@ -173,7 +173,7 @@ export default function Calculadora() {
         SIMULADOR
       </p>
 
-      <div className="relative mx-auto grid max-w-[1440px] gap-14 px-5 md:px-10 lg:grid-cols-[1fr_minmax(0,520px)] lg:gap-20">
+      <div className="relative mx-auto grid max-w-[90rem] gap-14 px-5 md:px-10 lg:grid-cols-[1fr_minmax(0,520px)] lg:gap-20">
         <div>
           <p className="rotulo mb-6 text-grafite">Para o investidor</p>
           <h2 className="titulo-lg max-w-[12ch] text-grafite">
@@ -239,7 +239,7 @@ export default function Calculadora() {
         <div className="lg:sticky lg:top-8 lg:self-start">
           <div
             data-cartao-resultado
-            className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-petroleo to-petroleo-profundo p-7 text-white shadow-2xl shadow-petroleo/30 md:p-10"
+            className="relative overflow-hidden bg-gradient-to-br from-petroleo to-petroleo-profundo p-7 text-white shadow-2xl shadow-petroleo/30 md:p-10"
           >
             <svg aria-hidden viewBox="0 0 400 200" className="absolute -right-10 -bottom-10 w-[120%] opacity-[0.08]">
               {Array.from({ length: 14 }, (_, i) => (
@@ -252,7 +252,7 @@ export default function Calculadora() {
               ))}
             </svg>
 
-            <p className="text-[11px] font-semibold tracking-[0.2em] text-white/60 uppercase">Rentabilidade anual estimada</p>
+            <p className="text-[0.6875rem] font-semibold tracking-[0.2em] text-white/60 uppercase">Rentabilidade anual estimada</p>
             <p className="mt-3 text-6xl font-semibold tracking-tight tabular-nums md:text-7xl">
               <Animado valor={r.rentabilidadeAnual} formato={pct1} />
             </p>
@@ -260,25 +260,25 @@ export default function Calculadora() {
 
             <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 border-t border-white/15 pt-8">
               <div>
-                <dt className="text-[11px] tracking-[0.16em] text-white/55 uppercase">Renda líquida / mês</dt>
+                <dt className="text-[0.6875rem] tracking-[0.16em] text-white/55 uppercase">Renda líquida / mês</dt>
                 <dd className="mt-1 text-2xl font-semibold tabular-nums">
                   <Animado valor={r.receitaLiquidaMes} formato={brl} />
                 </dd>
               </div>
               <div>
-                <dt className="text-[11px] tracking-[0.16em] text-white/55 uppercase">Investimento na montagem</dt>
+                <dt className="text-[0.6875rem] tracking-[0.16em] text-white/55 uppercase">Investimento na montagem</dt>
                 <dd className="mt-1 text-2xl font-semibold tabular-nums">
                   <Animado valor={r.investimentoMontagem} formato={brl} />
                 </dd>
               </div>
               <div>
-                <dt className="text-[11px] tracking-[0.16em] text-white/55 uppercase">A montagem se paga em</dt>
+                <dt className="text-[0.6875rem] tracking-[0.16em] text-white/55 uppercase">A montagem se paga em</dt>
                 <dd className="mt-1 text-2xl font-semibold tabular-nums">
                   <Animado valor={r.paybackMeses} formato={meses} />
                 </dd>
               </div>
               <div>
-                <dt className="text-[11px] tracking-[0.16em] text-white/55 uppercase">
+                <dt className="text-[0.6875rem] tracking-[0.16em] text-white/55 uppercase">
                   {entrada.modalidade === "temporada" ? "Diária média" : "Aluguel bruto / mês"}
                 </dt>
                 <dd className="mt-1 text-2xl font-semibold tabular-nums">
@@ -290,8 +290,8 @@ export default function Calculadora() {
               </div>
             </dl>
 
-            <div className="mt-8 rounded-2xl bg-white/10 p-5">
-              <p className="text-[11px] tracking-[0.16em] text-white/60 uppercase">Com a Lofteria × fazendo sozinho</p>
+            <div className="mt-8 bg-white/10 p-5">
+              <p className="text-[0.6875rem] tracking-[0.16em] text-white/60 uppercase">Com a Lofteria × fazendo sozinho</p>
               <p className="mt-2 text-3xl font-semibold text-salmao tabular-nums">
                 +<Animado valor={r.ganhoPrimeiroAnoVsSozinho} formato={brl} />
               </p>
@@ -300,12 +300,12 @@ export default function Calculadora() {
 
             <div className="mt-8">
               <div className="flex items-baseline justify-between">
-                <p className="text-[11px] tracking-[0.16em] text-white/60 uppercase">Patrimônio em 5 anos</p>
+                <p className="text-[0.6875rem] tracking-[0.16em] text-white/60 uppercase">Patrimônio em 5 anos</p>
                 <p className="text-xl font-semibold tabular-nums">
                   <Animado valor={total} formato={brl} />
                 </p>
               </div>
-              <div className="mt-3 flex h-2 gap-1 overflow-hidden rounded-full">
+              <div className="mt-3 flex h-2 gap-1 overflow-hidden">
                 <span className="bg-white/80 transition-[flex-grow] duration-700" style={{ flexGrow: investido }} />
                 <span className="bg-salmao transition-[flex-grow] duration-700" style={{ flexGrow: renda }} />
                 <span className="bg-[#7fc3d3] transition-[flex-grow] duration-700" style={{ flexGrow: valorizacao }} />

@@ -40,7 +40,7 @@ export default function Morador() {
           acao={{ href: "/contato", rotulo: "Quero um projeto" }}
         />
 
-        <Revelar className="mx-auto grid max-w-[1440px] gap-14 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-[1fr_1.2fr]">
+        <Revelar className="mx-auto grid max-w-[90rem] gap-14 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-[1fr_1.2fr]">
           <div data-revelar>
             <p className="rotulo mb-6 text-grafite">Cuidamos de tudo</p>
             <h2 className="titulo-lg max-w-[12ch] text-grafite">
@@ -55,7 +55,7 @@ export default function Morador() {
               <li
                 key={c}
                 data-revelar
-                className="group flex items-center gap-4 rounded-2xl bg-nevoa px-5 py-4 transition-colors duration-500 hover:bg-grafite hover:text-white"
+                className="group flex items-center gap-4 bg-nevoa px-5 py-4 transition-colors duration-500 hover:bg-grafite hover:text-white"
               >
                 <span className="text-xs text-salmao tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                 <span className="font-semibold text-grafite transition-colors duration-500 group-hover:text-white">{c}</span>

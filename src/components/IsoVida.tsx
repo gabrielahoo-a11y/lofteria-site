@@ -33,7 +33,7 @@ export default function IsoVida() {
       </div>
 
       {/* Reflexo do notebook no rosto */}
-      <div className="iso-tela absolute rounded-full" style={luz(65.2, 64.4, 3, 3.4)} />
+      <div className="iso-tela absolute rounded-full" style={luz(64.5, 65.6, 3, 3.4)} />
 
       {/* Vapor do café */}
       <div className="absolute" style={{ left: "63%", top: "63%", width: "1.6%", height: "5%" }}>

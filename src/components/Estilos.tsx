@@ -30,7 +30,7 @@ export function PaineisEstilos({ inicial = 0 }: { inicial?: number }) {
   const [ativo, setAtivo] = useState(inicial);
 
   return (
-    <div className="flex h-[64svh] min-h-[440px] flex-col gap-3 md:flex-row">
+    <div className="flex h-[64svh] min-h-[27.5rem] flex-col gap-3 md:flex-row">
       {ESTILOS.map((e, i) => {
         const aberto = ativo === i;
         return (
@@ -41,7 +41,7 @@ export function PaineisEstilos({ inicial = 0 }: { inicial?: number }) {
             onFocus={() => setAtivo(i)}
             onClick={() => setAtivo(i)}
             aria-pressed={aberto}
-            className="group relative overflow-hidden rounded-[28px] text-left text-white transition-[flex-grow] duration-700 ease-[cubic-bezier(.7,0,.2,1)]"
+            className="group relative overflow-hidden text-left text-white transition-[flex-grow] duration-700 ease-[cubic-bezier(.7,0,.2,1)]"
             style={{ flexGrow: aberto ? 3.2 : 1, flexBasis: 0 }}
           >
             <Image
@@ -75,7 +75,7 @@ export function PaineisEstilos({ inicial = 0 }: { inicial?: number }) {
 // Seção clara com os painéis, usada nas páginas internas
 export default function Estilos() {
   return (
-    <section id="estilos" className="mx-auto max-w-[1440px] px-5 py-28 md:px-10 md:py-40">
+    <section id="estilos" className="mx-auto max-w-[90rem] px-5 py-28 md:px-10 md:py-40">
       <div className="mb-14">
         <p className="rotulo mb-6 text-grafite">Descubra seu estilo</p>
         <h2 className="titulo-lg max-w-[14ch] text-grafite">

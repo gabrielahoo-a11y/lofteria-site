@@ -45,7 +45,7 @@ export default function ValoresCarrossel() {
 
   return (
     <section className="bg-nevoa py-24 md:py-32">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+      <div className="mx-auto max-w-[90rem] px-5 md:px-10">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="rotulo mb-6 text-grafite">Valores</p>
@@ -61,7 +61,7 @@ export default function ValoresCarrossel() {
                 onClick={() => rolar(d)}
                 disabled={d === -1 ? inicio : fim}
                 aria-label={d === -1 ? "Valor anterior" : "Próximo valor"}
-                className="grid size-11 place-items-center rounded-full bg-grafite text-white transition-all hover:bg-salmao disabled:bg-grafite/15 disabled:text-grafite/40"
+                className="grid size-11 place-items-center bg-grafite text-white transition-all hover:bg-salmao disabled:bg-grafite/15 disabled:text-grafite/40"
               >
                 {d === -1 ? <ArrowLeft className="size-4" /> : <ArrowRight className="size-4" />}
               </button>
@@ -76,7 +76,7 @@ export default function ValoresCarrossel() {
           {VALORES.map((v, i) => (
             <li
               key={v.titulo}
-              className="group relative flex aspect-[4/5] w-[78vw] max-w-[340px] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-[22px] bg-grafite-profundo p-7 text-white sm:w-[40vw] lg:w-[23vw]"
+              className="group relative flex aspect-[4/5] w-[78vw] max-w-[21.25rem] shrink-0 snap-start flex-col justify-between overflow-hidden bg-grafite-profundo p-7 text-white sm:w-[40vw] lg:w-[23vw]"
             >
               <Simbolo className="absolute -right-10 -bottom-10 w-56 text-white/[0.04] transition-all duration-1000 group-hover:-rotate-12 group-hover:text-salmao/20" />
               <span className="text-xs text-salmao tabular-nums">{String(i + 1).padStart(2, "0")}</span>

@@ -55,10 +55,10 @@ export default function Manifesto() {
 
   return (
     <section ref={raiz} className="bg-white px-5 py-28 text-center md:px-10 md:py-36">
-      <p className="text-[11px] font-semibold tracking-[0.24em] text-grafite uppercase">Quem somos</p>
+      <p className="text-[0.6875rem] font-semibold tracking-[0.24em] text-grafite uppercase">Quem somos</p>
       <p
         data-manifesto
-        className="mx-auto mt-10 max-w-[22ch] text-[clamp(2rem,4.2vw,3.6rem)] leading-[1.08] font-semibold tracking-[-0.025em] text-balance text-grafite"
+        className="mx-auto mt-10 max-w-[26ch] text-[clamp(1.8rem,3vw,2.75rem)] leading-[1.15] font-semibold tracking-[-0.025em] text-balance text-grafite"
       >
         Somos o feat entre o funcional e o emocional, o racional e o estético. Transformamos espaços em oportunidades
         e moradias em histórias.
@@ -74,7 +74,7 @@ export default function Manifesto() {
                 aria-hidden
               />
             </span>
-            <span className="font-semibold text-grafite">{titulo}</span>
+            <span className="text-lg font-light text-grafite">{titulo}</span>
           </li>
         ))}
       </ul>

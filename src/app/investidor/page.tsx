@@ -53,7 +53,7 @@ export default function Investidor() {
           acao={{ href: "#simulador", rotulo: "Simular meu retorno" }}
         />
 
-        <Revelar className="mx-auto grid max-w-[1440px] gap-10 px-5 py-24 md:grid-cols-3 md:px-10 md:py-32">
+        <Revelar className="mx-auto grid max-w-[90rem] gap-10 px-5 py-24 md:grid-cols-3 md:px-10 md:py-32">
           {PILARES.map((p, i) => (
             <div key={p.titulo} data-revelar className="border-t border-linha pt-8">
               <span className="text-xs text-salmao tabular-nums">0{i + 1}</span>

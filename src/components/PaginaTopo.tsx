@@ -33,11 +33,11 @@ export default function PaginaTopo({ rotulo, titulo, texto, foto, fotoAlt, acao 
           .timeline({ defaults: { ease: "expo.out" } })
           .from(linhas.words, { yPercent: 110, duration: 1.2, stagger: 0.04 })
           .from("[data-surge]", { opacity: 0, y: 24, duration: 1, stagger: 0.08 }, 0.35)
-          .from("[data-janela]", { clipPath: "inset(30% 30% 30% 30% round 32px)", duration: 1.6, ease: "expo.inOut" }, 0.2);
+          .from("[data-janela]", { clipPath: "inset(30% 30% 30% 30% round 0px)", duration: 1.6, ease: "expo.inOut" }, 0.2);
 
         gsap.fromTo(
           "[data-janela]",
-          { clipPath: "inset(0% 6% 0% 6% round 32px)" },
+          { clipPath: "inset(0% 6% 0% 6% round 0px)" },
           {
             clipPath: "inset(0% 0% 0% 0% round 0px)",
             ease: "none",
@@ -58,7 +58,7 @@ export default function PaginaTopo({ rotulo, titulo, texto, foto, fotoAlt, acao 
 
   return (
     <section ref={raiz} className="bg-white pt-32 md:pt-40">
-      <div className="mx-auto grid max-w-[1440px] gap-10 px-5 md:px-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+      <div className="mx-auto grid max-w-[90rem] gap-10 px-5 md:px-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
         <div>
           <p data-surge className="rotulo mb-8 text-grafite">
             {rotulo}
@@ -81,8 +81,8 @@ export default function PaginaTopo({ rotulo, titulo, texto, foto, fotoAlt, acao 
 
       <div
         data-janela
-        className="relative mt-16 h-[62svh] min-h-[360px] overflow-hidden md:mt-20 md:h-[78svh]"
-        style={{ clipPath: "inset(0% 6% 0% 6% round 32px)" }}
+        className="relative mt-16 h-[62svh] min-h-[22.5rem] overflow-hidden md:mt-20 md:h-[78svh]"
+        style={{ clipPath: "inset(0% 6% 0% 6% round 0px)" }}
       >
         <Image src={`/img/${foto}.jpg`} alt={fotoAlt} fill sizes="100vw" preload className="object-cover" />
       </div>

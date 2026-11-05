@@ -34,3 +34,14 @@ export function Simbolo({ className }: { className?: string }) {
     </svg>
   );
 }
+
+// Só o nome LOFTERIA., sem o símbolo (marca gigante do rodapé)
+export function Palavra({ className }: { className?: string }) {
+  return (
+    <svg viewBox="125 22 572 79" fill="currentColor" className={className} aria-hidden>
+      {LETRAS.map((d, i) => (
+        <path key={i} d={d} className={i === 0 ? "fill-salmao/40" : undefined} />
+      ))}
+    </svg>
+  );
+}

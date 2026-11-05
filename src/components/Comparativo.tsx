@@ -51,7 +51,7 @@ export default function Comparativo() {
 
   return (
     <section ref={raiz} className="bg-nevoa py-24 md:py-32">
-      <div className="mx-auto max-w-[1100px] px-5 md:px-10">
+      <div className="mx-auto max-w-[68.75rem] px-5 md:px-10">
         <div className="flex flex-wrap items-end justify-between gap-8">
           <div>
             <p className="rotulo mb-6 text-grafite">Faça a comparação</p>
@@ -59,7 +59,7 @@ export default function Comparativo() {
               Quem cuida de <span className="font-light text-salmao">cada etapa?</span>
             </h2>
           </div>
-          <div role="radiogroup" aria-label="Cenário" className="flex rounded-full bg-white p-1.5 shadow-sm ring-1 ring-linha">
+          <div role="radiogroup" aria-label="Cenário" className="flex bg-white p-1.5 shadow-sm ring-1 ring-linha">
             {[
               { v: false, rotulo: "Sem Lofteria" },
               { v: true, rotulo: "Com Lofteria" },
@@ -70,7 +70,7 @@ export default function Comparativo() {
                 role="radio"
                 aria-checked={com === o.v}
                 onClick={() => alternar(o.v)}
-                className={`rounded-full px-5 py-2.5 text-xs font-semibold tracking-[0.14em] uppercase transition-colors duration-300 ${
+                className={`px-5 py-2.5 text-xs font-semibold tracking-[0.14em] uppercase transition-colors duration-300 ${
                   com === o.v ? (o.v ? "bg-salmao text-white" : "bg-grafite text-white") : "text-grafite hover:bg-nevoa"
                 }`}
               >
@@ -80,7 +80,7 @@ export default function Comparativo() {
           </div>
         </div>
 
-        <ul className="mt-12 grid gap-px overflow-hidden rounded-3xl bg-linha [perspective:800px] sm:grid-cols-2">
+        <ul className="mt-12 grid gap-px overflow-hidden bg-linha [perspective:800px] sm:grid-cols-2">
           {LINHAS.map((l) => (
             <li key={l.tarefa} className="flex items-center justify-between gap-4 bg-white px-6 py-5">
               <span className="font-semibold text-grafite">{l.tarefa}</span>

@@ -82,7 +82,7 @@ export default function Jornada() {
   );
 
   return (
-    <section ref={raiz} className="relative flex h-svh min-h-[640px] flex-col overflow-hidden bg-white">
+    <section ref={raiz} className="relative flex h-svh min-h-[40rem] flex-col overflow-hidden bg-white">
       <p
         data-palavra
         aria-hidden
@@ -91,10 +91,10 @@ export default function Jornada() {
         Jornada
       </p>
 
-      <div className="relative mx-auto grid w-full max-w-[1440px] flex-1 items-center gap-8 px-5 pt-20 md:grid-cols-[1fr_auto_1fr] md:px-10">
+      <div className="relative mx-auto grid w-full max-w-[90rem] flex-1 items-center gap-8 px-5 pt-20 md:grid-cols-[1fr_auto_1fr] md:px-10">
         {/* Texto: no desktop alterna entre os lados da imagem; no celular fica sempre embaixo */}
         {(["esquerda", "direita"] as const).map((lado) => (
-          <div key={lado} className={`relative min-h-[170px] ${lado === "esquerda" ? "max-md:hidden md:order-1" : "max-md:order-2 md:order-3"}`}>
+          <div key={lado} className={`relative min-h-[10.625rem] ${lado === "esquerda" ? "max-md:hidden md:order-1" : "max-md:order-2 md:order-3"}`}>
             {ETAPAS.map((e, i) => {
               const daEsquerda = i % 2 === 0;
               if (lado === "esquerda" && !daEsquerda) return null;
@@ -122,7 +122,7 @@ export default function Jornada() {
           </div>
         ))}
 
-        <div className="relative mx-auto aspect-[3/4] w-[min(60vw,300px)] overflow-hidden rounded-[22px] shadow-2xl shadow-grafite/20 max-md:order-1 md:order-2 md:w-[min(22vw,320px)]">
+        <div className="relative mx-auto aspect-[3/4] w-[min(60vw,300px)] overflow-hidden shadow-2xl shadow-grafite/20 max-md:order-1 md:order-2 md:w-[min(22vw,320px)]">
           {ETAPAS.map((e, i) => (
             <Image
               key={e.foto}
@@ -139,7 +139,7 @@ export default function Jornada() {
       </div>
 
       {/* Linha do tempo */}
-      <div className="relative mx-auto w-full max-w-[1440px] px-5 pb-10 md:px-10">
+      <div className="relative mx-auto w-full max-w-[90rem] px-5 pb-10 md:px-10">
         <ol className="grid grid-cols-5 text-xs">
           {ETAPAS.map((e, i) => (
             <li

@@ -93,7 +93,7 @@ export default function ProjetosMini() {
           <div
             ref={cartao}
             aria-hidden
-            className={`pointer-events-none fixed top-0 left-0 z-[70] w-64 overflow-hidden rounded-[18px] bg-white shadow-2xl shadow-grafite/25 transition-[opacity,scale] duration-300 ${
+            className={`pointer-events-none fixed top-0 left-0 z-[70] w-64 overflow-hidden bg-white shadow-2xl shadow-grafite/25 transition-[opacity,scale] duration-300 ${
               visivel ? "scale-100 opacity-100" : "scale-75 opacity-0"
             }`}
           >

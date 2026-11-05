@@ -36,7 +36,7 @@ export default function Menu() {
           compacto ? "pointer-events-none -translate-y-full opacity-0" : "opacity-100"
         }`}
       >
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-5 md:px-10">
+        <div className="mx-auto flex max-w-[90rem] items-center justify-between px-5 py-5 md:px-10">
           <Link href="/" aria-label="Lofteria, início" className="text-grafite">
             <Logo className="h-6 w-auto md:h-7" simboloSalmao />
           </Link>
@@ -46,7 +46,7 @@ export default function Menu() {
                 key={p.href}
                 href={p.href}
                 aria-current={ativo(p.href) ? "page" : undefined}
-                className={`group relative flex items-center gap-1.5 py-1 text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors ${
+                className={`group relative flex items-center gap-1.5 py-1 text-[0.6875rem] font-semibold tracking-[0.18em] uppercase transition-colors ${
                   ativo(p.href) ? "text-salmao" : "text-grafite hover:text-salmao"
                 }`}
               >
@@ -67,7 +67,7 @@ export default function Menu() {
             <button
               type="button"
               onClick={() => setAberto(true)}
-              className="text-[11px] font-semibold tracking-[0.18em] text-grafite uppercase xl:hidden"
+              className="text-[0.6875rem] font-semibold tracking-[0.18em] text-grafite uppercase xl:hidden"
             >
               Menu
             </button>
@@ -81,7 +81,7 @@ export default function Menu() {
           compacto ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-8 opacity-0"
         }`}
       >
-        <div className="flex items-center gap-6 rounded-full bg-grafite-profundo/90 py-2.5 pr-2.5 pl-5 text-white shadow-2xl shadow-black/20 backdrop-blur-md">
+        <div className="flex items-center gap-6 bg-grafite-profundo/90 py-2.5 pr-2.5 pl-5 text-white shadow-2xl shadow-black/20 backdrop-blur-md">
           <Link href="/" aria-label="Voltar ao início">
             <Logo className="h-4 w-auto" simboloSalmao />
           </Link>
@@ -89,7 +89,7 @@ export default function Menu() {
             type="button"
             onClick={() => setAberto(true)}
             aria-expanded={aberto}
-            className="flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors hover:bg-white/20"
+            className="flex items-center gap-2 bg-white/10 px-4 py-2 text-[0.6875rem] font-semibold tracking-[0.18em] uppercase transition-colors hover:bg-white/20"
           >
             Menu
             <span className="flex flex-col gap-[3px]">
@@ -109,19 +109,19 @@ export default function Menu() {
           aberto ? "[clip-path:inset(0_0_0_0)]" : "pointer-events-none [clip-path:inset(0_0_100%_0)]"
         }`}
       >
-        <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-5 py-5 md:px-10">
+        <div className="mx-auto flex w-full max-w-[90rem] items-center justify-between px-5 py-5 md:px-10">
           <Link href="/" onClick={() => setAberto(false)} aria-label="Lofteria, início">
             <Logo className="h-6 w-auto" simboloSalmao />
           </Link>
           <button
             type="button"
             onClick={() => setAberto(false)}
-            className="text-[11px] font-semibold tracking-[0.18em] uppercase"
+            className="text-[0.6875rem] font-semibold tracking-[0.18em] uppercase"
           >
             Fechar ✕
           </button>
         </div>
-        <nav className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-center gap-1 px-5 md:px-10">
+        <nav className="mx-auto flex w-full max-w-[90rem] flex-1 flex-col justify-center gap-1 px-5 md:px-10">
           {[{ href: "/", rotulo: "Início" }, ...PAGINAS, { href: "/contato", rotulo: "Contato" }].map((p, i) => (
             <Link
               key={p.href}
@@ -140,7 +140,7 @@ export default function Menu() {
             </Link>
           ))}
         </nav>
-        <p className="mx-auto w-full max-w-[1440px] px-5 pb-8 text-sm text-white/50 md:px-10">
+        <p className="mx-auto w-full max-w-[90rem] px-5 pb-8 text-sm text-white/50 md:px-10">
           Seu imóvel pronto para performar.
         </p>
       </div>

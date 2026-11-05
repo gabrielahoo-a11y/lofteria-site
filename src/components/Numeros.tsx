@@ -53,7 +53,7 @@ export default function Numeros() {
 
   return (
     <section ref={raiz} className="bg-grafite-profundo pb-28 text-white md:pb-36">
-      <div className="mx-auto max-w-[1440px] px-5 pt-24 md:px-10 md:pt-32">
+      <div className="mx-auto max-w-[90rem] px-5 pt-24 md:px-10 md:pt-32">
         <p className="titulo-md max-w-[22ch]">
           Mais lucro em menos tempo.{" "}
           <span className="font-light text-white/45">De forma desburocratizada, eficiente e sem dor de cabeça.</span>
@@ -63,7 +63,7 @@ export default function Numeros() {
             <div
               key={n.rotulo}
               data-cartao
-              className="flex min-h-40 flex-col justify-between rounded-2xl bg-white/[0.04] p-7 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07]"
+              className="flex min-h-40 flex-col justify-between bg-white/[0.04] p-7 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07]"
             >
               <p className="text-5xl font-semibold tracking-tight tabular-nums md:text-6xl">
                 <span className="text-salmao">{n.prefixo}</span>

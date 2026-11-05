@@ -34,7 +34,7 @@ export default function SobreTopo() {
       ref={raiz}
       className="overflow-hidden bg-white bg-[repeating-linear-gradient(90deg,transparent_0_11px,rgba(50,60,68,.045)_11px_12px)] pt-36 md:pt-44"
     >
-      <div className="mx-auto max-w-[1440px] px-5 text-center md:px-10">
+      <div className="mx-auto max-w-[90rem] px-5 text-center md:px-10">
         <p data-surge className="rotulo justify-center text-grafite">
           Sobre a Lofteria
         </p>

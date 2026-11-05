@@ -20,6 +20,14 @@ html {
   background: #ffffff;
 }
 
+/* Monitores grandes: a partir de 1920px o site cresce junto com a tela (1rem = 1/120 da
+   largura), mantendo as mesmas proporções do desenho em 1920. Limite de 24px. */
+@media (min-width: 1921px) {
+  html {
+    font-size: min(calc(100vw / 120), 24px);
+  }
+}
+
 body {
   background: #ffffff;
   color: var(--color-texto);
@@ -48,7 +56,7 @@ html.lenis body {
 @layer components {
   /* Rótulo pequeno em caixa alta com o quadradinho salmão */
   .rotulo {
-    @apply inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.22em] uppercase;
+    @apply inline-flex items-center gap-2 text-[0.6875rem] font-semibold tracking-[0.22em] uppercase;
   }
   .rotulo::before {
     content: "";

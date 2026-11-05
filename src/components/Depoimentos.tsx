@@ -64,7 +64,7 @@ export default function Depoimentos() {
 
   return (
     <section id="depoimentos" ref={raiz} className="overflow-hidden bg-white py-28 md:py-40">
-      <div className="mx-auto max-w-[1440px] px-5 text-center md:px-10">
+      <div className="mx-auto max-w-[90rem] px-5 text-center md:px-10">
         <p className="rotulo mb-6 justify-center text-grafite">O que dizem nossos clientes</p>
         <h2 className="titulo-lg mx-auto max-w-[16ch] text-grafite">
           Julgados pelo resultado, <span className="font-light text-texto-suave">não pela promessa.</span>
@@ -77,7 +77,7 @@ export default function Depoimentos() {
             <figure
               key={i}
               aria-hidden={i >= DEPOIMENTOS.length}
-              className="flex w-[82vw] max-w-[420px] flex-col justify-between rounded-[24px] bg-nevoa p-8"
+              className="flex w-[82vw] max-w-[26.25rem] flex-col justify-between bg-nevoa p-8"
             >
               <blockquote className="leading-relaxed text-grafite">
                 <span className="mb-4 block text-4xl leading-none text-salmao">“</span>

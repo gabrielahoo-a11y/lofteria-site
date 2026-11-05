@@ -47,7 +47,7 @@ export default function FormularioLead({
       onClick={(e) => e.target === e.currentTarget && aoFechar()}
     >
       <div
-        className={`w-full max-w-md rounded-[28px] bg-white p-8 transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] md:p-10 ${
+        className={`w-full max-w-md bg-white p-8 transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] md:p-10 ${
           aberto ? "translate-y-0" : "translate-y-10"
         }`}
       >
@@ -82,7 +82,7 @@ export default function FormularioLead({
               { name: "whatsapp", rotulo: "WhatsApp", type: "tel", autoComplete: "tel" },
             ].map((c) => (
               <label key={c.name} className="block">
-                <span className="text-[11px] font-semibold tracking-[0.16em] text-texto-suave uppercase">{c.rotulo}</span>
+                <span className="text-[0.6875rem] font-semibold tracking-[0.16em] text-texto-suave uppercase">{c.rotulo}</span>
                 <input
                   required
                   name={c.name}

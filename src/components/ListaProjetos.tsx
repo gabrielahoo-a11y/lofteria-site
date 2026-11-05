@@ -38,7 +38,7 @@ export default function ListaProjetos() {
   );
 
   return (
-    <section ref={raiz} className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32">
+    <section ref={raiz} className="mx-auto max-w-[90rem] px-5 py-24 md:px-10 md:py-32">
       <div className="flex flex-wrap items-end justify-between gap-8">
         <h2 className="titulo-md max-w-[18ch] text-grafite">
           {PROJETOS.length} projetos em destaque <span className="font-light text-texto-suave">de mais de 350 entregues</span>
@@ -50,7 +50,7 @@ export default function ListaProjetos() {
               type="button"
               onClick={() => setFiltro(f.id)}
               aria-pressed={filtro === f.id}
-              className={`rounded-full px-4 py-2.5 text-sm transition-all duration-300 ${
+              className={`px-4 py-2.5 text-sm transition-all duration-300 ${
                 filtro === f.id ? "bg-grafite text-white" : "bg-white text-grafite ring-1 ring-linha hover:ring-grafite/40"
               }`}
             >
@@ -62,7 +62,7 @@ export default function ListaProjetos() {
 
       <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {visiveis.map((p) => (
-          <li key={p.slug} data-cartao-projeto className="group relative aspect-[4/5] overflow-hidden rounded-[24px] bg-grafite-profundo">
+          <li key={p.slug} data-cartao-projeto className="group relative aspect-[4/5] overflow-hidden bg-grafite-profundo">
             <Image
               src={foto(p)}
               alt={`Apartamento ${p.nome} montado pela Lofteria`}
@@ -72,7 +72,7 @@ export default function ListaProjetos() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0" />
             <div className="absolute inset-x-0 bottom-0 p-6 text-white">
-              <p className="text-[11px] tracking-[0.16em] text-white/70 uppercase">
+              <p className="text-[0.6875rem] tracking-[0.16em] text-white/70 uppercase">
                 {p.tipologia} · {p.local}
               </p>
               <h3 className="mt-2 text-2xl font-semibold tracking-tight transition-transform duration-500 group-hover:-translate-y-1">
