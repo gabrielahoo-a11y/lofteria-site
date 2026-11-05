@@ -45,9 +45,8 @@ export default function Construtoras() {
         />
 
         <Revelar className="mx-auto grid max-w-[90rem] gap-10 px-5 py-24 md:grid-cols-3 md:px-10 md:py-32">
-          {PILARES.map((p, i) => (
+          {PILARES.map((p) => (
             <div key={p.titulo} data-revelar className="border-t border-linha pt-8">
-              <span className="text-xs text-salmao tabular-nums">0{i + 1}</span>
               <h2 className="mt-5 text-3xl font-semibold tracking-tight text-grafite">{p.titulo}</h2>
               <p className="mt-4 max-w-sm leading-relaxed font-light text-texto-suave">{p.texto}</p>
             </div>

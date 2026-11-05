@@ -51,13 +51,12 @@ export default function Morador() {
             </p>
           </div>
           <ul className="grid gap-3 self-end sm:grid-cols-2">
-            {CUIDAMOS.map((c, i) => (
+            {CUIDAMOS.map((c) => (
               <li
                 key={c}
                 data-revelar
                 className="group flex items-center gap-4 rounded-2xl bg-nevoa px-5 py-4 transition-colors duration-500 hover:bg-grafite hover:text-white"
               >
-                <span className="text-xs text-salmao tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                 <span className="font-semibold text-grafite transition-colors duration-500 group-hover:text-white">{c}</span>
               </li>
             ))}

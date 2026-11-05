@@ -122,14 +122,13 @@ export default function Menu() {
           </button>
         </div>
         <nav className="mx-auto flex w-full max-w-[90rem] flex-1 flex-col justify-center gap-1 px-5 md:px-10">
-          {[{ href: "/", rotulo: "Início" }, ...PAGINAS, { href: "/contato", rotulo: "Contato" }].map((p, i) => (
+          {[{ href: "/", rotulo: "Início" }, ...PAGINAS, { href: "/contato", rotulo: "Contato" }].map((p) => (
             <Link
               key={p.href}
               href={p.href}
               onClick={() => setAberto(false)}
               className="group flex items-baseline gap-5 border-b border-white/10 py-3"
             >
-              <span className="text-xs text-salmao tabular-nums">{String(i + 1).padStart(2, "0")}</span>
               <span
                 className={`text-[clamp(2rem,5vw,4rem)] leading-none font-semibold tracking-tight transition-colors group-hover:text-salmao ${
                   ativo(p.href) ? "text-salmao" : ""

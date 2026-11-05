@@ -108,7 +108,7 @@ export default function Jornada() {
                   } ${lado === "esquerda" ? "text-right" : ""} ${lado === "direita" && daEsquerda ? "md:hidden" : ""}`}
                 >
                   <p className={`rotulo text-grafite ${lado === "esquerda" ? "justify-end" : ""}`}>
-                    {String(i + 1).padStart(2, "0")} · {e.marco}
+                    {e.marco}
                   </p>
                   <h3 className={`mt-4 max-w-[18ch] text-2xl font-semibold tracking-tight text-grafite md:text-3xl ${lado === "esquerda" ? "ml-auto" : ""}`}>
                     {e.titulo}

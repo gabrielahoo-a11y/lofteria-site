@@ -73,13 +73,12 @@ export default function ValoresCarrossel() {
           ref={trilho}
           className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {VALORES.map((v, i) => (
+          {VALORES.map((v) => (
             <li
               key={v.titulo}
               className="group relative flex aspect-[4/5] w-[78vw] max-w-[21.25rem] shrink-0 snap-start flex-col justify-between overflow-hidden rounded-[22px] bg-grafite-profundo p-7 text-white sm:w-[40vw] lg:w-[23vw]"
             >
               <Simbolo className="absolute -right-10 -bottom-10 w-56 text-white/[0.04] transition-all duration-1000 group-hover:-rotate-12 group-hover:text-salmao/20" />
-              <span className="text-xs text-salmao tabular-nums">{String(i + 1).padStart(2, "0")}</span>
               <div className="relative">
                 <h3 className="text-3xl font-semibold tracking-tight">{v.titulo}</h3>
                 <p className="mt-3 max-w-[22ch] font-light text-white/65">{v.texto}</p>

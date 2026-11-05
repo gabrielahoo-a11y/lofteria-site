@@ -66,9 +66,9 @@ export default function Numeros() {
               className="flex min-h-40 flex-col justify-between rounded-2xl bg-white/[0.04] p-7 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07]"
             >
               <p className="text-5xl font-semibold tracking-tight tabular-nums md:text-6xl">
-                <span className="text-salmao">{n.prefixo}</span>
+                <span>{n.prefixo}</span>
                 <span data-contador={n.valor}>{formatar(n.valor)}</span>
-                <span className="text-salmao">{n.sufixo}</span>
+                <span>{n.sufixo}</span>
               </p>
               <p className="mt-6 max-w-[22ch] text-sm text-white/55">{n.rotulo}</p>
             </div>

@@ -65,7 +65,7 @@ export default function Solucao() {
 
       {/* As quatro etapas lado a lado; no hover, um fundo claro sobe pela coluna */}
       <ul className="mx-auto mt-16 grid max-w-[90rem] border-t border-white/10 sm:grid-cols-2 md:mt-20 lg:grid-cols-4">
-        {ETAPAS.map((e, i) => (
+        {ETAPAS.map((e) => (
           <li
             key={e.titulo}
             data-revelar
@@ -73,8 +73,7 @@ export default function Solucao() {
           >
             <span className="absolute inset-0 origin-bottom scale-y-0 bg-white transition-transform duration-700 ease-[cubic-bezier(.33,0,.2,1)] group-hover:scale-y-100" />
             <div className="relative px-5 py-10 md:px-10 md:py-12">
-              <span className="text-xs text-salmao tabular-nums">0{i + 1}</span>
-              <h3 className="mt-4 text-2xl font-semibold tracking-tight transition-colors duration-500 group-hover:text-grafite md:text-3xl">
+              <h3 className="text-2xl font-semibold tracking-tight transition-colors duration-500 group-hover:text-grafite md:text-3xl">
                 {e.titulo}
               </h3>
               <ul className="mt-6 space-y-2.5">
