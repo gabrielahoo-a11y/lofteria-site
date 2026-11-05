@@ -1,5 +1,5 @@
-// Camadas que dão vida ao isométrico: luminárias que acendem "por voz", luz do sol passando,
-// vapor do café e o brilho do notebook. Tudo em % da imagem, então acompanha o zoom da abertura.
+// Camadas que dão vida ao isométrico: luminárias que acendem "por voz", luz do sol passando
+// e vapor do café. Tudo em % da imagem, então acompanha o zoom da abertura.
 // As animações ficam no globals.css e só rodam com prefers-reduced-motion: no-preference.
 
 const luz = (x: number, y: number, w: number, h: number) => ({
@@ -31,9 +31,6 @@ export default function IsoVida() {
         <div className="absolute rounded-[50%] iso-cone" style={luz(59.6, 55.9, 9, 9)} />
         <div className="absolute rounded-full iso-lampada" style={luz(60.4, 55.6, 1.6, 1.2)} />
       </div>
-
-      {/* Reflexo do notebook no rosto */}
-      <div className="iso-tela absolute rounded-full" style={luz(64.5, 65.6, 3, 3.4)} />
 
       {/* Vapor do café */}
       <div className="absolute" style={{ left: "63%", top: "63%", width: "1.6%", height: "5%" }}>

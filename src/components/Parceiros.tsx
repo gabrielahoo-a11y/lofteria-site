@@ -8,7 +8,7 @@ gsap.registerPlugin(useGSAP);
 
 // Investidores e parceiros. Enquanto não temos os arquivos das logos, os nomes aparecem
 // em texto; trocar por <Image src="/parceiros/…svg"> quando chegarem.
-const PARCEIROS = ["Faz", "Aldora", "Level Up"];
+const PARCEIROS = ["Faz", "DZ7", "Azzes", "Adore"];
 
 export default function Parceiros() {
   const raiz = useRef<HTMLElement>(null);

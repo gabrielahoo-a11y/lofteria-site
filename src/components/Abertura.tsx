@@ -326,7 +326,7 @@ export default function Abertura() {
             style={{ aspectRatio: `${3600} / ${3288}` }}
           >
             <Image
-              src="/img/apartamento-isometrico-vida.webp"
+              src="/img/apartamento-isometrico-moradores.webp"
               alt="Isométrico do loft Lago di Garda montado pela Lofteria: mezanino com quarto e uma moradora lendo, cozinha, living, jantar com um morador tomando café e home office"
               fill
               sizes="(max-width: 1023px) 150vw, 100vw"

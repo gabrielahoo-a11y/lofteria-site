@@ -216,17 +216,12 @@ html.lenis body {
 }
 .iso-luz-mezanino,
 .iso-luz-escritorio,
-.iso-tela,
 .iso-vapor,
 .iso-sol {
   opacity: 0;
 }
 .iso-sol {
   background: linear-gradient(100deg, transparent 38%, rgba(255, 238, 205, 0.32) 46%, rgba(255, 244, 222, 0.42) 50%, rgba(255, 238, 205, 0.32) 54%, transparent 62%);
-  mix-blend-mode: screen;
-}
-.iso-tela {
-  background: radial-gradient(circle, rgba(170, 205, 255, 0.45), transparent 70%);
   mix-blend-mode: screen;
 }
 .iso-vapor {
@@ -240,9 +235,6 @@ html.lenis body {
   }
   .iso-luz-escritorio {
     animation: iso-acender 14s ease-in-out -7s infinite;
-  }
-  .iso-tela {
-    animation: iso-tela 5s ease-in-out infinite;
   }
   .iso-vapor {
     animation: iso-vapor 3.6s ease-out infinite;
@@ -264,10 +256,6 @@ html.lenis body {
   16% { opacity: 0.85; }
   17%, 62% { opacity: 1; }
   74%, 100% { opacity: 0; }
-}
-@keyframes iso-tela {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
 }
 @keyframes iso-vapor {
   0% { opacity: 0; transform: translate(-50%, 0) scale(0.6); }
