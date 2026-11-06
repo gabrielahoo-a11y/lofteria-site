@@ -3,7 +3,6 @@ import Menu from "@/components/Menu";
 import PaginaTopo from "@/components/PaginaTopo";
 import Revelar from "@/components/Revelar";
 import Comparativo from "@/components/Comparativo";
-import Calculadora from "@/components/Calculadora";
 import Numeros from "@/components/Numeros";
 import Depoimentos from "@/components/Depoimentos";
 import { semViuva } from "@/lib/texto";
@@ -11,7 +10,7 @@ import { semViuva } from "@/lib/texto";
 export const metadata: Metadata = {
   title: "Para investidor · Lofteria",
   description:
-    "Um ecossistema completo para maximizar a rentabilidade do seu imóvel em short-stay, locação anual ou venda. Simule seu retorno.",
+    "Um ecossistema completo para maximizar a rentabilidade do seu imóvel em short-stay, locação anual ou venda.",
 };
 
 const PILARES = [
@@ -51,7 +50,7 @@ export default function Investidor() {
           }
           foto="plenty-sea"
           fotoAlt="Living do Plenty Sea 401, apartamento montado pela Lofteria para short-stay"
-          acao={{ href: "#simulador", rotulo: "Simular meu retorno" }}
+          acao={{ href: "/contato", rotulo: "Falar com um consultor" }}
         />
 
         <Revelar className="mx-auto grid max-w-[90rem] gap-10 px-5 py-24 md:grid-cols-3 md:px-10 md:py-32">
@@ -64,7 +63,6 @@ export default function Investidor() {
         </Revelar>
 
         <Comparativo />
-        <Calculadora />
         <Numeros />
         <Depoimentos />
       </main>

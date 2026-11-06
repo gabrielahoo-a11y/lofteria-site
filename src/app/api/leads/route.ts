@@ -1,4 +1,4 @@
-// Recebe os contatos do simulador e do formulário e grava na tabela `leads`
+// Recebe os contatos do formulário e da newsletter e grava na tabela `leads`
 // do Supabase (ver supabase/leads.sql). Sem as variáveis de ambiente, responde 503.
 
 const URL_SUPABASE = process.env.SUPABASE_URL;

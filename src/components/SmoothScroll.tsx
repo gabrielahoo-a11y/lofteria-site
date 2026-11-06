@@ -43,7 +43,7 @@ export default function SmoothScroll() {
     };
   }, []);
 
-  // Ao trocar de página: começa do topo, ou da seção indicada no endereço (ex.: /investidor#simulador)
+  // Ao trocar de página: começa do topo, ou da seção indicada no endereço (ex.: /#solucao)
   useEffect(() => {
     const lenis = lenisRef.current;
     const alvo = window.location.hash ? document.querySelector(window.location.hash) : null;

@@ -103,11 +103,6 @@ export default function Rodape() {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/investidor#simulador" className="text-white/80 transition-colors hover:text-salmao">
-                  Simulador de investimento
-                </Link>
-              </li>
             </ul>
           </div>
           <div>

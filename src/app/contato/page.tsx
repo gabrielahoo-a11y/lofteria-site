@@ -58,10 +58,10 @@ export default function PaginaContato() {
         </Revelar>
 
         <ChamadaFinal
-          rotulo="Para investidores"
-          titulo="Quer ver os números antes da conversa?"
+          rotulo="Portfólio"
+          titulo="Quer ver o que já entregamos antes da conversa?"
           foto="sala-estante"
-          acao={{ href: "/investidor#simulador", texto: "Simular meu retorno" }}
+          acao={{ href: "/projetos", texto: "Ver projetos" }}
         />
       </main>
     </>

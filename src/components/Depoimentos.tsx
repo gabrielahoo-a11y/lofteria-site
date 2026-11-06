@@ -67,8 +67,9 @@ export default function Depoimentos() {
     <section id="depoimentos" ref={raiz} className="overflow-hidden bg-white py-28 md:py-40">
       <div className="mx-auto max-w-[90rem] px-5 text-center md:px-10">
         <p className="rotulo mb-6 justify-center text-grafite">O que dizem nossos clientes</p>
-        <h2 className="titulo-lg mx-auto max-w-[16ch] text-grafite">
-          Julgados pelo resultado, <span className="font-light text-texto-suave">não pela promessa.</span>
+        <h2 className="titulo-lg mx-auto text-grafite">
+          Julgados pelo resultado, <br className="hidden sm:inline" />
+          <span className="font-light text-texto-suave">não pela promessa.</span>
         </h2>
       </div>
 

@@ -5,27 +5,16 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
-import { Cpu, Palette, Workflow } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
-const PILARES = [
-  { titulo: "Design", Icone: Palette, movimento: "icone-girar" },
-  { titulo: "Tecnologia", Icone: Cpu, movimento: "icone-pulsar" },
-  { titulo: "Processos", Icone: Workflow, movimento: "icone-fluir" },
-];
-
-// O texto "acende" palavra por palavra conforme a rolagem
+// Quem somos como manifesto: uma citação com aspas grandes, sem ícones.
+// O texto "acende" palavra por palavra conforme a rolagem.
 export default function Manifesto() {
   const raiz = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      // Comprimento 1 em cada traço dos ícones, para o efeito de redesenhar no hover
-      raiz.current!
-        .querySelectorAll("[data-pilar] svg :is(path, circle, rect, line, polyline)")
-        .forEach((el) => el.setAttribute("pathLength", "1"));
-
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const texto = SplitText.create("[data-manifesto]", { type: "words" });
@@ -39,13 +28,12 @@ export default function Manifesto() {
             scrollTrigger: { trigger: "[data-manifesto]", start: "top 85%", end: "bottom 50%", scrub: true },
           },
         );
-        gsap.from("[data-pilar]", {
-          y: 30,
+        gsap.from("[data-aspas]", {
+          scale: 0.6,
           opacity: 0,
-          duration: 1,
-          stagger: 0.12,
+          duration: 1.2,
           ease: "expo.out",
-          scrollTrigger: { trigger: "[data-pilares]", start: "top 90%" },
+          scrollTrigger: { trigger: raiz.current, start: "top 75%" },
         });
         return () => texto.revert();
       });
@@ -54,30 +42,29 @@ export default function Manifesto() {
   );
 
   return (
-    <section ref={raiz} className="bg-white px-5 py-28 text-center md:px-10 md:py-36">
-      <p className="text-[0.6875rem] font-semibold tracking-[0.24em] text-grafite uppercase">Quem somos</p>
-      <p
-        data-manifesto
-        className="mx-auto mt-10 max-w-[26ch] text-[clamp(1.8rem,3vw,2.75rem)] leading-[1.15] font-semibold tracking-[-0.025em] text-balance text-grafite"
-      >
-        Somos o feat entre o funcional e o emocional, o racional e o estético. Transformamos espaços em oportunidades
-        e moradias em histórias.
-      </p>
-
-      <ul data-pilares className="mx-auto mt-20 flex max-w-xl justify-center gap-12 sm:gap-20">
-        {PILARES.map(({ titulo, Icone, movimento }) => (
-          <li key={titulo} data-pilar className="icone-vivo group flex cursor-default flex-col items-center gap-4">
-            <span className="grid size-16 place-items-center rounded-full transition-colors duration-500 group-hover:bg-salmao/10">
-              <Icone
-                className={`size-9 text-grafite transition-colors duration-500 group-hover:text-salmao ${movimento}`}
-                strokeWidth={1.4}
-                aria-hidden
-              />
-            </span>
-            <span className="text-lg font-light text-grafite">{titulo}</span>
-          </li>
-        ))}
-      </ul>
+    <section ref={raiz} className="bg-white px-5 py-28 text-center md:px-10 md:py-40">
+      <p className="rotulo justify-center text-grafite">Quem somos</p>
+      <figure className="relative mx-auto mt-14 max-w-[72rem]">
+        <span
+          data-aspas
+          aria-hidden
+          className="block font-serif text-[clamp(6rem,12vw,10rem)] h-[0.5em] leading-[0.9] text-salmao select-none"
+        >
+          “
+        </span>
+        <blockquote
+          data-manifesto
+          className="mx-auto mt-4 text-[clamp(1.9rem,3.4vw,3.1rem)] leading-[1.15] font-semibold tracking-[-0.025em] text-grafite [text-wrap:wrap]"
+        >
+          {/* Quebras do manifesto fixas a partir do tablet; no celular o texto corre livre */}
+          Somos o feat entre o funcional e o <br className="hidden md:inline" />
+          emocional, o racional e o estético. <br className="hidden md:inline" />
+          Transformamos espaços em oportunidades <br className="hidden md:inline" />e moradias em&nbsp;histórias.
+        </blockquote>
+        <figcaption className="mt-10 text-[0.6875rem] font-semibold tracking-[0.22em] text-texto-suave uppercase">
+          Manifesto Lofteria
+        </figcaption>
+      </figure>
     </section>
   );
 }

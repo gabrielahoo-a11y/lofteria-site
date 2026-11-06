@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { PaineisEstilos } from "./Estilos";
+import { semViuva } from "@/lib/texto";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -80,7 +81,7 @@ export default function Solucao() {
                 {e.itens.map((it) => (
                   <li key={it} className="flex gap-3 text-sm text-white/60 transition-colors duration-500 group-hover:text-grafite md:text-base">
                     <span className="text-salmao">+</span>
-                    {it}
+                    {semViuva(it)}
                   </li>
                 ))}
               </ul>
