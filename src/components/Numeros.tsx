@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { semViuva } from "@/lib/texto";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -70,7 +71,7 @@ export default function Numeros() {
                 <span data-contador={n.valor}>{formatar(n.valor)}</span>
                 <span>{n.sufixo}</span>
               </p>
-              <p className="mt-6 max-w-[22ch] text-sm text-white/55">{n.rotulo}</p>
+              <p className="mt-6 max-w-[22ch] text-sm text-white/55">{semViuva(n.rotulo)}</p>
             </div>
           ))}
         </div>

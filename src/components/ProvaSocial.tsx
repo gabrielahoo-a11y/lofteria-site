@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Simbolo } from "./Logo";
+import { semViuva } from "@/lib/texto";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -70,7 +71,7 @@ export default function ProvaSocial() {
               aria-hidden={i !== fala}
               className={`absolute inset-x-0 bottom-0 transition-all duration-700 ${i === fala ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
             >
-              <blockquote className="text-xl leading-snug">“{f.texto}”</blockquote>
+              <blockquote className="text-xl leading-snug">“{semViuva(f.texto)}”</blockquote>
               <figcaption className="mt-5 text-xs tracking-[0.12em] text-white/50 uppercase">
                 {f.nome} · {f.papel}
               </figcaption>
@@ -95,7 +96,7 @@ export default function ProvaSocial() {
                 <Image key={f} src={`/img/${f}.jpg`} alt="" width={32} height={32} className="size-8 rounded-full border-2 border-grafite-profundo object-cover" />
               ))}
             </div>
-            <p className="mt-3 max-w-[16ch] text-sm leading-snug text-white/85">Do imóvel cru ao primeiro hóspede.</p>
+            <p className="mt-3 max-w-[16ch] text-sm leading-snug text-white/85">Do imóvel cru ao primeiro{"\u00A0"}hóspede.</p>
           </div>
           <p className="text-3xl font-semibold tracking-tight">
             60<span className="ml-1 text-xs font-normal text-white/60">dias</span>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { semViuva } from "@/lib/texto";
 
 // Fotos escolhidas pelo clima de cada linguagem; confirmar com o time qual projeto é de qual estilo
 const ESTILOS = [
@@ -61,7 +62,7 @@ export function PaineisEstilos({ inicial = 0 }: { inicial?: number }) {
               <div className={`grid transition-all duration-700 ${aberto ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                 <div className="overflow-hidden">
                   <p className="text-sm tracking-[0.14em] text-white/70 uppercase">{e.subtitulo}</p>
-                  <p className="mt-3 max-w-md font-light text-white/85">{e.texto}</p>
+                  <p className="mt-3 max-w-md font-light text-white/85">{semViuva(e.texto)}</p>
                 </div>
               </div>
             </div>

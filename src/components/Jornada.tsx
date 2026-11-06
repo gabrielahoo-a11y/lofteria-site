@@ -5,6 +5,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { semViuva } from "@/lib/texto";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -111,10 +112,10 @@ export default function Jornada() {
                     {e.marco}
                   </p>
                   <h3 className={`mt-4 max-w-[18ch] text-2xl font-semibold tracking-tight text-grafite md:text-3xl ${lado === "esquerda" ? "ml-auto" : ""}`}>
-                    {e.titulo}
+                    {semViuva(e.titulo)}
                   </h3>
                   <p className={`mt-3 max-w-sm text-sm leading-relaxed font-light text-texto-suave ${lado === "esquerda" ? "ml-auto" : ""}`}>
-                    {e.texto}
+                    {semViuva(e.texto)}
                   </p>
                 </div>
               );

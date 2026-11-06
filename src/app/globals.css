@@ -48,6 +48,27 @@ html.lenis body {
   overflow: hidden;
 }
 
+/* Quebra de linha: títulos com linhas equilibradas e textos sem palavra sozinha
+   na última linha (viúva). Sem hifenização automática. */
+h1,
+h2,
+h3,
+h4,
+blockquote,
+.titulo-xl,
+.titulo-lg,
+.titulo-md {
+  text-wrap: balance;
+}
+p,
+li,
+dd,
+figcaption,
+label {
+  text-wrap: pretty;
+  hyphens: manual;
+}
+
 ::selection {
   background: var(--color-salmao);
   color: white;

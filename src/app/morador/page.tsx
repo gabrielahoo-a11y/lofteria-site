@@ -43,7 +43,7 @@ export default function Morador() {
         <Revelar className="mx-auto grid max-w-[90rem] gap-14 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-[1fr_1.2fr]">
           <div data-revelar>
             <p className="rotulo mb-6 text-grafite">Cuidamos de tudo</p>
-            <h2 className="titulo-lg max-w-[12ch] text-grafite">
+            <h2 className="titulo-lg max-w-[14ch] text-grafite">
               Sem dor de cabeça, <span className="font-light text-salmao">sem imprevistos.</span>
             </h2>
             <p className="mt-6 max-w-md text-lg leading-relaxed font-light text-texto-suave">

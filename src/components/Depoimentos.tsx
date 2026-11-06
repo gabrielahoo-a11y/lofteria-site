@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { semViuva } from "@/lib/texto";
 
 gsap.registerPlugin(useGSAP);
 
@@ -81,7 +82,7 @@ export default function Depoimentos() {
             >
               <blockquote className="leading-relaxed text-grafite">
                 <span className="mb-4 block text-4xl leading-none text-salmao">“</span>
-                {d.texto}
+                {semViuva(d.texto)}
               </blockquote>
               <figcaption className="mt-8 flex items-center gap-3">
                 <span className="grid size-10 place-items-center rounded-full bg-grafite text-xs font-semibold text-white">

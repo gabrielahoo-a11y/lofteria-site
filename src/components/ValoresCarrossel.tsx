@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Simbolo } from "./Logo";
+import { semViuva } from "@/lib/texto";
 
 // Valores do manual de marca (Rebranding 2025)
 const VALORES = [
@@ -81,7 +82,7 @@ export default function ValoresCarrossel() {
               <Simbolo className="absolute -right-10 -bottom-10 w-56 text-white/[0.04] transition-all duration-1000 group-hover:-rotate-12 group-hover:text-salmao/20" />
               <div className="relative">
                 <h3 className="text-3xl font-semibold tracking-tight">{v.titulo}</h3>
-                <p className="mt-3 max-w-[22ch] font-light text-white/65">{v.texto}</p>
+                <p className="mt-3 max-w-[22ch] font-light text-white/65">{semViuva(v.texto)}</p>
               </div>
             </li>
           ))}

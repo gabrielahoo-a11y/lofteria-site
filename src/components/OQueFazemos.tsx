@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { semViuva } from "@/lib/texto";
 
 // Serviços do site atual; o ativo mostra a descrição e troca a foto
 const SERVICOS = [
@@ -70,7 +71,7 @@ export default function OQueFazemos() {
                 }`}
               >
                 <p className="overflow-hidden">
-                  <span className="block max-w-md pt-1 pb-4 font-light text-white/65">{s.texto}</span>
+                  <span className="block max-w-md pt-1 pb-4 font-light text-white/65">{semViuva(s.texto)}</span>
                 </p>
               </div>
             </li>
