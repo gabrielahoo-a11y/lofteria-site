@@ -43,7 +43,7 @@ export default function ConstrutorasTopo() {
           { yPercent: 4, ease: "none", scrollTrigger: { trigger: "[data-janela]", start: "top bottom", end: "bottom top", scrub: true } },
         );
         // O texto da parede entra quando a imagem chega ao centro da tela
-        gsap.from("[data-dado] > *", {
+        gsap.from("[data-dado] > p", {
           y: 40,
           opacity: 0,
           duration: 1.2,
@@ -93,31 +93,48 @@ export default function ConstrutorasTopo() {
         className="@container relative mt-16 overflow-hidden md:mt-20"
         style={{ clipPath: "inset(0% 6% 0% 6% round 28px)" }}
       >
-        <div data-parede className="relative aspect-[1916/1209] w-full">
-          <Image src="/img/construtoras-vazio.webp" alt="Apartamento vazio, sem ambientação" fill sizes="100vw" preload className="object-cover" />
-
-          {/* Arcos decorativos, como no slide */}
-          <span
-            data-arco
-            aria-hidden
-            className="absolute top-[19%] left-[57%] block aspect-square w-[7.5%] rounded-full border-[1.1cqw] border-white border-r-transparent border-b-transparent border-l-transparent"
-            style={{ transform: "rotate(-30deg)" }}
-          />
-          <span
-            data-arco
-            aria-hidden
-            className="absolute top-[74%] left-[16%] block aspect-square w-[7.5%] rounded-full border-[1.1cqw] border-white border-r-transparent border-b-transparent border-l-transparent"
-            style={{ transform: "rotate(-120deg)" }}
+        {/* No celular a imagem fica mais alta (recorte na parede); no resto, a foto inteira.
+            O texto e os arcos são medidos pela largura da imagem (cqw), então mantêm a mesma
+            posição e as mesmas quebras em qualquer resolução. */}
+        <div data-parede className="relative aspect-[4/5] w-full sm:aspect-[1916/1209]">
+          <Image
+            src="/img/construtoras-vazio.webp"
+            alt="Apartamento vazio, sem ambientação"
+            fill
+            sizes="100vw"
+            preload
+            className="object-cover object-[22%_50%] sm:object-center"
           />
 
-          {/* Texto na parede */}
-          <div data-dado className="absolute top-[27%] left-[22%] w-[40%]">
-            <p className="text-[5.2cqw] leading-[1.02] font-semibold tracking-[-0.02em] text-grafite">
-              81% dos compradores não conseguem entender um imóvel se ele estiver vazio
+          <div data-dado className="absolute top-[22%] left-[12%] text-[9.8cqw] sm:top-[26%] sm:left-[22%] sm:text-[5.6cqw]">
+            <span
+              data-arco
+              aria-hidden
+              className="absolute -top-[0.75em] left-[4.6em] block size-[1.6em] rounded-full border-[0.22em] border-white border-r-transparent border-b-transparent border-l-transparent"
+              style={{ transform: "rotate(-30deg)" }}
+            />
+            <p className="leading-[1.02] font-semibold tracking-[-0.02em] whitespace-nowrap text-grafite">
+              81% dos
+              <br />
+              compradores
+              <br />
+              não conseguem
+              <br />
+              entender um
+              <br />
+              imóvel se ele
+              <br />
+              estiver vazio
             </p>
-            <p className="mt-[1.6cqw] text-[1.05cqw] text-grafite/70">
+            <p className="mt-[0.45em] text-[0.2em] whitespace-nowrap text-grafite/70">
               <strong className="font-semibold text-grafite">Fonte:</strong> Associação Americana de Corretores
             </p>
+            <span
+              data-arco
+              aria-hidden
+              className="absolute top-[calc(100%+0.5em)] -left-[0.3em] sm:-left-[1.4em] block size-[1.6em] rounded-full border-[0.22em] border-white border-r-transparent border-b-transparent border-l-transparent"
+              style={{ transform: "rotate(-120deg)" }}
+            />
           </div>
         </div>
       </div>

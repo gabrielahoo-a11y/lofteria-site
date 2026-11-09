@@ -9,26 +9,21 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-// "Etapas da Operação" sobre a foto do iceberg, no formato do slide da apresentação:
-// título fixo à esquerda, etapas dos dois lados com uma linha até o iceberg.
-// A seção fica presa e as etapas aparecem em ordem, do fundo (01) até a ponta (06).
+// "Etapas da Operação" sobre a foto do iceberg, no formato do slide da apresentação.
+// No desktop a composição inteira funciona como um slide: a foto aparece sempre inteira
+// na tela e título, linhas, números e textos são medidos pela largura dela (cqw), então
+// nada corta nem se sobrepõe em nenhuma resolução. Abaixo de 1280 px vira lista.
 // Posições em % da imagem (2000 × 1174): y da linha, início e fim da linha em x.
 type Etapa = { n: string; titulo: string; texto: string; lado: "esq" | "dir"; y: number; de: number; ate: number };
 
 const ETAPAS: Etapa[] = [
-  { n: "01", titulo: "Alinhamento Inicial", texto: "Mapeamento de escopo, tipologias, perfil de cliente, cronograma, escopo financeiro e diretrizes técnicas.", lado: "esq", y: 86, de: 13, ate: 57.5 },
-  { n: "02", titulo: "Desenvolvimento do Projeto", texto: "Criação do projeto completo pela equipe da Lofteria, com foco em estética, funcionalidade e execução escalável.", lado: "dir", y: 73, de: 67.5, ate: 87 },
-  { n: "03", titulo: "Ativação Comercial", texto: "Entrega de materiais de venda (renders, memorial, Walk’a), com uso estratégico da base de leads da construtora.", lado: "esq", y: 66, de: 13, ate: 53 },
-  { n: "04", titulo: "Planejamento da Execução", texto: "Definição da janela de montagem, fornecedores homologados, cronograma e logística no local.", lado: "dir", y: 57, de: 70.5, ate: 87 },
-  { n: "05", titulo: "Execução", texto: "Montagem realizada pela Lofteria ou parceiros homologados, com atualizações periódicas e controle total da operação.", lado: "esq", y: 51.5, de: 13, ate: 50.5 },
-  { n: "06", titulo: "Entrega Final", texto: "Unidade pronta para visitação, anúncio e uso comercial, com todos os materiais de apoio (físicos e digitais) incluídos.", lado: "dir", y: 22, de: 64, ate: 87 },
+  { n: "01", titulo: "Alinhamento Inicial", texto: "Mapeamento de escopo, tipologias, perfil de cliente, cronograma, escopo financeiro e diretrizes técnicas.", lado: "esq", y: 80, de: 6, ate: 57.5 },
+  { n: "02", titulo: "Desenvolvimento do Projeto", texto: "Criação do projeto completo pela equipe da Lofteria, com foco em estética, funcionalidade e execução escalável.", lado: "dir", y: 71, de: 67.5, ate: 94 },
+  { n: "03", titulo: "Ativação Comercial", texto: "Entrega de materiais de venda (renders, memorial, Walk’a), com uso estratégico da base de leads da construtora.", lado: "esq", y: 64.5, de: 6, ate: 53 },
+  { n: "04", titulo: "Planejamento da Execução", texto: "Definição da janela de montagem, fornecedores homologados, cronograma e logística no local.", lado: "dir", y: 55, de: 70.5, ate: 94 },
+  { n: "05", titulo: "Execução", texto: "Montagem realizada pela Lofteria ou parceiros homologados, com atualizações periódicas e controle total da operação.", lado: "esq", y: 49, de: 6, ate: 50.5 },
+  { n: "06", titulo: "Entrega Final", texto: "Unidade pronta para visitação, anúncio e uso comercial, com todos os materiais de apoio (físicos e digitais) incluídos.", lado: "dir", y: 17, de: 64, ate: 94 },
 ];
-
-const Numero = ({ n }: { n: string }) => (
-  <span className="grid size-[2.6em] shrink-0 place-items-center rounded-full bg-grafite-profundo/80 text-[1.05em] font-semibold text-white ring-1 ring-white/30 backdrop-blur">
-    {n}
-  </span>
-);
 
 export default function IcebergEtapas() {
   const raiz = useRef<HTMLElement>(null);
@@ -36,12 +31,11 @@ export default function IcebergEtapas() {
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
-      mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+      mm.add("(min-width: 1280px) and (prefers-reduced-motion: no-preference)", () => {
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: { trigger: raiz.current, start: "top top", end: "+=220%", pin: true, scrub: 1 },
         });
-        tl.fromTo("[data-foto]", { yPercent: -3 }, { yPercent: 2, duration: 1 }, 0);
         ETAPAS.forEach((_, i) => {
           const em = 0.06 + i * 0.13;
           const el = `[data-etapa="${i}"]`;
@@ -56,73 +50,81 @@ export default function IcebergEtapas() {
   );
 
   return (
-    <section ref={raiz} className="relative overflow-hidden bg-[#03101c] text-white lg:h-svh">
-      {/* Foto com as etapas: no desktop cobre a tela; as posições seguem a imagem */}
-      <div className="relative aspect-[2000/1174] w-full text-[0.9rem] lg:absolute lg:top-1/2 lg:left-1/2 lg:w-[max(100vw,calc(100svh*2000/1174))] lg:-translate-x-1/2 lg:-translate-y-1/2 xl:text-[1rem]">
-        <div data-foto className="absolute inset-0">
-          <Image src="/img/iceberg.webp" alt="Iceberg: a ponta acima da água e a maior parte submersa" fill sizes="100vw" unoptimized className="object-cover" />
+    <section
+      ref={raiz}
+      className="relative overflow-hidden bg-[linear-gradient(180deg,#0d2a45_0%,#0a2238_45%,#03101c_60%,#020a12_100%)] text-white xl:grid xl:h-svh xl:place-items-center"
+    >
+      {/* Desktop: o "slide" inteiro, sempre visível por completo */}
+      <div className="@container relative hidden aspect-[2000/1174] w-[min(100vw,calc(100svh*2000/1174))] xl:block">
+        <Image src="/img/iceberg.webp" alt="Iceberg: a ponta acima da água e a maior parte submersa" fill sizes="100vw" unoptimized className="object-cover" />
+
+        <div className="absolute top-[9%] left-[6%]">
+          <h2 className="text-[4.4cqw] leading-[0.95] font-semibold tracking-[-0.02em]">
+            Etapas da <br />
+            Operação
+          </h2>
+          <p className="mt-[0.9cqw] text-[1.25cqw] text-white/85">
+            Modelo estruturado em <strong className="font-semibold">6 fases principais</strong>
+          </p>
+          <Link data-cta href="/contato" className="botao botao-claro mt-[1.8cqw] px-[1.6cqw]! py-[0.9cqw]! text-[0.8cqw]!">
+            Agendar conversa
+          </Link>
         </div>
 
         {ETAPAS.map((e, i) => (
-          <div key={e.n} data-etapa={i} className="absolute inset-0 max-lg:hidden">
-            {/* Linha até o iceberg */}
+          <div key={e.n} data-etapa={i} className="absolute inset-0">
             <span
               data-linha
               className={`absolute h-px bg-white/55 ${e.lado === "esq" ? "origin-left" : "origin-right"}`}
               style={{ top: `${e.y}%`, left: `${e.de}%`, width: `${e.ate - e.de}%` }}
             />
-            {/* Número na ponta externa da linha */}
             <span
               data-num
-              className="absolute"
+              className="absolute grid size-[2.3cqw] place-items-center rounded-full bg-grafite-profundo/80 text-[0.95cqw] font-semibold ring-1 ring-white/30 backdrop-blur"
               style={{ top: `${e.y}%`, left: `${e.lado === "esq" ? e.de : e.ate}%`, transform: "translate(-50%, -50%)" }}
             >
-              <Numero n={e.n} />
+              {e.n}
             </span>
-            {/* Título e texto abaixo da linha */}
             <div
               data-texto
-              className={`absolute ${e.lado === "esq" ? "w-[26%] text-left" : "w-[20%] text-right"}`}
+              className={`absolute w-[24%] ${e.lado === "esq" ? "text-left" : "text-right"}`}
               style={{
-                top: `calc(${e.y}% + 1.9em)`,
-                ...(e.lado === "esq" ? { left: `calc(${e.de}% + 1.6em)` } : { right: `calc(${100 - e.ate}% + 1.6em)` }),
+                top: `calc(${e.y}% + 1.7cqw)`,
+                ...(e.lado === "esq" ? { left: `calc(${e.de}% + 1.9cqw)` } : { right: `calc(${100 - e.ate}% + 1.9cqw)` }),
               }}
             >
-              <h3 className="text-[1.35em] leading-tight font-semibold">{e.titulo}</h3>
-              <p className="mt-[0.5em] text-[0.82em] leading-relaxed text-white/75">{e.texto}</p>
+              <h3 className="text-[1.3cqw] leading-tight font-semibold whitespace-nowrap">{e.titulo}</h3>
+              <p className="mt-[0.4cqw] text-[0.86cqw] leading-[1.55] text-white/75">{e.texto}</p>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Título fixo no canto, sobre o céu */}
-      <div className="relative mx-auto max-w-[90rem] px-5 py-14 md:px-10 lg:absolute lg:inset-x-0 lg:top-0 lg:pt-[12svh]">
-        <h2 className="text-[clamp(2.4rem,4.6vw,4.6rem)] leading-[0.95] font-semibold tracking-[-0.02em]">
-          Etapas da <br />
-          Operação
-        </h2>
-        <p className="mt-5 text-lg text-white/85">
-          Modelo estruturado em <strong className="font-semibold">6 fases principais</strong>
-        </p>
-        <Link data-cta href="/contato" className="botao botao-claro mt-8 max-lg:hidden">
-          Agendar conversa
-        </Link>
-
-        {/* No celular, as etapas em lista */}
-        <ol className="mt-10 space-y-6 lg:hidden">
-          {ETAPAS.map((e) => (
-            <li key={e.n} className="flex gap-4 text-[0.95rem]">
-              <Numero n={e.n} />
-              <div>
-                <h3 className="text-lg font-semibold">{e.titulo}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-white/70">{e.texto}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-        <Link href="/contato" className="botao botao-claro mt-10 lg:hidden">
-          Agendar conversa
-        </Link>
+      {/* Celular e tablet: foto e lista numerada */}
+      <div className="xl:hidden">
+        <div className="relative aspect-[2000/1174] w-full">
+          <Image src="/img/iceberg.webp" alt="Iceberg: a ponta acima da água e a maior parte submersa" fill sizes="100vw" unoptimized className="object-cover" />
+        </div>
+        <div className="mx-auto max-w-3xl px-5 py-14 md:px-10">
+          <h2 className="text-[clamp(2.4rem,7vw,4rem)] leading-[0.95] font-semibold tracking-[-0.02em]">Etapas da Operação</h2>
+          <p className="mt-4 text-lg text-white/85">
+            Modelo estruturado em <strong className="font-semibold">6 fases principais</strong>
+          </p>
+          <ol className="mt-10 space-y-6">
+            {ETAPAS.map((e) => (
+              <li key={e.n} className="flex gap-4">
+                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-white/10 text-sm font-semibold ring-1 ring-white/30">{e.n}</span>
+                <div>
+                  <h3 className="text-lg font-semibold">{e.titulo}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-white/70">{e.texto}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <Link href="/contato" className="botao botao-claro mt-10">
+            Agendar conversa
+          </Link>
+        </div>
       </div>
     </section>
   );
