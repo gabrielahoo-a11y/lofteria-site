@@ -201,3 +201,21 @@ label {
   50% { opacity: 1; }
   100% { opacity: 0.6; transform: translateX(18%); }
 }
+
+/* Iceberg das etapas (Construtoras) */
+@media (prefers-reduced-motion: no-preference) {
+  .iceberg-flutua {
+    animation: iceberg-flutua 7s ease-in-out infinite;
+  }
+  .iceberg-onda {
+    animation: iceberg-onda 5s ease-in-out infinite;
+  }
+}
+@keyframes iceberg-flutua {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+@keyframes iceberg-onda {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-20px); }
+}
