@@ -56,7 +56,11 @@ export default function IcebergEtapas() {
     >
       {/* Desktop: o "slide" inteiro, sempre visível por completo */}
       <div className="@container relative hidden aspect-[2000/1174] w-[min(100vw,calc(100svh*2000/1174))] xl:block">
-        <Image src="/img/iceberg.webp" alt="Iceberg: a ponta acima da água e a maior parte submersa" fill sizes="100vw" unoptimized className="object-cover" />
+        {/* Versão ampliada da foto (mar e céu continuados nas bordas): o slide fica inteiro
+            e a imagem preenche o resto da tela, sem faixas nas laterais nem em cima/embaixo */}
+        <div className="pointer-events-none absolute top-[-22.4%] left-[-30%] h-[144.8%] w-[160%]">
+          <Image src="/img/iceberg-amplo.webp" alt="Iceberg: a ponta acima da água e a maior parte submersa" fill sizes="160vw" unoptimized className="object-cover" />
+        </div>
 
         <div className="absolute top-[9%] left-[6%]">
           <h2 className="text-[4.4cqw] leading-[0.95] font-semibold tracking-[-0.02em]">
