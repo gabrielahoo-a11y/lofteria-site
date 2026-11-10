@@ -6,9 +6,16 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
-// Investidores e parceiros. Enquanto não temos os arquivos das logos, os nomes aparecem
-// em texto; trocar por <Image src="/parceiros/…svg"> quando chegarem.
-const PARCEIROS = ["Faz", "DZ7", "Azzes", "Adore"];
+// Investidores e parceiros. Quem tem o logo aparece com ele (como máscara, na mesma cor
+// discreta dos nomes, e salmão ao passar o mouse); os demais, pelo nome em texto.
+// Logo da Adore: arquivo oficial do site adoreincorporadora.com.br.
+type Parceiro = { nome: string; logo?: string; proporcao?: number };
+const PARCEIROS: Parceiro[] = [
+  { nome: "FAZ", logo: "/img/parceiros/faz-logo.png", proporcao: 387 / 144 },
+  { nome: "DZ7" },
+  { nome: "Azzes" },
+  { nome: "Adore", logo: "/img/parceiros/adore-logo.png", proporcao: 647 / 256 },
+];
 
 export default function Parceiros() {
   const raiz = useRef<HTMLElement>(null);
@@ -42,13 +49,32 @@ export default function Parceiros() {
       </div>
       <div className="mt-12 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
         <ul data-trilho className="flex w-max items-center">
-          {[...sequencia, ...sequencia].map((nome, i) => (
+          {[...sequencia, ...sequencia].map((p, i) => (
             <li
               key={i}
               aria-hidden={i >= PARCEIROS.length}
               className="px-10 text-[clamp(2rem,4vw,3.5rem)] font-semibold tracking-[0.04em] whitespace-nowrap uppercase text-grafite/25 transition-colors duration-300 hover:text-salmao md:px-16"
             >
-              {nome}
+              {p.logo ? (
+                <span
+                  role="img"
+                  aria-label={p.nome}
+                  className="block h-[1.4em] bg-current"
+                  style={{
+                    aspectRatio: p.proporcao,
+                    maskImage: `url(${p.logo})`,
+                    WebkitMaskImage: `url(${p.logo})`,
+                    maskSize: "contain",
+                    WebkitMaskSize: "contain",
+                    maskRepeat: "no-repeat",
+                    WebkitMaskRepeat: "no-repeat",
+                    maskPosition: "center",
+                    WebkitMaskPosition: "center",
+                  }}
+                />
+              ) : (
+                p.nome
+              )}
             </li>
           ))}
         </ul>

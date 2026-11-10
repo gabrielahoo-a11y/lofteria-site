@@ -106,7 +106,7 @@ export default function Construtoras() {
               </div>
               <div data-revelar className="flex flex-col justify-between gap-8 rounded-2xl p-8 ring-1 ring-linha">
                 <p className="text-[0.6875rem] font-semibold tracking-[0.22em] text-texto-suave uppercase">Modelo já aplicado em empreendimentos com</p>
-                <div className="flex flex-wrap items-center gap-x-12 gap-y-6 opacity-45 grayscale">
+                <div className="flex flex-wrap items-center gap-x-9 gap-y-6 opacity-45 grayscale">
                   <div
                     role="img"
                     aria-label="FAZ Construções e Incorporações"
@@ -120,6 +120,13 @@ export default function Construtoras() {
                     style={{ maskImage: "url(/img/parceiros/lagoa-brick.svg)", WebkitMaskImage: "url(/img/parceiros/lagoa-brick.svg)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat" }}
                   />
                   <span className="text-xl font-semibold tracking-[0.18em] text-grafite uppercase">Alma Lusa</span>
+                  <div
+                    role="img"
+                    aria-label="Adore Incorporações Imobiliárias"
+                    className="aspect-[647/256] w-24 bg-grafite"
+                    style={{ maskImage: "url(/img/parceiros/adore-logo.png)", WebkitMaskImage: "url(/img/parceiros/adore-logo.png)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat" }}
+                  />
+                  <span className="text-xl font-semibold tracking-[0.18em] text-grafite uppercase">Level Up</span>
                 </div>
               </div>
             </div>
