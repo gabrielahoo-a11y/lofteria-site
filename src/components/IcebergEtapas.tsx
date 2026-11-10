@@ -37,13 +37,17 @@ const pct = (o: { left: number; top: number; width: number; height: number }) =>
   height: `${o.height}%`,
 });
 
+// Paralaxe com o mouse: cada camada se desloca proporcionalmente à "profundidade" (px no
+// extremo da tela). Usa a propriedade CSS translate, separada do transform da rolagem.
+const prof = (k: number) => ({ translate: `calc(var(--mx, 0) * ${k}px) calc(var(--my, 0) * ${k}px)` });
+
 // Céu, água (com a ondulação na faixa da superfície) e iceberg, empilhados
 function Camadas() {
   return (
     <div data-palco className="pointer-events-none absolute" style={pct(PALCO)}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img data-ceu src="/img/iceberg/ceu.webp" alt="" className="absolute inset-0 h-full w-full" />
-      <div data-agua className="absolute inset-0">
+      <img data-ceu src="/img/iceberg/ceu.webp" alt="" className="absolute inset-0 h-full w-full" style={prof(-8)} />
+      <div data-agua className="absolute inset-0" style={prof(10)}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/img/iceberg/agua.webp" alt="" className="absolute inset-0 h-full w-full" />
         {/* Faixa da superfície com ondulação (filtro SVG animado) */}
@@ -58,7 +62,7 @@ function Camadas() {
         src="/img/iceberg/iceberg.webp"
         alt="Iceberg: a ponta acima da água e a maior parte submersa"
         className="absolute"
-        style={pct(ICEBERG)}
+        style={{ ...pct(ICEBERG), ...prof(24) }}
       />
     </div>
   );
@@ -95,6 +99,36 @@ export default function IcebergEtapas() {
         entrada.fromTo("[data-cta]", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 0.2 + ETAPAS.length * 0.22);
         ScrollTrigger.create({ trigger: raiz.current, start: "top 55%", once: true, onEnter: () => entrada.play() });
       });
+
+      // Paralaxe com o mouse (só em telas grandes com mouse): o fundo vai para um lado,
+      // a água e o iceberg para o outro, com suavização
+      mm.add("(min-width: 1280px) and (pointer: fine) and (prefers-reduced-motion: no-preference)", () => {
+        const el = raiz.current!;
+        const pos = { x: 0, y: 0 };
+        const aplicar = () => {
+          el.style.setProperty("--mx", pos.x.toFixed(4));
+          el.style.setProperty("--my", pos.y.toFixed(4));
+        };
+        const irX = gsap.quickTo(pos, "x", { duration: 1.2, ease: "power3.out", onUpdate: aplicar });
+        const irY = gsap.quickTo(pos, "y", { duration: 1.2, ease: "power3.out", onUpdate: aplicar });
+        const mover = (e: PointerEvent) => {
+          const r = el.getBoundingClientRect();
+          irX(((e.clientX - r.left) / r.width) * 2 - 1);
+          irY(((e.clientY - r.top) / r.height) * 2 - 1);
+        };
+        const sair = () => {
+          irX(0);
+          irY(0);
+        };
+        el.addEventListener("pointermove", mover);
+        el.addEventListener("pointerleave", sair);
+        return () => {
+          el.removeEventListener("pointermove", mover);
+          el.removeEventListener("pointerleave", sair);
+          el.style.removeProperty("--mx");
+          el.style.removeProperty("--my");
+        };
+      });
     },
     { scope: raiz },
   );
@@ -118,7 +152,7 @@ export default function IcebergEtapas() {
       <div className="@container relative hidden aspect-[2000/1174] w-[min(100vw,calc(100svh*2000/1174))] xl:block">
         <Camadas />
 
-        <div data-textos className="absolute inset-0">
+        <div data-textos className="absolute inset-0" style={prof(16)}>
           <div className="absolute top-[9%] left-[6%]">
             <h2 className="text-[4.4cqw] leading-[0.95] font-semibold tracking-[-0.02em]">
               Etapas da <br />

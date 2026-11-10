@@ -11,7 +11,7 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 // Topo da página de Construtoras: título e, abaixo, a sala vazia com o dado dos 81%
-// escrito na parede (como no slide da apresentação). A imagem abre da moldura para a
+// escrito na parede (como no slide da apresentação, sem os arcos). A imagem abre da moldura para a
 // largura toda com a rolagem, no mesmo padrão das outras páginas.
 export default function ConstrutorasTopo() {
   const raiz = useRef<HTMLElement>(null);
@@ -51,15 +51,6 @@ export default function ConstrutorasTopo() {
           ease: "expo.out",
           scrollTrigger: { trigger: "[data-janela]", start: "top 45%" },
         });
-        gsap.from("[data-arco]", {
-          scale: 0.4,
-          opacity: 0,
-          rotate: -40,
-          duration: 1.4,
-          stagger: 0.15,
-          ease: "expo.out",
-          scrollTrigger: { trigger: "[data-janela]", start: "top 45%" },
-        });
         return () => titulo.revert();
       });
     },
@@ -94,9 +85,9 @@ export default function ConstrutorasTopo() {
         style={{ clipPath: "inset(0% 6% 0% 6% round 28px)" }}
       >
         {/* No celular a imagem fica mais alta (recorte na parede); no resto, a foto inteira.
-            O texto e os arcos são medidos pela largura da imagem (cqw), então mantêm a mesma
+            O texto é medido pela largura da imagem (cqw), então mantêm a mesma
             posição e as mesmas quebras em qualquer resolução. */}
-        <div data-parede className="relative aspect-[4/5] w-full sm:aspect-[1916/1209]">
+        <div data-parede className="relative aspect-[4/5] w-full sm:aspect-[1440/700]">
           <Image
             src="/img/construtoras-vazio.webp"
             alt="Apartamento vazio, sem ambientação"
@@ -106,14 +97,9 @@ export default function ConstrutorasTopo() {
             className="object-cover object-[22%_50%] sm:object-center"
           />
 
-          <div data-dado className="absolute top-[22%] left-[12%] text-[9.8cqw] sm:top-[26%] sm:left-[22%] sm:text-[5.6cqw]">
-            <span
-              data-arco
-              aria-hidden
-              className="absolute -top-[0.75em] left-[4.6em] block size-[1.6em] rounded-full border-[0.22em] border-white border-r-transparent border-b-transparent border-l-transparent"
-              style={{ transform: "rotate(-30deg)" }}
-            />
-            <p className="leading-[1.02] font-semibold tracking-[-0.02em] whitespace-nowrap text-grafite">
+          {/* Medidas do Figma: caixa de 1268 × 700 dentro da largura de 1440, texto de 60 px */}
+          <div data-dado className="absolute top-[24%] left-[12%] text-[8.6cqw] sm:top-[32.4%] sm:left-[25.35%] sm:text-[4.17cqw]">
+            <p className="leading-[0.82] font-semibold tracking-[-0.02em] whitespace-nowrap text-grafite">
               81% dos
               <br />
               compradores
@@ -126,15 +112,9 @@ export default function ConstrutorasTopo() {
               <br />
               estiver vazio
             </p>
-            <p className="mt-[0.45em] text-[0.2em] whitespace-nowrap text-grafite/70">
+            <p className="mt-[0.45em] text-[0.233em] whitespace-nowrap text-grafite/70">
               <strong className="font-semibold text-grafite">Fonte:</strong> Associação Americana de Corretores
             </p>
-            <span
-              data-arco
-              aria-hidden
-              className="absolute top-[calc(100%+0.5em)] -left-[0.3em] sm:-left-[1.4em] block size-[1.6em] rounded-full border-[0.22em] border-white border-r-transparent border-b-transparent border-l-transparent"
-              style={{ transform: "rotate(-120deg)" }}
-            />
           </div>
         </div>
       </div>
