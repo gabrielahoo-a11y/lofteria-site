@@ -18,16 +18,72 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const PALCO = { left: -70.35, top: -7.67, width: 240.7, height: 115.33 }; // palco 32:9 em % da janela
 const ICEBERG = { left: 45.64, top: 28.8, width: 8.77, height: 59.97 }; // recorte do iceberg em % do palco
 
-type Etapa = { n: string; titulo: string; texto: string; lado: "esq" | "dir"; y: number; de: number; ate: number };
+type Etapa = {
+  n: string;
+  titulo: string;
+  texto: string;
+  lado: "esq" | "dir";
+  y: number;
+  de: number;
+  ate: number;
+};
 
 // y, de e ate em % da janela. O iceberg ocupa de ~39,5% a ~60,5% na horizontal.
 const ETAPAS: Etapa[] = [
-  { n: "01", titulo: "Alinhamento Inicial", texto: "Mapeamento de escopo, tipologias, perfil de cliente, cronograma, escopo financeiro e diretrizes técnicas.", lado: "esq", y: 80, de: 6, ate: 46.5 },
-  { n: "02", titulo: "Desenvolvimento do Projeto", texto: "Criação do projeto completo pela equipe da Lofteria, com foco em estética, funcionalidade e execução escalável.", lado: "dir", y: 71, de: 56.5, ate: 94 },
-  { n: "03", titulo: "Ativação Comercial", texto: "Entrega de materiais de venda (renders, memorial, Walk’a), com uso estratégico da base de leads da construtora.", lado: "esq", y: 65, de: 6, ate: 43.5 },
-  { n: "04", titulo: "Planejamento da Execução", texto: "Definição da janela de montagem, fornecedores homologados, cronograma e logística no local.", lado: "dir", y: 56, de: 58, ate: 94 },
-  { n: "05", titulo: "Execução", texto: "Montagem realizada pela Lofteria ou parceiros homologados, com atualizações periódicas e controle total da operação.", lado: "esq", y: 51, de: 6, ate: 42 },
-  { n: "06", titulo: "Entrega Final", texto: "Unidade pronta para visitação, anúncio e uso comercial, com todos os materiais de apoio (físicos e digitais) incluídos.", lado: "dir", y: 17, de: 52, ate: 94 },
+  {
+    n: "01",
+    titulo: "Alinhamento Inicial",
+    texto: "Mapeamento de escopo, tipologias, perfil de cliente, cronograma, escopo financeiro e diretrizes técnicas.",
+    lado: "esq",
+    y: 80,
+    de: 6,
+    ate: 46.5,
+  },
+  {
+    n: "02",
+    titulo: "Desenvolvimento do Projeto",
+    texto: "Criação do projeto completo pela equipe da Lofteria, com foco em estética, funcionalidade e execução escalável.",
+    lado: "dir",
+    y: 71,
+    de: 56.5,
+    ate: 94,
+  },
+  {
+    n: "03",
+    titulo: "Ativação Comercial",
+    texto: "Entrega de materiais de venda (renders, memorial, Walk’a), com uso estratégico da base de leads da construtora.",
+    lado: "esq",
+    y: 65,
+    de: 6,
+    ate: 43.5,
+  },
+  {
+    n: "04",
+    titulo: "Planejamento da Execução",
+    texto: "Definição da janela de montagem, fornecedores homologados, cronograma e logística no local.",
+    lado: "dir",
+    y: 56,
+    de: 58,
+    ate: 94,
+  },
+  {
+    n: "05",
+    titulo: "Execução",
+    texto: "Montagem realizada pela Lofteria ou parceiros homologados, com atualizações periódicas e controle total da operação.",
+    lado: "esq",
+    y: 51,
+    de: 6,
+    ate: 42,
+  },
+  {
+    n: "06",
+    titulo: "Entrega Final",
+    texto: "Unidade pronta para visitação, anúncio e uso comercial, com todos os materiais de apoio (físicos e digitais) incluídos.",
+    lado: "dir",
+    y: 17,
+    de: 52,
+    ate: 94,
+  },
 ];
 
 const pct = (o: { left: number; top: number; width: number; height: number }) => ({
@@ -37,33 +93,45 @@ const pct = (o: { left: number; top: number; width: number; height: number }) =>
   height: `${o.height}%`,
 });
 
-// Paralaxe com o mouse: cada camada se desloca proporcionalmente à "profundidade" (px no
-// extremo da tela). Usa a propriedade CSS translate, separada do transform da rolagem.
-const prof = (k: number) => ({ translate: `calc(var(--mx, 0) * ${k}px) calc(var(--my, 0) * ${k}px)` });
+// Paralaxe "orbital" com o mouse (como era o isométrico da Home): o iceberg acompanha o mouse
+// com deslocamento amplo e uma leve rotação, e as outras camadas se movem menos, criando
+// profundidade. Valores em px no extremo da tela. Usa as propriedades CSS translate e rotate,
+// separadas do transform usado pela rolagem.
+const prof = (x: number, y = x * (2 / 3), giro = 0) => ({
+  translate: `calc(var(--mx, 0) * ${x}px) calc(var(--my, 0) * ${y}px)`,
+  ...(giro ? { rotate: `calc(var(--mx, 0) * ${giro}deg)` } : {}),
+});
 
 // Céu, água (com a ondulação na faixa da superfície) e iceberg, empilhados
 function Camadas() {
+  // Cada camada tem um invólucro para o mouse (translate/rotate) e, dentro, o elemento que a
+  // rolagem anima com GSAP: o GSAP zera translate/rotate nos elementos que ele transforma.
   return (
     <div data-palco className="pointer-events-none absolute" style={pct(PALCO)}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img data-ceu src="/img/iceberg/ceu.webp" alt="" className="absolute inset-0 h-full w-full" style={prof(-8)} />
-      <div data-agua className="absolute inset-0" style={prof(10)}>
+      <div className="absolute inset-0" style={prof(-12, -4)}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/img/iceberg/agua.webp" alt="" className="absolute inset-0 h-full w-full" />
-        {/* Faixa da superfície com ondulação (filtro SVG animado) */}
-        <div className="absolute inset-x-0 top-[40%] h-[14%] overflow-hidden" style={{ filter: "url(#ondas)" }}>
+        <img data-ceu src="/img/iceberg/ceu.webp" alt="" className="absolute inset-0 h-full w-full" />
+      </div>
+      <div className="absolute inset-0" style={prof(16, 6)}>
+        <div data-agua className="absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/iceberg/agua.webp" alt="" className="absolute inset-x-0 top-[-285.7%] h-[714.3%] w-full max-w-none" />
+          <img src="/img/iceberg/agua.webp" alt="" className="absolute inset-0 h-full w-full" />
+          {/* Faixa da superfície com ondulação (filtro SVG animado) */}
+          <div className="absolute inset-x-0 top-[40%] h-[14%] overflow-hidden" style={{ filter: "url(#ondas)" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/img/iceberg/agua.webp" alt="" className="absolute inset-x-0 top-[-285.7%] h-[714.3%] w-full max-w-none" />
+          </div>
         </div>
       </div>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        data-iceberg
-        src="/img/iceberg/iceberg.webp"
-        alt="Iceberg: a ponta acima da água e a maior parte submersa"
-        className="absolute"
-        style={{ ...pct(ICEBERG), ...prof(24) }}
-      />
+      <div className="absolute" style={{ ...pct(ICEBERG), ...prof(45, 10, 0.6) }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          data-iceberg
+          src="/img/iceberg/iceberg.webp"
+          alt="Iceberg: a ponta acima da água e a maior parte submersa"
+          className="absolute inset-0 h-full w-full"
+        />
+      </div>
     </div>
   );
 }
@@ -81,13 +149,22 @@ export default function IcebergEtapas() {
         gsap
           .timeline({
             defaults: { ease: "none" },
-            scrollTrigger: { trigger: raiz.current, start: "top top", end: "+=80%", pin: true, scrub: 1 },
+            scrollTrigger: {
+              trigger: raiz.current,
+              start: "top top",
+              end: "+=80%",
+              pin: true,
+              scrub: 1,
+            },
           })
           .fromTo("[data-ceu]", { y: () => -h() * 0.015 }, { y: () => h() * 0.015, duration: 1 }, 0)
           .fromTo(["[data-agua]", "[data-iceberg]", "[data-textos]"], { y: () => h() * 0.03 }, { y: () => -h() * 0.03, duration: 1 }, 0);
 
         // As etapas entram sozinhas, em sequência, assim que a seção aparece na tela
-        const entrada = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+        const entrada = gsap.timeline({
+          paused: true,
+          defaults: { ease: "power3.out" },
+        });
         ETAPAS.forEach((_, i) => {
           const el = `[data-etapa="${i}"]`;
           const em = 0.2 + i * 0.22;
@@ -97,7 +174,12 @@ export default function IcebergEtapas() {
             .fromTo(`${el} [data-texto]`, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, em + 0.15);
         });
         entrada.fromTo("[data-cta]", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 0.2 + ETAPAS.length * 0.22);
-        ScrollTrigger.create({ trigger: raiz.current, start: "top 55%", once: true, onEnter: () => entrada.play() });
+        ScrollTrigger.create({
+          trigger: raiz.current,
+          start: "top 55%",
+          once: true,
+          onEnter: () => entrada.play(),
+        });
       });
 
       // Paralaxe com o mouse (só em telas grandes com mouse): o fundo vai para um lado,
@@ -109,8 +191,16 @@ export default function IcebergEtapas() {
           el.style.setProperty("--mx", pos.x.toFixed(4));
           el.style.setProperty("--my", pos.y.toFixed(4));
         };
-        const irX = gsap.quickTo(pos, "x", { duration: 1.2, ease: "power3.out", onUpdate: aplicar });
-        const irY = gsap.quickTo(pos, "y", { duration: 1.2, ease: "power3.out", onUpdate: aplicar });
+        const irX = gsap.quickTo(pos, "x", {
+          duration: 1.4,
+          ease: "power3.out",
+          onUpdate: aplicar,
+        });
+        const irY = gsap.quickTo(pos, "y", {
+          duration: 1.4,
+          ease: "power3.out",
+          onUpdate: aplicar,
+        });
         const mover = (e: PointerEvent) => {
           const r = el.getBoundingClientRect();
           irX(((e.clientX - r.left) / r.width) * 2 - 1);
@@ -152,47 +242,57 @@ export default function IcebergEtapas() {
       <div className="@container relative hidden aspect-[2000/1174] w-[min(100vw,calc(100svh*2000/1174))] xl:block">
         <Camadas />
 
-        <div data-textos className="absolute inset-0" style={prof(16)}>
-          <div className="absolute top-[9%] left-[6%]">
-            <h2 className="text-[4.4cqw] leading-[0.95] font-semibold tracking-[-0.02em]">
-              Etapas da <br />
-              Operação
-            </h2>
-            <p className="mt-[0.9cqw] text-[1.25cqw] text-white/85">
-              Modelo estruturado em <strong className="font-semibold">6 fases principais</strong>
-            </p>
-            <Link data-cta href="/contato" className="botao botao-claro mt-[1.8cqw] px-[1.6cqw]! py-[0.9cqw]! text-[0.8cqw]!">
-              Agendar conversa
-            </Link>
-          </div>
-
-          {ETAPAS.map((e, i) => (
-            <div key={e.n} data-etapa={i} className="absolute inset-0">
-              <span
-                data-linha
-                className={`absolute h-px bg-white/55 ${e.lado === "esq" ? "origin-left" : "origin-right"}`}
-                style={{ top: `${e.y}%`, left: `${e.de}%`, width: `${e.ate - e.de}%` }}
-              />
-              <span
-                data-num
-                className="absolute grid size-[2.3cqw] place-items-center rounded-full bg-grafite-profundo/80 text-[0.95cqw] font-semibold ring-1 ring-white/30 backdrop-blur"
-                style={{ top: `${e.y}%`, left: `${e.lado === "esq" ? e.de : e.ate}%`, transform: "translate(-50%, -50%)" }}
-              >
-                {e.n}
-              </span>
-              <div
-                data-texto
-                className={`absolute w-[24%] ${e.lado === "esq" ? "text-left" : "text-right"}`}
-                style={{
-                  top: `calc(${e.y}% + 1.7cqw)`,
-                  ...(e.lado === "esq" ? { left: `calc(${e.de}% + 1.9cqw)` } : { right: `calc(${100 - e.ate}% + 1.9cqw)` }),
-                }}
-              >
-                <h3 className="text-[1.3cqw] leading-tight font-semibold whitespace-nowrap">{e.titulo}</h3>
-                <p className="mt-[0.4cqw] text-[0.86cqw] leading-[1.55] text-white/75">{e.texto}</p>
-              </div>
+        <div className="absolute inset-0" style={prof(26, 8)}>
+          <div data-textos className="absolute inset-0">
+            <div className="absolute top-[9%] left-[6%]">
+              <h2 className="text-[4.4cqw] leading-[0.95] font-semibold tracking-[-0.02em]">
+                Etapas da <br />
+                Operação
+              </h2>
+              <p className="mt-[0.9cqw] text-[1.25cqw] text-white/85">
+                Modelo estruturado em <strong className="font-semibold">6 fases principais</strong>
+              </p>
+              <Link data-cta href="/contato" className="botao botao-claro mt-[1.8cqw] px-[1.6cqw]! py-[0.9cqw]! text-[0.8cqw]!">
+                Agendar conversa
+              </Link>
             </div>
-          ))}
+
+            {ETAPAS.map((e, i) => (
+              <div key={e.n} data-etapa={i} className="absolute inset-0">
+                <span
+                  data-linha
+                  className={`absolute h-px bg-white/55 ${e.lado === "esq" ? "origin-left" : "origin-right"}`}
+                  style={{
+                    top: `${e.y}%`,
+                    left: `${e.de}%`,
+                    width: `${e.ate - e.de}%`,
+                  }}
+                />
+                <span
+                  data-num
+                  className="absolute grid size-[2.3cqw] place-items-center rounded-full bg-grafite-profundo/80 text-[0.95cqw] font-semibold ring-1 ring-white/30 backdrop-blur"
+                  style={{
+                    top: `${e.y}%`,
+                    left: `${e.lado === "esq" ? e.de : e.ate}%`,
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  {e.n}
+                </span>
+                <div
+                  data-texto
+                  className={`absolute w-[24%] ${e.lado === "esq" ? "text-left" : "text-right"}`}
+                  style={{
+                    top: `calc(${e.y}% + 1.7cqw)`,
+                    ...(e.lado === "esq" ? { left: `calc(${e.de}% + 1.9cqw)` } : { right: `calc(${100 - e.ate}% + 1.9cqw)` }),
+                  }}
+                >
+                  <h3 className="text-[1.3cqw] leading-tight font-semibold whitespace-nowrap">{e.titulo}</h3>
+                  <p className="mt-[0.4cqw] text-[0.86cqw] leading-[1.55] text-white/75">{e.texto}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

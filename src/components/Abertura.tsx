@@ -215,35 +215,6 @@ export default function Abertura() {
           });
           tl.to("[data-ambiente]", { opacity: 0, duration: 0.04 }, 0.95);
 
-          // Na abertura, o apartamento acompanha o mouse com um leve movimento de profundidade
-          if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-            const irX = gsap.quickTo(interno, "x", {
-              duration: 1.2,
-              ease: "power3.out",
-            });
-            const irY = gsap.quickTo(interno, "y", {
-              duration: 1.2,
-              ease: "power3.out",
-            });
-            const girar = gsap.quickTo(interno, "rotation", {
-              duration: 1.2,
-              ease: "power3.out",
-            });
-            const mover = (e: PointerEvent) => {
-              const forca = Math.max(0, 1 - tl.scrollTrigger!.progress * 8);
-              const nx = e.clientX / window.innerWidth - 0.5;
-              const ny = e.clientY / window.innerHeight - 0.5;
-              irX(nx * 90 * forca);
-              irY(ny * 60 * forca);
-              girar(nx * 1.2 * forca);
-            };
-            window.addEventListener("pointermove", mover);
-            return () => {
-              window.removeEventListener("pointermove", mover);
-              titulo.revert();
-            };
-          }
-
           return () => titulo.revert();
         },
       );
