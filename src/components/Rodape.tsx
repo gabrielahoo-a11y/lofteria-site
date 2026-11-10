@@ -135,9 +135,10 @@ export default function Rodape() {
         </button>
       </div>
 
-      {/* Nome da marca de ponta a ponta, cortado pela base da página */}
-      <div className="mx-auto mt-12 aspect-[572/56] max-w-[90rem] overflow-hidden px-5 md:px-10" aria-hidden>
-        <div data-marca className="text-white/[0.07]">
+      {/* Nome da marca de ponta a ponta, inteiro. O espaço embaixo deixa a palavra acima
+          do menu flutuante quando a página chega ao fim. */}
+      <div className="mx-auto mt-12 max-w-[90rem] px-5 pb-24 md:px-10 md:pb-28" aria-hidden>
+        <div data-marca className="text-white opacity-[0.07]">
           <Palavra className="h-auto w-full" />
         </div>
       </div>
