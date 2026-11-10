@@ -71,27 +71,29 @@ export default function IcebergEtapas() {
     () => {
       const mm = gsap.matchMedia();
       mm.add("(min-width: 1280px) and (prefers-reduced-motion: no-preference)", () => {
-        const tl = gsap.timeline({
-          defaults: { ease: "none" },
-          scrollTrigger: { trigger: raiz.current, start: "top top", end: "+=220%", pin: true, scrub: 1 },
-        });
-        // Paralaxe: o céu fica quase parado ao fundo; água, iceberg e textos sobem juntos
-        // à frente (a água acompanha o iceberg para a linha d'água não descolar dele)
+        // Paralaxe na rolagem (seção presa por pouco tempo): o céu quase parado ao fundo;
+        // água, iceberg e textos sobem juntos à frente
         const h = () => window.innerHeight;
-        tl.fromTo("[data-ceu]", { y: () => -h() * 0.015 }, { y: () => h() * 0.015, duration: 1 }, 0).fromTo(
-          ["[data-agua]", "[data-iceberg]", "[data-textos]"],
-          { y: () => h() * 0.04 },
-          { y: () => -h() * 0.03, duration: 1 },
-          0,
-        );
+        gsap
+          .timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: { trigger: raiz.current, start: "top top", end: "+=80%", pin: true, scrub: 1 },
+          })
+          .fromTo("[data-ceu]", { y: () => -h() * 0.015 }, { y: () => h() * 0.015, duration: 1 }, 0)
+          .fromTo(["[data-agua]", "[data-iceberg]", "[data-textos]"], { y: () => h() * 0.03 }, { y: () => -h() * 0.03, duration: 1 }, 0);
+
+        // As etapas entram sozinhas, em sequência, assim que a seção aparece na tela
+        const entrada = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
         ETAPAS.forEach((_, i) => {
-          const em = 0.06 + i * 0.13;
           const el = `[data-etapa="${i}"]`;
-          tl.fromTo(`${el} [data-linha]`, { scaleX: 0 }, { scaleX: 1, duration: 0.07, ease: "power2.out" }, em)
-            .fromTo(`${el} [data-num]`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.04, ease: "back.out(2)" }, em)
-            .fromTo(`${el} [data-texto]`, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.05 }, em + 0.03);
+          const em = 0.2 + i * 0.22;
+          entrada
+            .fromTo(`${el} [data-linha]`, { scaleX: 0 }, { scaleX: 1, duration: 0.7 }, em)
+            .fromTo(`${el} [data-num]`, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, em)
+            .fromTo(`${el} [data-texto]`, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, em + 0.15);
         });
-        tl.fromTo("[data-cta]", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.06 }, 0.86);
+        entrada.fromTo("[data-cta]", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, 0.2 + ETAPAS.length * 0.22);
+        ScrollTrigger.create({ trigger: raiz.current, start: "top 55%", once: true, onEnter: () => entrada.play() });
       });
     },
     { scope: raiz },
