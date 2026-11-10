@@ -36,7 +36,7 @@ export default function Tour360() {
             role="tab"
             aria-selected={t.id === atual}
             onClick={() => setAtual(t.id)}
-            className={`px-5 py-2.5 text-xs font-semibold tracking-[0.16em] uppercase transition-colors duration-300 ${
+            className={`rounded-full px-5 py-2.5 text-xs font-semibold tracking-[0.16em] uppercase transition-colors duration-300 ${
               t.id === atual ? "bg-grafite text-white" : "bg-white text-grafite ring-1 ring-linha hover:ring-grafite/40"
             }`}
           >

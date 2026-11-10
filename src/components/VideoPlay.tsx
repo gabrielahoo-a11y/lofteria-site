@@ -130,7 +130,7 @@ export default function VideoPlay({ texto }: { texto: string }) {
                 <button
                   type="button"
                   onClick={fechar}
-                  className="absolute top-5 right-5 flex items-center gap-2 bg-white/10 px-4 py-2 text-[0.6875rem] font-semibold tracking-[0.18em] text-white uppercase hover:bg-white/20"
+                  className="absolute top-5 right-5 flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-[0.6875rem] font-semibold tracking-[0.18em] text-white uppercase hover:bg-white/20"
                 >
                   Fechar <X className="size-4" />
                 </button>

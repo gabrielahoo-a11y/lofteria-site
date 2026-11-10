@@ -79,9 +79,12 @@ label {
   .rotulo {
     @apply inline-flex items-center gap-2 text-[0.6875rem] font-semibold tracking-[0.22em] uppercase;
   }
+  /* O marcador é o símbolo da Lofteria (antes era um quadradinho) */
   .rotulo::before {
     content: "";
-    @apply size-1.5 bg-salmao;
+    @apply h-[0.625rem] w-2 shrink-0 bg-salmao;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 10'%3E%3Cpath d='M7.33332 1.86913L3.64863 3.99852C3.44809 4.11445 3.33334 4.31344 3.33334 4.54525V7.12542C3.33334 7.21293 3.37668 7.2881 3.45238 7.33183L3.99992 7.64823V4.72217C3.99992 4.62283 4.04914 4.53757 4.13508 4.4879L8 2.25436V3.6393C8 3.73859 7.95087 3.8239 7.86491 3.87352L5.64866 5.15436C5.44818 5.27024 5.33334 5.46918 5.33334 5.701V8.41872L4.18925 9.07985C4.06888 9.14951 3.93112 9.14951 3.81069 9.07985L1.99998 8.03343V3.56628C1.99998 3.46694 2.0492 3.38168 2.13509 3.33206L4.66666 1.86908L4.11906 1.55262C4.04336 1.50884 3.9566 1.50884 3.88088 1.55262L1.64864 2.84267C1.44811 2.95856 1.33331 3.15755 1.33331 3.38936V7.64815L0.189282 6.98706C0.0689086 6.91746 0 6.798 0 6.65887V2.47317C0 2.33404 0.0688574 2.21457 0.189282 2.14498L3.81075 0.0521543C3.93117 -0.0173848 4.06894 -0.0173848 4.18936 0.0521543L7.33332 1.86913ZM7.86491 6.18531L7.33332 6.4925V7.26301L5.99996 8.03351V5.87802C5.99996 5.77867 6.04912 5.69342 6.13512 5.6438L7.99992 4.5661V5.95099C7.99992 6.05032 7.95087 6.13558 7.86491 6.18531Z'/%3E%3C/svg%3E") center / contain no-repeat;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 10'%3E%3Cpath d='M7.33332 1.86913L3.64863 3.99852C3.44809 4.11445 3.33334 4.31344 3.33334 4.54525V7.12542C3.33334 7.21293 3.37668 7.2881 3.45238 7.33183L3.99992 7.64823V4.72217C3.99992 4.62283 4.04914 4.53757 4.13508 4.4879L8 2.25436V3.6393C8 3.73859 7.95087 3.8239 7.86491 3.87352L5.64866 5.15436C5.44818 5.27024 5.33334 5.46918 5.33334 5.701V8.41872L4.18925 9.07985C4.06888 9.14951 3.93112 9.14951 3.81069 9.07985L1.99998 8.03343V3.56628C1.99998 3.46694 2.0492 3.38168 2.13509 3.33206L4.66666 1.86908L4.11906 1.55262C4.04336 1.50884 3.9566 1.50884 3.88088 1.55262L1.64864 2.84267C1.44811 2.95856 1.33331 3.15755 1.33331 3.38936V7.64815L0.189282 6.98706C0.0689086 6.91746 0 6.798 0 6.65887V2.47317C0 2.33404 0.0688574 2.21457 0.189282 2.14498L3.81075 0.0521543C3.93117 -0.0173848 4.06894 -0.0173848 4.18936 0.0521543L7.33332 1.86913ZM7.86491 6.18531L7.33332 6.4925V7.26301L5.99996 8.03351V5.87802C5.99996 5.77867 6.04912 5.69342 6.13512 5.6438L7.99992 4.5661V5.95099C7.99992 6.05032 7.95087 6.13558 7.86491 6.18531Z'/%3E%3C/svg%3E") center / contain no-repeat;
   }
 
   .titulo-xl {
@@ -97,25 +100,28 @@ label {
     font-size: clamp(1.75rem, 3.2vw, 2.75rem);
   }
 
-  /* Botão com cantoneiras: lembra uma planta baixa */
+  /* Botões cheios em pílula; o de contorno mantém as cantoneiras (lembram uma planta baixa) */
   .botao {
-    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold tracking-[0.16em] uppercase transition-colors duration-300;
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-xs font-semibold tracking-[0.16em] uppercase transition-colors duration-300;
   }
-  .botao::before,
-  .botao::after {
+  .botao-contorno {
+    @apply rounded-none;
+  }
+  .botao-contorno::before,
+  .botao-contorno::after {
     content: "";
     @apply pointer-events-none absolute size-2.5 border-current transition-all duration-300;
   }
-  .botao::before {
+  .botao-contorno::before {
     @apply -top-1 -left-1 border-t border-l;
   }
-  .botao::after {
+  .botao-contorno::after {
     @apply -right-1 -bottom-1 border-r border-b;
   }
-  .botao:hover::before {
+  .botao-contorno:hover::before {
     @apply top-0 left-0;
   }
-  .botao:hover::after {
+  .botao-contorno:hover::after {
     @apply right-0 bottom-0;
   }
   .botao-salmao {
@@ -218,4 +224,34 @@ label {
 @keyframes iceberg-onda {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(-20px); }
+}
+
+/* Ondas: cada linha sobe, desce e desliza um pouco, com atraso em cascata */
+.ondas {
+  aspect-ratio: 1638.52 / 414.78;
+}
+.ondas path {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: onda 9s ease-in-out infinite;
+}
+@keyframes onda {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scaleY(1);
+  }
+  25% {
+    transform: translate3d(-0.6%, -6%, 0) scaleY(1.12);
+  }
+  50% {
+    transform: translate3d(0, 3%, 0) scaleY(0.9);
+  }
+  75% {
+    transform: translate3d(0.6%, -3%, 0) scaleY(1.06);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ondas path {
+    animation: none;
+  }
 }

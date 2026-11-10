@@ -286,7 +286,7 @@ export default function Abertura() {
                 <Link href="/investidor" className="botao botao-salmao">
                   Para investidor
                 </Link>
-                <a href="#solucao" className="botao text-grafite">
+                <a href="#solucao" className="botao botao-contorno text-grafite">
                   Como funciona
                 </a>
               </div>

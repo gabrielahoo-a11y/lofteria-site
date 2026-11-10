@@ -4,10 +4,11 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
+import Ondas from "@/components/Ondas";
 
 gsap.registerPlugin(SplitText, useGSAP);
 
-// Título centralizado sobre linhas finas, que sobe palavra por palavra (topo das páginas simples)
+// Título centralizado sobre o grafismo de ondas, que sobe palavra por palavra (topo das páginas simples)
 export default function TituloCentral({ rotulo, children }: { rotulo: string; children: React.ReactNode }) {
   const raiz = useRef<HTMLElement>(null);
 
@@ -29,12 +30,13 @@ export default function TituloCentral({ rotulo, children }: { rotulo: string; ch
   return (
     <section
       ref={raiz}
-      className="bg-white bg-[repeating-linear-gradient(90deg,transparent_0_11px,rgba(50,60,68,.045)_11px_12px)] px-5 pt-36 pb-16 text-center md:px-10 md:pt-44 md:pb-24"
+      className="relative overflow-hidden bg-white px-5 pt-36 pb-16 text-center md:px-10 md:pt-44 md:pb-24"
     >
-      <p data-surge className="rotulo justify-center text-grafite">
+      <Ondas className="top-[-8.2vw]" />
+      <p data-surge className="rotulo relative justify-center text-grafite">
         {rotulo}
       </p>
-      <h1 data-titulo className="mx-auto mt-6 max-w-[16ch] text-[clamp(2.6rem,6vw,5.8rem)] leading-[0.98] tracking-[-0.035em] text-balance text-grafite">
+      <h1 data-titulo className="relative mx-auto mt-6 max-w-[16ch] text-[clamp(2.6rem,6vw,5.8rem)] leading-[0.98] tracking-[-0.035em] text-balance text-grafite">
         {children}
       </h1>
     </section>

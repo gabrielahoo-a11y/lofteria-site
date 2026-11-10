@@ -5,12 +5,13 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useGSAP } from "@gsap/react";
+import Ondas from "@/components/Ondas";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
 // Quem somos como manifesto: uma citação com aspas grandes, sem ícones.
 // O texto "acende" palavra por palavra conforme a rolagem.
-export default function Manifesto() {
+export default function Manifesto({ ondas = false }: { ondas?: boolean }) {
   const raiz = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -42,8 +43,9 @@ export default function Manifesto() {
   );
 
   return (
-    <section ref={raiz} className="bg-white px-5 py-28 text-center md:px-10 md:py-40">
-      <p className="rotulo justify-center text-grafite">Quem somos</p>
+    <section ref={raiz} className="relative overflow-hidden bg-white px-5 py-28 text-center md:px-10 md:py-40">
+      {ondas && <Ondas className="top-[-10.35vw]" />}
+      <p className="rotulo relative justify-center text-grafite">Quem somos</p>
       <figure className="relative mx-auto mt-14 max-w-[72rem]">
         <span
           data-aspas

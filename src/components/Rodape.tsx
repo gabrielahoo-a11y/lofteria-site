@@ -66,12 +66,12 @@ export default function Rodape() {
                 type="email"
                 autoComplete="email"
                 placeholder="Seu e-mail"
-                className="min-w-0 flex-1 rounded-lg bg-black/25 px-4 py-3 text-sm ring-1 ring-white/10 outline-none placeholder:text-white/40 focus:ring-salmao"
+                className="min-w-0 flex-1 rounded-full bg-black/25 px-4 py-3 text-sm ring-1 ring-white/10 outline-none placeholder:text-white/40 focus:ring-salmao"
               />
               <button
                 type="submit"
                 disabled={estado === "enviando"}
-                className="shrink-0 bg-white px-6 py-3 text-xs font-semibold tracking-[0.16em] text-grafite uppercase transition-colors hover:bg-salmao hover:text-white disabled:opacity-60"
+                className="shrink-0 rounded-full bg-white px-6 py-3 text-xs font-semibold tracking-[0.16em] text-grafite uppercase transition-colors hover:bg-salmao hover:text-white disabled:opacity-60"
               >
                 {estado === "enviando" ? "Enviando…" : "Assinar"}
               </button>

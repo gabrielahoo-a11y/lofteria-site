@@ -59,7 +59,7 @@ export default function Comparativo() {
               Quem cuida de <span className="font-light text-salmao">cada etapa?</span>
             </h2>
           </div>
-          <div role="radiogroup" aria-label="Cenário" className="flex bg-white p-1.5 shadow-sm ring-1 ring-linha">
+          <div role="radiogroup" aria-label="Cenário" className="flex rounded-full bg-white p-1.5 shadow-sm ring-1 ring-linha">
             {[
               { v: false, rotulo: "Sem Lofteria" },
               { v: true, rotulo: "Com Lofteria" },
@@ -70,7 +70,7 @@ export default function Comparativo() {
                 role="radio"
                 aria-checked={com === o.v}
                 onClick={() => alternar(o.v)}
-                className={`px-5 py-2.5 text-xs font-semibold tracking-[0.14em] uppercase transition-colors duration-300 ${
+                className={`rounded-full px-5 py-2.5 text-xs font-semibold tracking-[0.14em] uppercase transition-colors duration-300 ${
                   com === o.v ? (o.v ? "bg-salmao text-white" : "bg-grafite text-white") : "text-grafite hover:bg-nevoa"
                 }`}
               >

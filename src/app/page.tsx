@@ -13,7 +13,7 @@ export default function Home() {
       <Menu />
       <main>
         <Abertura />
-        <Manifesto />
+        <Manifesto ondas />
         <Solucao />
         <Projetos />
         <Numeros />
