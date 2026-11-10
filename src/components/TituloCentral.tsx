@@ -36,7 +36,7 @@ export default function TituloCentral({ rotulo, children }: { rotulo: string; ch
       <p data-surge className="rotulo relative justify-center text-grafite">
         {rotulo}
       </p>
-      <h1 data-titulo className="relative mx-auto mt-6 max-w-[16ch] text-[clamp(2.6rem,6vw,5.8rem)] leading-[0.98] tracking-[-0.035em] text-balance text-grafite">
+      <h1 data-titulo className="relative mx-auto mt-6 max-w-[16ch] text-[clamp(2.4rem,4.2vw,3.75rem)] leading-[0.98] tracking-[-0.035em] text-balance text-grafite">
         {children}
       </h1>
     </section>

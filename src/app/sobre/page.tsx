@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { metadados } from "@/lib/seo";
 import Menu from "@/components/Menu";
 import SobreTopo from "@/components/SobreTopo";
 import Manifesto from "@/components/Manifesto";
@@ -9,11 +10,12 @@ import ValoresCarrossel from "@/components/ValoresCarrossel";
 import Depoimentos from "@/components/Depoimentos";
 import ChamadaFinal from "@/components/ChamadaFinal";
 
-export const metadata: Metadata = {
-  title: "Sobre · Lofteria",
-  description:
+export const metadata: Metadata = metadados({
+  titulo: "Sobre",
+  descricao:
     "Tecnologia, design e inteligência imobiliária para entregar moradias prontas para performar, com eficiência para o investidor e experiência para o morador.",
-};
+  caminho: "/sobre",
+});
 
 // Mesma estrutura da página About da referência (Avenlo), com o conteúdo da Lofteria
 export default function Sobre() {

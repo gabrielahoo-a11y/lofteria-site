@@ -64,7 +64,7 @@ export default function ConstrutorasTopo() {
           <p data-surge className="rotulo text-grafite">
             Construtoras e incorporadoras
           </p>
-          <h1 data-titulo className="mt-8 text-[clamp(2.6rem,6vw,6rem)] leading-[0.98] font-thin tracking-[-0.03em] text-grafite">
+          <h1 data-titulo className="mt-8 text-[clamp(2.4rem,4.2vw,3.75rem)] leading-[0.98] font-thin tracking-[-0.03em] text-grafite">
             Estoque pronto, <br className="hidden sm:inline" />
             produto que vende.
           </h1>

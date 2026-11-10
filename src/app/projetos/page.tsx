@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+import { metadados } from "@/lib/seo";
 import Menu from "@/components/Menu";
 import PaginaTopo from "@/components/PaginaTopo";
 import ListaProjetos from "@/components/ListaProjetos";
 import Projetos from "@/components/Projetos";
 
-export const metadata: Metadata = {
-  title: "Projetos · Lofteria",
-  description: "Mais de 350 apartamentos transformados em Florianópolis e no litoral catarinense. Conheça alguns deles.",
-};
+export const metadata: Metadata = metadados({
+  titulo: "Projetos",
+  descricao:
+    "Mais de 350 apartamentos transformados em Florianópolis e no litoral catarinense. Conheça alguns deles.",
+  caminho: "/projetos",
+});
 
 export default function PaginaProjetos() {
   return (

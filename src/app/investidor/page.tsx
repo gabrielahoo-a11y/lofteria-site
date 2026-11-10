@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { metadados } from "@/lib/seo";
 import Menu from "@/components/Menu";
 import PaginaTopo from "@/components/PaginaTopo";
 import Revelar from "@/components/Revelar";
@@ -7,11 +8,12 @@ import Numeros from "@/components/Numeros";
 import Depoimentos from "@/components/Depoimentos";
 import { semViuva } from "@/lib/texto";
 
-export const metadata: Metadata = {
-  title: "Para investidor · Lofteria",
-  description:
+export const metadata: Metadata = metadados({
+  titulo: "Para investidor",
+  descricao:
     "Um ecossistema completo para maximizar a rentabilidade do seu imóvel em short-stay, locação anual ou venda.",
-};
+  caminho: "/investidor",
+});
 
 const PILARES = [
   {

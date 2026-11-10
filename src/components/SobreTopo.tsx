@@ -40,7 +40,7 @@ export default function SobreTopo() {
         <p data-surge className="rotulo justify-center text-grafite">
           Sobre a Lofteria
         </p>
-        <h1 data-titulo className="mx-auto mt-6 max-w-[14ch] text-[clamp(2.6rem,6.4vw,6.2rem)] leading-[0.98] tracking-[-0.035em] text-balance text-grafite">
+        <h1 data-titulo className="mx-auto mt-6 max-w-[14ch] text-[clamp(2.4rem,4.2vw,3.75rem)] leading-[0.98] tracking-[-0.035em] text-balance text-grafite">
           <span className="font-light">Não queremos ser os maiores.</span> <strong className="font-semibold">Queremos ser únicos.</strong>
         </h1>
       </div>

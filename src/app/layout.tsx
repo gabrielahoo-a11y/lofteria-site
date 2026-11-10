@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { DADOS_ESTRUTURADOS, DESCRICAO, INDEXAVEL, metadados, NOME, SITE_URL } from "@/lib/seo";
 import localFont from "next/font/local";
 import SmoothScroll from "@/components/SmoothScroll";
 import Rodape from "@/components/Rodape";
@@ -12,25 +13,40 @@ const exo2 = localFont({
   display: "swap",
 });
 
-const DESCRICAO =
-  "Projetamos, executamos e entregamos apartamentos completos, prontos para render em short-stay, locação anual ou venda.";
-
 export const metadata: Metadata = {
-  title: "Lofteria · Seu imóvel pronto para performar",
+  metadataBase: new URL(SITE_URL),
+  title: { default: `${NOME} · Seu imóvel pronto para performar`, template: `%s · ${NOME}` },
   description: DESCRICAO,
-  openGraph: {
-    title: "Lofteria · Seu imóvel pronto para performar",
-    description: DESCRICAO,
-    siteName: "Lofteria",
-    locale: "pt_BR",
-    type: "website",
-  },
+  applicationName: NOME,
+  keywords: [
+    "Lofteria",
+    "apartamento decorado",
+    "design de interiores Florianópolis",
+    "short-stay",
+    "Airbnb Florianópolis",
+    "locação por temporada",
+    "reforma de apartamento",
+    "decorado para construtoras",
+  ],
+  authors: [{ name: NOME }],
+  creator: NOME,
+  formatDetection: { telephone: false },
+  robots: INDEXAVEL ? { index: true, follow: true } : { index: false, follow: false },
+  ...metadados({ descricao: DESCRICAO, caminho: "/" }),
+};
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="pt-BR" className={`${exo2.variable} antialiased`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(DADOS_ESTRUTURADOS).replace(/</g, "\\u003c") }}
+        />
         <SmoothScroll />
         {children}
         <Rodape />

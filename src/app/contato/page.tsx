@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { metadados } from "@/lib/seo";
 import Menu from "@/components/Menu";
 import TituloCentral from "@/components/TituloCentral";
 import Revelar from "@/components/Revelar";
@@ -6,10 +7,12 @@ import FormularioContato from "@/components/FormularioContato";
 import ChamadaFinal from "@/components/ChamadaFinal";
 import { REDES } from "@/lib/navegacao";
 
-export const metadata: Metadata = {
-  title: "Contato · Lofteria",
-  description: "Conte o que você quer para o seu imóvel. Um consultor da Lofteria responde em até 1 dia útil.",
-};
+export const metadata: Metadata = metadados({
+  titulo: "Contato",
+  descricao:
+    "Conte o que você quer para o seu imóvel. Um consultor da Lofteria responde em até 1 dia útil.",
+  caminho: "/contato",
+});
 
 // Mesma estrutura da página de contato da referência: título, cartão com os dados ao lado
 // do formulário e chamada final

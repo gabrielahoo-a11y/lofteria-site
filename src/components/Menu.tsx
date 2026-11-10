@@ -130,7 +130,7 @@ export default function Menu() {
               className="group flex items-baseline gap-5 border-b border-white/10 py-3"
             >
               <span
-                className={`text-[clamp(2rem,5vw,4rem)] leading-none font-semibold tracking-tight transition-colors group-hover:text-salmao ${
+                className={`text-[clamp(2rem,3.4vw,3rem)] leading-none font-semibold tracking-tight transition-colors group-hover:text-salmao ${
                   ativo(p.href) ? "text-salmao" : ""
                 }`}
               >

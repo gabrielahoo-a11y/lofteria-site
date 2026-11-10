@@ -63,7 +63,7 @@ export default function PaginaTopo({ rotulo, titulo, texto, foto, fotoAlt, acao 
           <p data-surge className="rotulo mb-8 text-grafite">
             {rotulo}
           </p>
-          <h1 data-titulo className="text-[clamp(2.6rem,6vw,6rem)] leading-[0.98] tracking-[-0.035em] text-grafite">
+          <h1 data-titulo className="text-[clamp(2.4rem,4.2vw,3.75rem)] leading-[0.98] tracking-[-0.035em] text-grafite">
             {titulo}
           </h1>
         </div>

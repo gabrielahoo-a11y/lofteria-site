@@ -45,7 +45,7 @@ export default function ChamadaFinal({
       <div className="absolute inset-0 bg-gradient-to-b from-grafite-profundo/70 via-grafite-profundo/55 to-grafite-profundo" />
       <div className="relative">
         <p className="rotulo justify-center text-white/70">{rotulo}</p>
-        <h2 className="mx-auto mt-6 max-w-[16ch] text-[clamp(2.4rem,5.5vw,5rem)] leading-[1] font-semibold tracking-[-0.03em] text-balance">
+        <h2 className="mx-auto mt-6 max-w-[16ch] text-[clamp(2.2rem,4.2vw,3.75rem)] leading-[1] font-semibold tracking-[-0.03em] text-balance">
           {titulo}
         </h2>
         <Link href={acao.href} className="botao botao-claro mt-10">

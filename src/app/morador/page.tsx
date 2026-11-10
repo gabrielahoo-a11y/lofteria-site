@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import { metadados } from "@/lib/seo";
 import Menu from "@/components/Menu";
 import PaginaTopo from "@/components/PaginaTopo";
 import Revelar from "@/components/Revelar";
 import Solucao from "@/components/Solucao";
 import Depoimentos from "@/components/Depoimentos";
 
-export const metadata: Metadata = {
-  title: "Para morador · Lofteria",
-  description:
+export const metadata: Metadata = metadados({
+  titulo: "Para morador",
+  descricao:
     "Projetos personalizados para o seu estilo de vida. Cuidamos de tudo, do orçamento às vistorias, e você recebe o apartamento pronto para viver.",
-};
+  caminho: "/morador",
+});
 
 const CUIDAMOS = [
   "Orçamentos",

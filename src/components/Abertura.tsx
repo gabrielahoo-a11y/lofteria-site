@@ -261,7 +261,7 @@ export default function Abertura() {
           <div data-texto className="relative z-20">
             <h1
               data-titulo
-              className="text-[clamp(2.7rem,5.6vw,5.6rem)] leading-[1] font-thin tracking-[-0.03em] text-grafite"
+              className="text-[clamp(2.4rem,4.2vw,3.75rem)] leading-[1] font-thin tracking-[-0.03em] text-grafite"
             >
               Seu imóvel decorado e pronto para performar.
             </h1>

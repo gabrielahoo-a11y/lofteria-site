@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { metadados } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import Menu from "@/components/Menu";
@@ -12,11 +13,12 @@ import { semViuva } from "@/lib/texto";
 // Página curta e direta para incorporadoras, com base na apresentação
 // "Soluções em Design de Interiores para Incorporadoras" e nos materiais do Alma Lusa e do Lagoa Brick.
 
-export const metadata: Metadata = {
-  title: "Construtoras e incorporadoras · Lofteria",
-  description:
+export const metadata: Metadata = metadados({
+  titulo: "Construtoras e incorporadoras",
+  descricao:
     "Transformamos unidades prontas em produtos ambientados e prontos para vender: projeto, execução e materiais de venda em até 60 dias, sem sobrecarregar a obra.",
-};
+  caminho: "/construtoras",
+});
 
 const DIFERENCIAIS = [
   { titulo: "Até 60 dias", texto: "Do projeto à ambientação final, integrados ao cronograma da obra." },
