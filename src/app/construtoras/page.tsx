@@ -36,8 +36,13 @@ export default function Construtoras() {
         {/* Proposta de valor */}
         <section className="bg-grafite-profundo py-24 text-white md:py-32">
           <Revelar className="mx-auto max-w-[90rem] px-5 md:px-10">
-            <h2 data-revelar className="titulo-lg max-w-[20ch]">
-              Não somos uma empresa de decoração. <span className="font-light text-white/45">Somos uma operação técnica que gera valor no&nbsp;VGV.</span>
+            {/* Quebras fixas a partir do tablet: cada ideia na sua linha */}
+            <h2 data-revelar className="titulo-lg">
+              Não somos uma empresa de&nbsp;decoração. <br className="hidden md:inline" />
+              <span className="font-light text-white/45 max-md:block">
+                Somos uma operação técnica <br className="hidden md:inline" />
+                que gera valor no&nbsp;VGV.
+              </span>
             </h2>
             <div className="mt-16 grid gap-3 md:grid-cols-3">
               {DIFERENCIAIS.map((d) => (
