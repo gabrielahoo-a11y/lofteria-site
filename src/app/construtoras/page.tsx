@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import Menu from "@/components/Menu";
@@ -51,99 +50,71 @@ export default function Construtoras() {
 
         <IcebergEtapas />
 
-        {/* Quem já confia: FAZ, empreendimentos e caso */}
+        {/* Como a parceria funciona: foco no modelo e no valor para cada lado, não em um parceiro */}
         <section className="py-24 md:py-32">
           <Revelar className="mx-auto max-w-[90rem] px-5 md:px-10">
             <div data-revelar className="flex flex-wrap items-end justify-between gap-8">
-              <h2 className="titulo-lg max-w-[16ch] text-grafite">
-                Lado a lado <span className="font-light text-texto-suave">com quem constrói.</span>
+              <h2 className="titulo-lg text-grafite">
+                Uma parceria, <br className="hidden sm:inline" />
+                <span className="font-light text-texto-suave">três ganhos.</span>
               </h2>
               <p className="max-w-md text-lg leading-relaxed font-light text-texto-suave">
-                {semViuva(
-                  "Com a FAZ Construções e Incorporações, desde 2008 em Florianópolis, assinamos as unidades decoradas dos empreendimentos parceiros.",
-                )}
+                {semViuva("Construtora, investidor e Lofteria trabalham no mesmo cronograma. Cada um com um papel claro, e a unidade sai pronta para performar.")}
               </p>
             </div>
 
-            {/* FAZ: faixa larga com a obra ao fundo e o engenheiro saindo do quadro */}
-            <div data-revelar className="relative isolate mt-24 text-white">
-              <div className="absolute inset-0 -z-10 overflow-hidden rounded-[28px] bg-[#0b0b0c]">
-                <Image src="/img/parceiros/faz-obras.webp" alt="" fill sizes="100vw" className="object-cover object-[50%_35%] opacity-75" />
-                <span className="absolute inset-0 bg-gradient-to-r from-[#0b0b0c] via-[#0b0b0c]/75 to-[#0b0b0c]/10" />
+            <div className="mt-14 grid gap-3 md:grid-cols-3">
+              {[
+                {
+                  quem: "Construtora",
+                  titulo: "Vende a unidade pronta",
+                  texto: "Mais valor percebido no empreendimento, sem mobilizar a equipe e sem impacto no cronograma da obra.",
+                },
+                {
+                  quem: "Investidor",
+                  titulo: "Recebe o imóvel pronto para render",
+                  texto: "Contrata a unidade decorada junto com a compra, com o pagamento acompanhando o fluxo do empreendimento. A contratação é opcional.",
+                },
+                {
+                  quem: "Lofteria",
+                  titulo: "Assume a ambientação de ponta a ponta",
+                  texto: "Projeto, compras, execução e material de venda, com fornecedores homologados, prazo e orçamento definidos.",
+                },
+              ].map((c) => (
+                <div key={c.quem} data-revelar className="flex flex-col rounded-2xl bg-nevoa p-8">
+                  <span className="text-[0.6875rem] font-semibold tracking-[0.22em] text-salmao uppercase">{c.quem}</span>
+                  <h3 className="mt-5 text-2xl font-semibold tracking-tight text-grafite">{c.titulo}</h3>
+                  <p className="mt-3 leading-relaxed font-light text-texto-suave">{semViuva(c.texto)}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-3 grid gap-3 lg:grid-cols-[1fr_1.4fr]">
+              <div data-revelar className="flex flex-col justify-end rounded-2xl bg-grafite-profundo p-8 text-white">
+                <p className="text-[0.6875rem] font-semibold tracking-[0.22em] text-salmao uppercase">Caso · 2 dormitórios no Campeche</p>
+                <p className="mt-4 text-3xl font-semibold tracking-tight">Vendido em menos de 20 dias</p>
+                <p className="mt-2 text-sm font-light text-white/60">
+                  {semViuva("Depois de 4 meses parado, com valorização percebida de R$ 120 mil acima da média da torre.")}
+                </p>
               </div>
-              <div className="pointer-events-none absolute right-[2%] bottom-0 aspect-[857/960] h-[40%] max-sm:right-[-4%] sm:h-[104%] lg:right-[6%] lg:h-[118%]">
-                <Image src="/img/parceiros/faz-pessoa.webp" alt="" fill sizes="(max-width: 1023px) 50vw, 30vw" className="object-contain object-bottom drop-shadow-2xl" />
-              </div>
-              <div className="relative flex min-h-[34rem] flex-col justify-between gap-10 p-8 sm:min-h-[24rem] md:p-12">
-                <div>
+              <div data-revelar className="flex flex-col justify-between gap-8 rounded-2xl p-8 ring-1 ring-linha">
+                <p className="text-[0.6875rem] font-semibold tracking-[0.22em] text-texto-suave uppercase">Modelo já aplicado em empreendimentos com</p>
+                <div className="flex flex-wrap items-center gap-x-12 gap-y-6 opacity-45 grayscale">
                   <div
                     role="img"
                     aria-label="FAZ Construções e Incorporações"
-                    className="aspect-[387/144] w-36 bg-white md:w-44"
+                    className="aspect-[387/144] w-24 bg-grafite"
                     style={{ maskImage: "url(/img/parceiros/faz-logo.png)", WebkitMaskImage: "url(/img/parceiros/faz-logo.png)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat" }}
                   />
-                  <span className="mt-5 block h-1 w-12 bg-[#e1251b]" />
-                </div>
-                <dl className="grid max-w-[34rem] grid-cols-1 gap-5 max-sm:w-[50%] sm:max-w-[min(34rem,50%)] sm:grid-cols-2 lg:max-w-[58%] lg:grid-cols-4">
-                  {[
-                    ["+700", "unidades entregues"],
-                    ["+17", "anos de mercado"],
-                    ["+200 mil", "m² construídos"],
-                    ["R$ 1,3 bi", "administrados em obras"],
-                  ].map(([v, r]) => (
-                    <div key={r} className="border-l-2 border-[#e1251b] pl-4">
-                      <dd className="text-[clamp(1.5rem,2.2vw,2rem)] leading-none font-semibold tracking-tight whitespace-nowrap">{v}</dd>
-                      <dt className="mt-1.5 text-sm text-white/65">{r}</dt>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </div>
-
-            <div className="mt-3 grid gap-3 lg:grid-cols-3">
-              {/* Alma Lusa */}
-              <a
-                data-revelar
-                href="https://almalusafloripa.com.br/"
-                target="_blank"
-                rel="noreferrer"
-                className="group relative min-h-[22rem] overflow-hidden rounded-[28px] bg-grafite-profundo text-white"
-              >
-                <Image
-                  src="/img/parceiros/alma-lusa-studio.webp"
-                  alt="Studio do Alma Lusa decorado pela Lofteria"
-                  fill
-                  sizes="(max-width: 1023px) 100vw, 33vw"
-                  className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-105"
-                />
-                <span className="absolute inset-0 bg-gradient-to-t from-grafite-profundo/90 via-grafite-profundo/20 to-transparent" />
-                <span className="absolute inset-x-0 bottom-0 p-8">
-                  <span className="block text-[0.6875rem] font-semibold tracking-[0.22em] text-white/70 uppercase">Santo Antônio de Lisboa</span>
-                  <span className="mt-2 flex items-center gap-2 text-3xl font-semibold tracking-tight">
-                    Alma Lusa <ArrowUpRight className="size-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden />
-                  </span>
-                  <span className="mt-2 block text-sm font-light text-white/70">46 studios, 11 lofts e cobertura · cotas decoradas by&nbsp;Lofteria</span>
-                </span>
-              </a>
-
-                <div data-revelar className="flex min-h-[22rem] flex-col justify-between rounded-[28px] bg-[#181413] p-8 text-[#eee8d8]">
                   <div
                     role="img"
                     aria-label="Lagoa Brick"
-                    className="aspect-[900/98] w-full max-w-[16rem] bg-[#eee8d8]"
+                    className="aspect-[900/98] w-40 bg-grafite"
                     style={{ maskImage: "url(/img/parceiros/lagoa-brick.svg)", WebkitMaskImage: "url(/img/parceiros/lagoa-brick.svg)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat" }}
                   />
-                  <p className="mt-8 text-sm leading-relaxed opacity-75">
-                    {semViuva("Lagoa da Conceição · studios com garden e terraço, unidades decoradas by Lofteria.")}
-                  </p>
+                  <span className="text-xl font-semibold tracking-[0.18em] text-grafite uppercase">Alma Lusa</span>
                 </div>
-                <div data-revelar className="flex min-h-[22rem] flex-col justify-end rounded-[28px] bg-grafite-profundo p-8 text-white">
-                  <p className="text-[0.6875rem] font-semibold tracking-[0.22em] text-salmao uppercase">Caso · 2 dormitórios no Campeche</p>
-                  <p className="mt-4 text-3xl font-semibold tracking-tight">Vendido em menos de 20 dias</p>
-                  <p className="mt-2 text-sm font-light text-white/60">
-                    {semViuva("Depois de 4 meses parado, com valorização percebida de R$ 120 mil acima da média da torre.")}
-                  </p>
-                </div>
+              </div>
             </div>
           </Revelar>
         </section>
