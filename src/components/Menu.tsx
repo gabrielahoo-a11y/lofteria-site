@@ -46,11 +46,10 @@ export default function Menu() {
                 key={p.href}
                 href={p.href}
                 aria-current={ativo(p.href) ? "page" : undefined}
-                className={`group relative flex items-center gap-1.5 py-1 text-[0.6875rem] font-semibold tracking-[0.18em] uppercase transition-colors ${
+                className={`group relative flex items-center py-1 text-[0.6875rem] font-semibold tracking-[0.18em] uppercase transition-colors ${
                   ativo(p.href) ? "text-salmao" : "text-grafite hover:text-salmao"
                 }`}
               >
-                <p.Icone className="size-3.5 text-salmao transition-transform duration-300 group-hover:-translate-y-0.5" strokeWidth={1.6} aria-hidden />
                 {p.rotulo}
                 <span
                   className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-salmao transition-transform duration-500 ${

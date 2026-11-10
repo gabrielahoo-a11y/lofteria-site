@@ -9,7 +9,7 @@ import Ondas from "@/components/Ondas";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
 
-// Quem somos como manifesto: uma citação com aspas grandes, sem ícones.
+// Quem somos como manifesto, sem aspas: aspas ficam só para falas diretas (depoimentos).
 // O texto "acende" palavra por palavra conforme a rolagem.
 export default function Manifesto({ ondas = false }: { ondas?: boolean }) {
   const raiz = useRef<HTMLElement>(null);
@@ -29,13 +29,6 @@ export default function Manifesto({ ondas = false }: { ondas?: boolean }) {
             scrollTrigger: { trigger: "[data-manifesto]", start: "top 85%", end: "bottom 50%", scrub: true },
           },
         );
-        gsap.from("[data-aspas]", {
-          scale: 0.6,
-          opacity: 0,
-          duration: 1.2,
-          ease: "expo.out",
-          scrollTrigger: { trigger: raiz.current, start: "top 75%" },
-        });
         return () => texto.revert();
       });
     },
@@ -47,16 +40,9 @@ export default function Manifesto({ ondas = false }: { ondas?: boolean }) {
       {ondas && <Ondas className="top-0" />}
       <p className="rotulo relative justify-center text-grafite">Quem somos</p>
       <figure className="relative mx-auto mt-14 max-w-[72rem]">
-        <span
-          data-aspas
-          aria-hidden
-          className="block font-serif text-[clamp(6rem,12vw,10rem)] h-[0.5em] leading-[0.9] text-salmao select-none"
-        >
-          “
-        </span>
         <blockquote
           data-manifesto
-          className="mx-auto mt-4 text-[clamp(1.9rem,3.4vw,3.1rem)] leading-[1.15] font-semibold tracking-[-0.025em] text-grafite [text-wrap:wrap]"
+          className="mx-auto text-[clamp(1.9rem,3.4vw,3.1rem)] leading-[1.15] font-semibold tracking-[-0.025em] text-grafite [text-wrap:wrap]"
         >
           {/* Quebras do manifesto fixas a partir do tablet; no celular o texto corre livre */}
           Somos o feat entre o funcional e o <br className="hidden md:inline" />
