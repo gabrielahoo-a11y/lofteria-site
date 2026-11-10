@@ -44,7 +44,7 @@ export default function Manifesto({ ondas = false }: { ondas?: boolean }) {
 
   return (
     <section ref={raiz} className="relative overflow-hidden bg-white px-5 py-28 text-center md:px-10 md:py-40">
-      {ondas && <Ondas className="top-[-10.35vw]" />}
+      {ondas && <Ondas className="top-0" />}
       <p className="rotulo relative justify-center text-grafite">Quem somos</p>
       <figure className="relative mx-auto mt-14 max-w-[72rem]">
         <span

@@ -32,7 +32,7 @@ export default function TituloCentral({ rotulo, children }: { rotulo: string; ch
       ref={raiz}
       className="relative overflow-hidden bg-white px-5 pt-36 pb-16 text-center md:px-10 md:pt-44 md:pb-24"
     >
-      <Ondas className="top-[-8.2vw]" />
+      <Ondas className="top-16" />
       <p data-surge className="rotulo relative justify-center text-grafite">
         {rotulo}
       </p>

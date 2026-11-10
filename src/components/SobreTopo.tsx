@@ -35,7 +35,7 @@ export default function SobreTopo() {
       ref={raiz}
       className="relative overflow-hidden bg-white pt-36 md:pt-44"
     >
-      <Ondas className="top-[-6.4vw]" />
+      <Ondas className="top-16" />
       <div className="relative mx-auto max-w-[90rem] px-5 text-center md:px-10">
         <p data-surge className="rotulo justify-center text-grafite">
           Sobre a Lofteria

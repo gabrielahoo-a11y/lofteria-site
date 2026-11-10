@@ -229,6 +229,12 @@ label {
 /* Ondas: cada linha sobe, desce e desliza um pouco, com atraso em cascata */
 .ondas {
   aspect-ratio: 1638.52 / 414.78;
+  --borda-h: linear-gradient(90deg, transparent 4%, #000 16%, #000 86%, transparent 98%);
+  --borda-v: linear-gradient(180deg, transparent 0%, #000 18%, #000 72%, transparent 96%);
+  mask-image: var(--borda-h), var(--borda-v);
+  mask-composite: intersect;
+  -webkit-mask-image: var(--borda-h), var(--borda-v);
+  -webkit-mask-composite: source-in;
 }
 .ondas path {
   transform-box: fill-box;
