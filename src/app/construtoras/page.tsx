@@ -105,29 +105,40 @@ export default function Construtoras() {
                 </p>
               </div>
               <div data-revelar className="flex flex-col justify-between gap-8 rounded-2xl p-8 ring-1 ring-linha">
-                <p className="text-[0.6875rem] font-semibold tracking-[0.22em] text-texto-suave uppercase">Modelo já aplicado em empreendimentos com</p>
-                <div className="flex flex-wrap items-center gap-x-9 gap-y-6 opacity-45 grayscale">
-                  <div
-                    role="img"
-                    aria-label="FAZ Construções e Incorporações"
-                    className="aspect-[387/144] w-24 bg-grafite"
-                    style={{ maskImage: "url(/img/parceiros/faz-logo.png)", WebkitMaskImage: "url(/img/parceiros/faz-logo.png)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat" }}
-                  />
-                  <div
-                    role="img"
-                    aria-label="Lagoa Brick"
-                    className="aspect-[900/98] w-40 bg-grafite"
-                    style={{ maskImage: "url(/img/parceiros/lagoa-brick.svg)", WebkitMaskImage: "url(/img/parceiros/lagoa-brick.svg)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat" }}
-                  />
-                  <span className="text-xl font-semibold tracking-[0.18em] text-grafite uppercase">Alma Lusa</span>
-                  <div
-                    role="img"
-                    aria-label="Adore Incorporações Imobiliárias"
-                    className="aspect-[647/256] w-24 bg-grafite"
-                    style={{ maskImage: "url(/img/parceiros/adore-logo.png)", WebkitMaskImage: "url(/img/parceiros/adore-logo.png)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat" }}
-                  />
-                  <span className="text-xl font-semibold tracking-[0.18em] text-grafite uppercase">Level Up</span>
-                </div>
+                <p className="text-[0.6875rem] font-semibold tracking-[0.22em] text-texto-suave uppercase">Modelo já aplicado com construtoras parceiras</p>
+                {/* Cada construtora com os empreendimentos que a Lofteria ambientou com ela */}
+                <ul className="divide-y divide-linha">
+                  {[
+                    { nome: "FAZ Construções e Incorporações", logo: "/img/parceiros/faz-logo.png", proporcao: "aspect-[387/144] w-20", obras: ["lagoa-brick", "Alma Lusa"] },
+                    { nome: "Adore Incorporações Imobiliárias", logo: "/img/parceiros/adore-logo.png", proporcao: "aspect-[647/256] w-20", obras: ["Level Up"] },
+                  ].map((c) => (
+                    <li key={c.nome} className="grid grid-cols-[6.5rem_1fr] items-center gap-6 py-5 first:pt-0 last:pb-0">
+                      <div
+                        role="img"
+                        aria-label={c.nome}
+                        className={`${c.proporcao} bg-grafite opacity-60`}
+                        style={{ maskImage: `url(${c.logo})`, WebkitMaskImage: `url(${c.logo})`, maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat" }}
+                      />
+                      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-grafite/60">
+                        {c.obras.map((o) =>
+                          o === "lagoa-brick" ? (
+                            <div
+                              key={o}
+                              role="img"
+                              aria-label="Lagoa Brick"
+                              className="aspect-[900/98] w-36 bg-current"
+                              style={{ maskImage: "url(/img/parceiros/lagoa-brick.svg)", WebkitMaskImage: "url(/img/parceiros/lagoa-brick.svg)", maskSize: "contain", WebkitMaskSize: "contain", maskRepeat: "no-repeat" }}
+                            />
+                          ) : (
+                            <span key={o} className="text-lg font-semibold tracking-[0.18em] uppercase">
+                              {o}
+                            </span>
+                          ),
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </Revelar>
