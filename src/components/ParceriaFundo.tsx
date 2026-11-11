@@ -69,6 +69,7 @@ export default function ParceriaFundo() {
           duration: 1.2,
           stagger: 0.08,
           ease: "expo.out",
+          clearProps: "transform",
           scrollTrigger: { trigger: raiz.current, start: "top 70%" },
         });
         // O feixe de luz desce um pouco com a rolagem, como se a câmera afundasse
@@ -84,7 +85,7 @@ export default function ParceriaFundo() {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div
           data-feixe
-          className="absolute top-[2%] left-1/2 h-[90%] w-[70%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_50%_20%,rgba(70,160,220,0.16),rgba(40,110,170,0.05)_45%,transparent_70%)] blur-2xl"
+          className="absolute top-[12%] left-1/2 h-[85%] w-[70%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_50%_20%,rgba(70,160,220,0.16),rgba(40,110,170,0.05)_45%,transparent_70%)] blur-2xl"
         />
         {PARTICULAS.map((p, i) => (
           <span
@@ -118,7 +119,7 @@ export default function ParceriaFundo() {
             <div
               key={c.quem}
               data-surge
-              className="group flex flex-col rounded-2xl bg-[#0b1824]/70 p-8 ring-1 ring-white/[0.07] backdrop-blur-md transition-[background-color,box-shadow,transform] duration-500 hover:-translate-y-1 hover:bg-[#0f2233]/80 hover:ring-[#5fb4e6]/30"
+              className="group flex flex-col rounded-2xl bg-[#0b1824]/70 p-8 ring-1 ring-white/[0.07] backdrop-blur-md transition-[background-color,box-shadow,translate] duration-500 hover:-translate-y-1 hover:bg-[#0f2233]/80 hover:ring-[#5fb4e6]/30"
             >
               <span className="text-[0.6875rem] font-semibold tracking-[0.22em] text-salmao uppercase">{c.quem}</span>
               <h3 className="mt-5 text-2xl font-semibold tracking-tight">{c.titulo}</h3>

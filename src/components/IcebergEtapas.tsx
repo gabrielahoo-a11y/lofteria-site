@@ -143,22 +143,8 @@ export default function IcebergEtapas() {
     () => {
       const mm = gsap.matchMedia();
       mm.add("(min-width: 1280px) and (prefers-reduced-motion: no-preference)", () => {
-        // Paralaxe na rolagem (seção presa por pouco tempo): o céu quase parado ao fundo;
-        // água, iceberg e textos sobem juntos à frente
-        const h = () => window.innerHeight;
-        gsap
-          .timeline({
-            defaults: { ease: "none" },
-            scrollTrigger: {
-              trigger: raiz.current,
-              start: "top top",
-              end: "+=80%",
-              pin: true,
-              scrub: 1,
-            },
-          })
-          .fromTo("[data-ceu]", { y: () => -h() * 0.015 }, { y: () => h() * 0.015, duration: 1 }, 0)
-          .fromTo(["[data-agua]", "[data-iceberg]", "[data-textos]"], { y: () => h() * 0.03 }, { y: () => -h() * 0.03, duration: 1 }, 0);
+        // Sem paralaxe na rolagem: a seção não fica presa (a sensação era de site travado).
+        // A profundidade fica com a paralaxe do mouse.
 
         // As etapas entram sozinhas, em sequência, assim que a seção aparece na tela
         const entrada = gsap.timeline({
@@ -226,7 +212,7 @@ export default function IcebergEtapas() {
   return (
     <section
       ref={raiz}
-      className="relative overflow-hidden bg-[#02070d] text-white xl:bg-[linear-gradient(180deg,#00112a_0%,#0c2c4a_42%,#020c18_52%,#000000_100%)] xl:grid xl:h-svh xl:place-items-center"
+      className="relative overflow-hidden bg-[#02070d] text-white xl:bg-[linear-gradient(180deg,#00112a_0%,#0c2c4a_42%,#020c18_52%,#010005_100%)] xl:grid xl:h-svh xl:place-items-center"
     >
       {/* Filtro da ondulação: ruído animado que desloca a faixa da superfície */}
       <svg aria-hidden className="absolute size-0">
@@ -241,6 +227,8 @@ export default function IcebergEtapas() {
       {/* Desktop: janela 2000 × 1174 sempre inteira; as camadas 32:9 preenchem em volta */}
       <div className="@container relative hidden aspect-[2000/1174] w-[min(100vw,calc(100svh*2000/1174))] xl:block">
         <Camadas />
+        {/* Fundo da cena se dissolve na cor da seção seguinte (sem corte na borda da imagem) */}
+        <div aria-hidden className="pointer-events-none absolute inset-x-[-60vw] top-[80%] bottom-[-40svh] bg-[linear-gradient(180deg,rgba(1,0,5,0)_0%,#010005_55%)]" />
 
         <div className="absolute inset-0" style={prof(26, 8)}>
           <div data-textos className="absolute inset-0">
