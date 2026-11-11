@@ -49,7 +49,7 @@ export function PaineisEstilos({ inicial = 0 }: { inicial?: number }) {
               src={e.foto}
               alt={`Projeto no estilo ${e.nome}`}
               fill
-              sizes="(min-width: 768px) 60vw, 100vw"
+              quality={85} sizes="(min-width: 768px) 60vw, 100vw"
               className={`object-cover transition-transform duration-1000 ${aberto ? "scale-100" : "scale-110"}`}
             />
             <div

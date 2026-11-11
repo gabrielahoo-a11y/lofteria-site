@@ -84,7 +84,7 @@ export default function PaginaTopo({ rotulo, titulo, texto, foto, fotoAlt, acao 
         className="relative mt-16 h-[62svh] min-h-[22.5rem] overflow-hidden md:mt-20 md:h-[78svh]"
         style={{ clipPath: "inset(0% 6% 0% 6% round 0px)" }}
       >
-        <Image src={`/img/${foto}.jpg`} alt={fotoAlt} fill sizes="100vw" preload className="object-cover" />
+        <Image src={`/img/${foto}.jpg`} alt={fotoAlt} fill quality={85} sizes="100vw" preload className="object-cover" />
       </div>
     </section>
   );

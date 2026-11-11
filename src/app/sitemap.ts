@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
+import { PROJETOS } from "@/lib/projetos";
 
 const PAGINAS: { caminho: string; prioridade: number }[] = [
   { caminho: "", prioridade: 1 },
@@ -12,7 +13,7 @@ const PAGINAS: { caminho: string; prioridade: number }[] = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return PAGINAS.map((p) => ({
+  return [...PAGINAS, ...PROJETOS.map((p) => ({ caminho: `/projetos/${p.slug}`, prioridade: 0.5 }))].map((p) => ({
     url: `${SITE_URL}${p.caminho}`,
     lastModified: new Date(),
     changeFrequency: "monthly",

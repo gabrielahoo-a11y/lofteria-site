@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { PROJETOS, foto, type Projeto } from "@/lib/projetos";
@@ -63,11 +64,12 @@ export default function ListaProjetos() {
       <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {visiveis.map((p) => (
           <li key={p.slug} data-cartao-projeto className="group relative aspect-[4/5] overflow-hidden rounded-[24px] bg-grafite-profundo">
+            <Link href={`/projetos/${p.slug}`} className="absolute inset-0 z-10" aria-label={`Ver o projeto ${p.nome}`} />
             <Image
               src={foto(p)}
               alt={`Apartamento ${p.nome} montado pela Lofteria`}
               fill
-              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              quality={85} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
               className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(.2,.8,.2,1)] group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0" />

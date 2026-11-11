@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { REDES } from "@/lib/navegacao";
 
-// Endereço público do site. Defina NEXT_PUBLIC_SITE_URL com o domínio final (ex.: https://lofteria.com).
+// Endereço público do site. Defina NEXT_PUBLIC_SITE_URL com o domínio final (ex.: https://lofteria.com.br).
 // Sem ela, usa o domínio de produção que a Vercel informa no build.
 const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? (vercel ? `https://${vercel}` : "http://localhost:3000")).replace(/\/$/, "");

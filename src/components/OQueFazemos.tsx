@@ -41,7 +41,7 @@ export default function OQueFazemos() {
             src={`/img/${s.foto}.jpg`}
             alt={i === ativo ? `${s.nome}: ${s.texto}` : ""}
             fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            quality={85} sizes="(min-width: 1024px) 50vw, 100vw"
             className={`object-cover transition-[opacity,scale] duration-[1.2s] ease-[cubic-bezier(.2,.8,.2,1)] ${
               i === ativo ? "scale-100 opacity-100" : "scale-110 opacity-0"
             }`}

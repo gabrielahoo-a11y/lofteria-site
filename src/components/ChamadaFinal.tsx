@@ -40,7 +40,7 @@ export default function ChamadaFinal({
   return (
     <section ref={raiz} className="relative grid min-h-[80svh] place-items-center overflow-hidden px-5 py-28 text-center text-white">
       <div data-fundo className="absolute inset-0">
-        <Image src={`/img/${foto}.jpg`} alt="" fill sizes="100vw" className="object-cover" />
+        <Image src={`/img/${foto}.jpg`} alt="" fill quality={85} sizes="100vw" className="object-cover" />
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-grafite-profundo/70 via-grafite-profundo/55 to-grafite-profundo" />
       <div className="relative">
