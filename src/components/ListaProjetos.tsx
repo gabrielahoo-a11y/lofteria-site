@@ -42,7 +42,7 @@ export default function ListaProjetos() {
     <section ref={raiz} className="mx-auto max-w-[90rem] px-5 py-24 md:px-10 md:py-32">
       <div className="flex flex-wrap items-end justify-between gap-8">
         <h2 className="titulo-md max-w-[18ch] text-grafite">
-          {PROJETOS.length} projetos em destaque <span className="font-light text-texto-suave">de mais de 350 entregues</span>
+          {PROJETOS.length} projetos em destaque <span className="font-light text-texto-suave">de mais de 400 entregues</span>
         </h2>
         <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrar por tipologia">
           {FILTROS.map((f) => (

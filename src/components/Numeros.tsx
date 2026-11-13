@@ -8,14 +8,14 @@ import { semViuva } from "@/lib/texto";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-// Números do site atual (lofteria.com.br). Conferir antes de publicar.
+// Números oficiais da Lofteria (revisados em 13/11/2026 com a equipe)
 const NUMEROS = [
-  { valor: 350, prefixo: "+", sufixo: "", rotulo: "Apartamentos entregues" },
-  { valor: 16, prefixo: "R$ ", sufixo: "M", rotulo: "Gerenciados em obras" },
-  { valor: 30, prefixo: "+", sufixo: "%", rotulo: "De rentabilidade nos imóveis entregues" },
-  { valor: 17, prefixo: "+", sufixo: "%", rotulo: "De valorização nas diárias" },
-  { valor: 9738, prefixo: "", sufixo: " m²", rotulo: "Desenvolvidos" },
-  { valor: 10, prefixo: "+", sufixo: "", rotulo: "Países com clientes investidores" },
+  { valor: 400, prefixo: "+", sufixo: "", rotulo: "Imóveis concluídos" },
+  { valor: 15, prefixo: "+", sufixo: "M", rotulo: "Gerenciados em obras" },
+  { valor: 10, prefixo: "+ de ", sufixo: " países", rotulo: "Clientes em mais de 10 países" },
+  { valor: 30, prefixo: "+ de ", sufixo: "%", rotulo: "De rentabilidade em imóveis entregues" },
+  { valor: 8054, prefixo: "", sufixo: " m²", rotulo: "Desenvolvidos" },
+  { valor: 3, prefixo: "Até ", sufixo: "x", rotulo: "Menos tempo de vacância em unidades reformuladas" },
 ];
 
 const formatar = (n: number) => Math.round(n).toLocaleString("pt-BR");

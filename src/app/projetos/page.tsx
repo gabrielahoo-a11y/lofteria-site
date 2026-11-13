@@ -8,7 +8,7 @@ import Projetos from "@/components/Projetos";
 export const metadata: Metadata = metadados({
   titulo: "Projetos",
   descricao:
-    "Mais de 350 apartamentos transformados em Florianópolis e no litoral catarinense. Conheça alguns deles.",
+    "Mais de 400 apartamentos transformados em Florianópolis e no litoral catarinense. Conheça alguns deles.",
   caminho: "/projetos",
 });
 
@@ -24,7 +24,7 @@ export default function PaginaProjetos() {
               <strong className="font-semibold">Encontre</strong> <span className="font-light">a Lofteria.</span>
             </>
           }
-          texto="Mais de 350 apartamentos já foram transformados com a nossa expertise. Transformamos imóveis e agregamos exclusividade e valor. Conheça alguns deles."
+          texto="Mais de 400 apartamentos já foram transformados com a nossa expertise. Transformamos imóveis e agregamos exclusividade e valor. Conheça alguns deles."
           foto="sunset-lagoa"
           fotoAlt="Sunset 213, apartamento montado pela Lofteria em Florianópolis"
         />

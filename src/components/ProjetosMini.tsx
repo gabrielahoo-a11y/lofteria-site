@@ -9,7 +9,7 @@ import { DESTAQUES, foto } from "@/lib/projetos";
 // Projetos entregues; as três primeiras fotos são as bolinhas visíveis
 const PROJETOS = DESTAQUES.map((p) => ({ nome: p.nome, local: `${p.tipologia} · ${p.local}`, foto: foto(p) }));
 
-// "+350 apartamentos entregues": ao passar o mouse, uma miniatura segue o cursor
+// "+400 imóveis concluídos": ao passar o mouse, uma miniatura segue o cursor
 // passando fotos dos projetos. Por enquanto o clique não leva a lugar nenhum.
 export default function ProjetosMini() {
   const area = useRef<HTMLDivElement>(null);
@@ -83,8 +83,8 @@ export default function ProjetosMini() {
           ))}
         </div>
         <p className="leading-tight text-texto-suave">
-          <strong className="block text-2xl font-semibold text-grafite">+350</strong>
-          apartamentos <strong className="font-semibold text-grafite/80">entregues</strong>
+          <strong className="block text-2xl font-semibold text-grafite">+400</strong>
+          imóveis <strong className="font-semibold text-grafite/80">concluídos</strong>
         </p>
       </div>
 
