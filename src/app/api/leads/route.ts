@@ -1,7 +1,8 @@
 // Recebe os contatos do formulário e da newsletter e grava na tabela `leads`
 // do Supabase (ver supabase/leads.sql). Sem as variáveis de ambiente, responde 503.
 
-const URL_SUPABASE = process.env.SUPABASE_URL;
+// Aceita o endereço com ou sem barra final ou "/rest/v1"
+const URL_SUPABASE = process.env.SUPABASE_URL?.trim().replace(/\/+$/, "").replace(/\/rest\/v1$/, "");
 const CHAVE = process.env.SUPABASE_PUBLISHABLE_KEY;
 
 const texto = (v: unknown, max = 200) => (typeof v === "string" ? v.trim().slice(0, max) : "");

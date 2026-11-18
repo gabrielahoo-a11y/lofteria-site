@@ -23,7 +23,8 @@ async function lerTabela(): Promise<Map<Tipologia, Linha> | null> {
   if (cache && Date.now() - cache.quando < VALIDADE_MS) return cache.linhas;
   let linhas: Linha[] | null = null;
 
-  const url = process.env.SUPABASE_URL;
+  // Aceita o endereço com ou sem barra final ou "/rest/v1"
+  const url = process.env.SUPABASE_URL?.trim().replace(/\/+$/, "").replace(/\/rest\/v1$/, "");
   const chave = process.env.SUPABASE_SECRET_KEY;
   if (url && chave) {
     const resp = await fetch(`${url}/rest/v1/orcamento_base?select=tipologia,area_ref,categorias,ambientes`, {
