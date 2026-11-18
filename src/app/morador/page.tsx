@@ -39,7 +39,8 @@ export default function Morador() {
           texto="Transforme seu apartamento em um lar que reflete a sua personalidade. Criamos projetos personalizados para aproveitar cada espaço de acordo com o seu estilo de vida."
           foto="jantar-quadro"
           fotoAlt="Sala de jantar com mesa de vidro e quadro abstrato, projeto da Lofteria"
-          acao={{ href: "/contato", rotulo: "Quero um projeto" }}
+          acao={{ href: "/orcamento", rotulo: "Faça seu orçamento" }}
+          acaoSecundaria={{ href: "/contato", rotulo: "Quero um projeto" }}
         />
 
         <Revelar className="mx-auto grid max-w-[90rem] gap-14 px-5 py-24 md:px-10 md:py-32 lg:grid-cols-[1fr_1.2fr]">

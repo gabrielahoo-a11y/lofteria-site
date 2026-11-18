@@ -43,3 +43,6 @@ next-env.d.ts
 public/_teste/
 export/
 !.env.example
+
+# valores dos orçamentos-base (nunca no git)
+dados-privados/

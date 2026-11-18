@@ -4,6 +4,7 @@ export const PAGINAS = [
   { href: "/morador", rotulo: "Para morador" },
   { href: "/construtoras", rotulo: "Construtoras" },
   { href: "/projetos", rotulo: "Projetos" },
+  { href: "/orcamento", rotulo: "Orçamento" },
   { href: "/sobre", rotulo: "Sobre" },
 ];
 
