@@ -14,9 +14,12 @@ const PACOTES: Pacote[] = ["Basic", "Essential", "Design"];
 type Linha = { tipologia: Tipologia; area_ref: number; categorias: BaseTipologia["categorias"]; ambientes: BaseTipologia["ambientes"] };
 
 let cache: { quando: number; linhas: Map<Tipologia, Linha> } | null = null;
+/** Motivo da última falha, sem dados sensíveis (aparece na resposta de erro para facilitar a configuração). */
+let motivo = "";
 const VALIDADE_MS = 10 * 60 * 1000;
 
 async function lerTabela(): Promise<Map<Tipologia, Linha> | null> {
+  motivo = "";
   if (cache && Date.now() - cache.quando < VALIDADE_MS) return cache.linhas;
   let linhas: Linha[] | null = null;
 
@@ -28,11 +31,17 @@ async function lerTabela(): Promise<Map<Tipologia, Linha> | null> {
       cache: "no-store",
     });
     if (!resp.ok) {
-      console.error("Falha ao ler orcamento_base", resp.status, await resp.text());
+      const corpo = await resp.text();
+      console.error("Falha ao ler orcamento_base", resp.status, corpo);
+      const codigo = corpo.match(/"code"\s*:\s*"([^"]+)"/)?.[1];
+      motivo = `supabase respondeu ${resp.status}${codigo ? ` (${codigo})` : ""}`;
       return null;
     }
     linhas = (await resp.json()) as Linha[];
-  } else if (process.env.NODE_ENV !== "production") {
+  } else if (process.env.NODE_ENV === "production") {
+    motivo = `faltam variáveis na Vercel: ${[!url && "SUPABASE_URL", !chave && "SUPABASE_SECRET_KEY"].filter(Boolean).join(" e ")}`;
+    return null;
+  } else {
     try {
       const arquivo = path.join(process.cwd(), "dados-privados", "orcamento-base.json");
       linhas = JSON.parse(await readFile(arquivo, "utf8")) as Linha[];
@@ -40,7 +49,10 @@ async function lerTabela(): Promise<Map<Tipologia, Linha> | null> {
       return null;
     }
   }
-  if (!linhas?.length) return null;
+  if (!linhas?.length) {
+    motivo ||= "a tabela orcamento_base está vazia ou a chave não tem acesso a ela";
+    return null;
+  }
   const mapa = new Map(linhas.map((l) => [l.tipologia, l]));
   cache = { quando: Date.now(), linhas: mapa };
   return mapa;
@@ -56,7 +68,10 @@ export async function GET(req: Request) {
   const tabela = await lerTabela();
   const linha = tabela?.get(tipologia);
   if (!tabela || !linha) {
-    return Response.json({ erro: "Orçamento indisponível no momento" }, { status: 503 });
+    return Response.json(
+      { erro: "Orçamento indisponível no momento", motivo: motivo || `sem a tipologia ${tipologia} na tabela` },
+      { status: 503 },
+    );
   }
 
   // Tipologias sem sacada no orçamento-base usam a proporção da sacada no base 3D
