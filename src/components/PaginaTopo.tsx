@@ -17,11 +17,13 @@ type Props = {
   foto: string;
   fotoAlt: string;
   acao?: { href: string; rotulo: string };
+  /** Segundo botão, em contorno, ao lado do principal */
+  acaoSecundaria?: { href: string; rotulo: string };
 };
 
 // Topo das páginas internas: título que sobe palavra por palavra e uma foto
 // que sai de uma janela estreita e ocupa a largura da tela conforme a rolagem.
-export default function PaginaTopo({ rotulo, titulo, texto, foto, fotoAlt, acao }: Props) {
+export default function PaginaTopo({ rotulo, titulo, texto, foto, fotoAlt, acao, acaoSecundaria }: Props) {
   const raiz = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -71,10 +73,19 @@ export default function PaginaTopo({ rotulo, titulo, texto, foto, fotoAlt, acao 
           <div data-surge className="max-w-md text-lg leading-relaxed font-light text-texto-suave">
             {texto}
           </div>
-          {acao && (
-            <Link data-surge href={acao.href} className="botao botao-salmao mt-8">
-              {acao.rotulo}
-            </Link>
+          {(acao || acaoSecundaria) && (
+            <div data-surge className="mt-8 flex flex-wrap items-center gap-5">
+              {acao && (
+                <Link href={acao.href} className="botao botao-salmao">
+                  {acao.rotulo}
+                </Link>
+              )}
+              {acaoSecundaria && (
+                <Link href={acaoSecundaria.href} className="botao botao-contorno text-grafite hover:text-salmao">
+                  {acaoSecundaria.rotulo}
+                </Link>
+              )}
+            </div>
           )}
         </div>
       </div>

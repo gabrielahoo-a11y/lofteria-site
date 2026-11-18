@@ -53,6 +53,7 @@ export default function Investidor() {
           foto="plenty-sea"
           fotoAlt="Living do Plenty Sea 401, apartamento montado pela Lofteria para short-stay"
           acao={{ href: "/contato", rotulo: "Falar com um consultor" }}
+          acaoSecundaria={{ href: "/orcamento", rotulo: "Orçamento pela planta" }}
         />
 
         <Revelar className="mx-auto grid max-w-[90rem] gap-10 px-5 py-24 md:grid-cols-3 md:px-10 md:py-32">
